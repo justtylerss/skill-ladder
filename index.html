@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Skill Ladder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Home for the three ladders. Tokens and themes are copied from the apps; keep them in sync. */
+:root {
+  --bg: #f2f3f8;
+  --card: #ffffff;
+  --ink: #141a2e;
+  --ink-2: #464d6a;
+  --muted: #6d7495;
+  --line: #d9dde9;
+  --hair: #e7e9f1;
+  --accent: #3445c9;
+  --accent-ink: #ffffff;
+  --accent-soft: #e4e8fc;
+  --accent-text: #2a39ad;
+  --heat-0: #e7e9f1;
+  --heat-1: #c3cbf5;
+  --heat-2: #8090ea;
+  --heat-3: #3445c9;
+  --good: #0ca30c;
+  --good-text: #006300;
+  --warn: #fab219;
+  --warn-text: #845500;
+  --bad: #d03b3b;
+  --bad-text: #a92626;
+  --target: rgba(52, 69, 201, 0.10);
+  --good-soft: rgba(12, 163, 12, 0.18);
+  --warn-soft: rgba(250, 178, 25, 0.22);
+  --inhale: #9aa6ee;
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r: 14px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1020;
+    --card: #161a2d;
+    --ink: #eceef8;
+    --ink-2: #b5bad2;
+    --muted: #8a90ad;
+    --line: #2a3049;
+    --hair: #1f2439;
+    --accent: #8e9cff;
+    --accent-ink: #0d1020;
+    --accent-soft: #232a55;
+    --accent-text: #aab4ff;
+    --heat-0: #1f2439;
+    --heat-1: #2d3775;
+    --heat-2: #4d5dc6;
+    --heat-3: #8e9cff;
+    --good: #2dbe2d;
+    --good-text: #55d655;
+    --warn: #fab219;
+    --warn-text: #fab219;
+    --bad: #ec6262;
+    --bad-text: #f28585;
+    --target: rgba(142, 156, 255, 0.13);
+    --inhale: #4b58a8;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1020;
+  --card: #161a2d;
+  --ink: #eceef8;
+  --ink-2: #b5bad2;
+  --muted: #8a90ad;
+  --line: #2a3049;
+  --hair: #1f2439;
+  --accent: #8e9cff;
+  --accent-ink: #0d1020;
+  --accent-soft: #232a55;
+  --accent-text: #aab4ff;
+  --heat-0: #1f2439;
+  --heat-1: #2d3775;
+  --heat-2: #4d5dc6;
+  --heat-3: #8e9cff;
+  --good: #2dbe2d;
+  --good-text: #55d655;
+  --warn: #fab219;
+  --warn-text: #fab219;
+  --bad: #ec6262;
+  --bad-text: #f28585;
+  --target: rgba(142, 156, 255, 0.13);
+  --inhale: #4b58a8;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+}
+.wrap {
+  max-width: 620px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 24px 64px;
+  display: grid;
+  gap: 20px;
+}
+h1, h2 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
+p { margin: 0; }
+.small { font-size: 13px; color: var(--ink-2); }
+.top { display: grid; gap: 10px; margin-bottom: 8px; }
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+h1 {
+  font-size: clamp(38px, 11vw, 54px);
+  font-weight: 780;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  font-variation-settings: "opsz" 96;
+}
+.lede { color: var(--ink-2); font-size: 16px; max-width: 34em; }
+.lede strong { color: var(--ink); }
+
+.app {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+.app-top { display: flex; align-items: baseline; justify-content: space-between; gap: 4px 12px; flex-wrap: wrap; }
+.app h2 { font-size: 26px; font-weight: 720; letter-spacing: -0.015em; }
+.lvl { font-family: var(--font-mono); font-size: 13px; color: var(--accent-text); }
+.stats {
+  margin: 0;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.stats > div { padding: 10px 0; min-width: 0; }
+.stats > div + div { padding-left: 14px; border-left: 1px solid var(--line); }
+.stats dt { font-size: 12px; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+.stats dd { margin: 2px 0 0; font-family: var(--font-display); font-size: 24px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.stats dd small { font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--ink-2); margin-left: 2px; }
+.empty { padding: 10px 14px; border-radius: 10px; background: var(--accent-soft); color: var(--ink-2); font-size: 14px; }
+
+.btn {
+  font: inherit;
+  font-weight: 600;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--accent-ink);
+  min-height: 44px;
+  padding: 0 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: start;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .1s;
+}
+.btn:active { transform: scale(0.97); }
+.btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.foot { font-size: 12px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <p class="eyebrow" id="today-label">Today</p>
+    <h1>Skill Ladder</h1>
+    <p class="lede" id="today-line">Three daily practice ladders: singing, piano, and cooking.</p>
+  </header>
+
+  <article class="app" id="voice" aria-labelledby="voice-h">
+    <div class="app-top"><h2 id="voice-h">Voice Ladder</h2><p class="lvl" data-f="level" hidden></p></div>
+    <dl class="stats" hidden>
+      <div><dt>Streak</dt><dd><span data-f="streak">0</span><small data-f="days">days</small></dd></div>
+      <div><dt>Today</dt><dd><span data-f="mins">0</span><small>min</small></dd></div>
+      <div><dt>Steps</dt><dd><span data-f="steps">0</span><small>/ 5</small></dd></div>
+    </dl>
+    <p class="empty">Not started yet. A daily singing coach with live pitch feedback; start with the voice type test.</p>
+    <a class="btn" href="voice/">Open Voice Ladder</a>
+  </article>
+
+  <article class="app" id="piano" aria-labelledby="piano-h">
+    <div class="app-top"><h2 id="piano-h">Piano Ladder</h2><p class="lvl" data-f="level" hidden></p></div>
+    <dl class="stats" hidden>
+      <div><dt>Streak</dt><dd><span data-f="streak">0</span><small data-f="days">days</small></dd></div>
+      <div><dt>Today</dt><dd><span data-f="mins">0</span><small>min</small></dd></div>
+      <div><dt>Steps</dt><dd><span data-f="steps">0</span><small>/ 5</small></dd></div>
+    </dl>
+    <p class="empty">Not started yet. A daily piano coach that listens through the mic or MIDI; start with the level check.</p>
+    <a class="btn" href="piano/">Open Piano Ladder</a>
+  </article>
+
+  <article class="app" id="kitchen" aria-labelledby="kitchen-h">
+    <div class="app-top"><h2 id="kitchen-h">Kitchen Ladder</h2><p class="lvl" data-f="level" hidden></p></div>
+    <dl class="stats" hidden>
+      <div><dt>This week</dt><dd><span data-f="week">0</span><small data-f="cooks">cooks</small></dd></div>
+      <div><dt>Mastered</dt><dd><span data-f="mastered">0</span><small data-f="dishes">dishes</small></dd></div>
+    </dl>
+    <p class="empty">Not started yet. A beginner cooking coach with timers and taste fixes; start with the kitchen check.</p>
+    <a class="btn" href="kitchen/">Open Kitchen Ladder</a>
+  </article>
+
+  <p class="foot">Progress is read from this browser. Each app saves and syncs its own log.</p>
+</div>
+<script>
+(() => {
+  'use strict';
+  // Read-only: this page never writes to localStorage. Keys and shapes belong to the apps.
+  const LEVELS = {
+    voice: ['Foundations', 'Pitch control', 'Range & registers', 'Agility', 'Polish'],
+    piano: ['First keys', 'Both hands', 'Chord changes', 'Groove', 'Expression'],
+    kitchen: ['Kitchen basics', 'Heat control', 'Flavor balance', 'No recipe needed', 'Your own dishes'],
+  };
+  const SKILL = { voice: 'singing', piano: 'piano', kitchen: 'cooking' };
+
+  const pad = n => String(n).padStart(2, '0');
+  const dkey = d => d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+  const now = new Date();
+  const back = n => dkey(new Date(now.getFullYear(), now.getMonth(), now.getDate() - n));
+  const today = back(0);
+  const obj = v => (v && typeof v === 'object' ? v : {});
+  const plural = (n, one, many) => (n === 1 ? one : many);
+
+  function load(key) {
+    try {
+      const o = JSON.parse(localStorage.getItem(key) || 'null');
+      return o && typeof o === 'object' ? o : null;
+    } catch (e) { return null; }
+  }
+  const level = o => Math.max(1, Math.min(5, Number(obj(o.profile).level) || 1));
+  const stepsOn = d => { const s = obj(obj(d).steps); return Object.keys(s).filter(k => s[k]).length; };
+
+  // Voice and Piano: a day counts toward the streak with 3+ steps. Like the apps, an
+  // unfinished today doesn't break the streak; it counts back from yesterday.
+  function practice(o) {
+    const days = obj(o.days);
+    const counts = k => stepsOn(days[k]) >= 3;
+    let i = counts(today) ? 0 : 1, streak = 0;
+    while (counts(back(i))) { streak++; i++; }
+    const d = obj(days[today]);
+    const mins = Math.round(Number(d.mins) || 0);
+    const steps = stepsOn(d);
+    return { streak, days: plural(streak, 'day', 'days'), mins, steps, today: steps >= 1 || mins >= 3 };
+  }
+
+  // Kitchen: cooks since Monday, and dishes with 3+ cooks whose last two ratings are 4+.
+  function kitchen(o) {
+    const days = obj(o.days);
+    const ws = back((now.getDay() + 6) % 7);
+    const cooks = k => { const c = obj(days[k]).cooks; return Array.isArray(c) ? c.length : 0; };
+    const week = Object.keys(days).filter(k => k >= ws).reduce((n, k) => n + cooks(k), 0);
+    const mastered = Object.values(obj(obj(o.profile).dishes)).filter(ds => ds && ds.cooks >= 3
+      && Array.isArray(ds.ratings) && ds.ratings.length >= 2 && ds.ratings.slice(-2).every(r => r >= 4)).length;
+    return { week, cooks: plural(week, 'cook', 'cooks'), mastered, dishes: plural(mastered, 'dish', 'dishes'),
+      today: cooks(today) > 0 || stepsOn(days[today]) > 0 };
+  }
+
+  const practicedToday = [];
+  [['voice', 'voice-ladder-v1', practice], ['piano', 'piano-ladder-v1', practice], ['kitchen', 'kitchen-ladder-v1', kitchen]].forEach(([id, key, read]) => {
+    const o = load(key);
+    if (!o) return;
+    const card = document.getElementById(id);
+    const s = read(o);
+    const n = level(o);
+    s.level = 'Level ' + n + ' · ' + LEVELS[id][n - 1];
+    Object.keys(s).forEach(k => { const e = card.querySelector('[data-f="' + k + '"]'); if (e) e.textContent = s[k]; });
+    card.querySelector('[data-f="level"]').hidden = false;
+    card.querySelector('.stats').hidden = false;
+    card.querySelector('.empty').hidden = true;
+    if (s.today) practicedToday.push(SKILL[id]);
+  });
+
+  document.getElementById('today-label').textContent = now.toLocaleDateString(undefined, { weekday: 'long', month: 'short', day: 'numeric' });
+  const line = document.getElementById('today-line');
+  if (practicedToday.length) {
+    line.textContent = 'Today you practiced ';
+    line.appendChild(document.createElement('strong')).textContent = new Intl.ListFormat('en', { type: 'conjunction' }).format(practicedToday);
+    line.append('.');
+  } else {
+    line.textContent = 'Nothing practiced yet today. Pick a ladder to start.';
+  }
+})();
+</script>
+</body>
+</html>
