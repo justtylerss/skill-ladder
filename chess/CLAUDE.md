@@ -7,7 +7,8 @@ The whole app is `index.html` (HTML, CSS, and one JavaScript IIFE, no build step
 - A day holds `steps` (see, tactics, opening, endgame, play), `pz` (`ids` assigned today, `res` first-try scores 1 / 0.5 / 0, `fin`), `games` (finished games with SAN and the review's blunder count), `active` (the game in progress as UCI moves, so a reload resumes it), `checkin`, `ex` (library drills), and best-of-day metrics (`rating`, `pzAcc`, `vision`, `notation`, `rush`, `blunders`).
 - The profile keeps `rating`, per-puzzle results in `puzzles` keyed by puzzle id, `themes`, `openings` (clean-run days), `endgames` (wins), and `wins` by computer level.
 - Puzzle ids are a hash of the FEN. Never edit the FEN of an existing puzzle; add new ones instead.
-- Shared with the other ladders on the same site: the Claude key (`voice-ladder-ai`) and the GitHub token (read from `voice-ladder-gh`, stored for this app in `chess-ladder-gh`).
+- Shared with the other ladders on the same site: the Claude key (`voice-ladder-ai`) and the GitHub token (read from `voice-ladder-gh`, stored for this app in `chess-ladder-gh`). The Save menu on the home page writes the token into this key for every app; the in-app token form is kept but hidden, so `ghConnect` still works.
+- `../tree.js` (loaded at the end of `<body>` with `data-app`) adds the Skill Tree bar under the header and watches this app's saved data for XP toasts and level-up confetti. It only reads app data, and the app works without it.
 
 ## Map of the script (search for the comment headers)
 - `helpers`, then the chess core between `chess rules` and `end of chess core`: a 0x88 board, moves packed into one int, FEN, SAN, `legalMoves`, `gameStatus`, `perft`, then `computer player` (material plus piece-square tables and a mop-up term, alpha-beta with quiescence and check extensions, `think` and `scoreRoot`). The core has no DOM access, so it can be pulled out between its markers and run in Node.

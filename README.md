@@ -13,6 +13,10 @@ Four daily practice coaches that run in the browser, plus a home page that shows
 
 The home page (`index.html`) is your skill tree. Each app is a branch, and its five levels are nodes that light up as you reach them; the branches grow in when the page opens, and the level you're on now pulses. Everything you've practiced earns XP toward a player level (Seedling, Sprout, Sapling, and on to World tree), and 14 badges reward streaks, levels, and practicing several skills in one day. A new level or badge since your last visit gets a banner and confetti. Animations turn off when your device asks for reduced motion.
 
-Below the tree, a card per app shows today's numbers: your current streak, minutes, and steps for Voice and Piano; cooks this week and dishes mastered for Kitchen; and your streak, steps, and puzzle rating for Chess. The home page only reads the apps' data; each app saves and syncs its own log.
+Every app has a Skill Tree bar under its header with your player level, XP, and that app's branch, so finishing a step pops "+XP" and a level-up throws confetti right where you are.
 
-Each app is one self-contained `index.html` with no build step, served by GitHub Pages from `main` (root). Notes for Claude Code are in [CLAUDE.md](CLAUDE.md), [piano/CLAUDE.md](piano/CLAUDE.md), [kitchen/CLAUDE.md](kitchen/CLAUDE.md), and [chess/CLAUDE.md](chess/CLAUDE.md).
+The **Save menu** on the home page holds your keys and saves: turn on cloud save once per device with one GitHub token and every ladder syncs to its own private gist; connect one Claude API key for the coach in every ladder; or download all your progress as a save file and load it back (keys are never in the file).
+
+Below the tree, a card per app shows today's numbers: your current streak, minutes, and steps for Voice and Piano; cooks this week and dishes mastered for Kitchen; and your streak, steps, and puzzle rating for Chess. Outside the Save menu, the home page only reads the apps' data; each app saves and syncs its own log.
+
+Each app is one `index.html` with no build step, served by GitHub Pages from `main` (root). They share `tree.js` for the Skill Tree bar and celebrations, and still work without it. Notes for Claude Code are in [CLAUDE.md](CLAUDE.md), [piano/CLAUDE.md](piano/CLAUDE.md), [kitchen/CLAUDE.md](kitchen/CLAUDE.md), and [chess/CLAUDE.md](chess/CLAUDE.md).

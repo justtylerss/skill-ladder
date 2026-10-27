@@ -62,7 +62,9 @@ Without a key, **Copy chef prompt for Claude** fills the same prompt with your d
 
 ## Saving and sync
 
-Everything is saved in the browser's local storage. To share it across devices, connect a GitHub token with only `gist` scope. The log lives in a private gist (`kitchen-ladder-log.json`), merged by day. A token already connected in Voice Ladder on the same device is reused.
+Everything is saved in the browser's local storage. To share it across devices, turn on **Cloud save** once per device in the Save menu on the [Skill Tree home page](../#save), with a GitHub token that has only `gist` scope; it switches on every ladder at once. The log lives in a private gist (`kitchen-ladder-log.json`), merged by day.
+
+A **Skill Tree bar** under the header shows your player level, XP, and this app's branch of levels. Finishing a step pops "+XP", and a new level or badge throws confetti.
 
 ## Files
 

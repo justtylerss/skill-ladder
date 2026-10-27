@@ -65,7 +65,9 @@ Pitch detection uses the YIN algorithm and runs entirely in your browser. No aud
 
 ## Saving and sync
 
-Everything is saved in the browser's local storage, including your name and goals for the coach. To share it across your phone and computer, connect each device under **Sync your phone and computer** with a GitHub token that has only `gist` scope. The log lives in a private gist (`voice-ladder-log.json`), merged by day. The token stays in each device's local storage, and you can revoke it anytime at github.com/settings/tokens.
+Everything is saved in the browser's local storage, including your name and goals for the coach. To share it across devices, turn on **Cloud save** once per device in the Save menu on the [Skill Tree home page](../#save), with a GitHub token that has only `gist` scope; it switches on every ladder at once. The log lives in a private gist (`voice-ladder-log.json`), merged by day. The token stays in each device's local storage, and you can revoke it anytime at github.com/settings/tokens.
+
+A **Skill Tree bar** under the header shows your player level, XP, and this app's branch of levels. Finishing a step pops "+XP", and a new level or badge throws confetti.
 
 ## Files
 

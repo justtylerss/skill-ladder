@@ -4,7 +4,8 @@ The whole app is `index.html` (HTML, CSS, and one JavaScript IIFE, no build step
 
 ## Don't break saved progress
 - Practice data lives in `localStorage['piano-ladder-v1']` (`{ days, profile, settingsUpdated }`) and syncs to a private gist file `piano-ladder-log.json`. Keep these names and keep old fields readable (`normProfile` fills defaults).
-- Shared with Voice Ladder on the same site: the Claude key (`voice-ladder-ai`), the GitHub token (read from `voice-ladder-gh`, stored for this app in `piano-ladder-gh`), and the voice range (read-only from `voice-ladder-v1`).
+- Shared with Voice Ladder on the same site: the Claude key (`voice-ladder-ai`), the GitHub token (read from `voice-ladder-gh`, stored for this app in `piano-ladder-gh`), and the voice range (read-only from `voice-ladder-v1`). The Save menu on the home page writes the token into this key for every app; the in-app token form is kept but hidden, so `ghConnect` still works.
+- `../tree.js` (loaded at the end of `<body>` with `data-app`) adds the Skill Tree bar under the header and watches this app's saved data for XP toasts and level-up confetti. It only reads app data, and the app works without it.
 - Never hardcode the user's name, goals, or range. They're entered in the app.
 
 ## Map of the script (search for the comment headers)

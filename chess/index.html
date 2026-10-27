@@ -1193,12 +1193,8 @@ button.rv-row { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 
     <div class="sync" id="sync-panel" hidden>
       <h3>Sync your phone and computer</h3>
       <div id="sync-setup">
-        <p class="small">Your log is saved to a private gist on your GitHub account, and every device you connect shares it. If another ladder is already synced on this device, Chess Ladder uses the same token automatically.</p>
-        <ol class="small">
-          <li><a href="https://github.com/settings/tokens/new?scopes=gist&amp;description=Chess%20Ladder%20sync" target="_blank" rel="noopener">Create a GitHub token</a>. It opens pre-filled with gist access only. Pick an expiration, tap Generate, and copy the token.</li>
-          <li>Paste it below and tap Connect. Do the same on your other device.</li>
-        </ol>
-        <div class="row" style="margin-top:10px">
+        <p class="small">Turn on cloud save once for all your ladders in the <a href="../#save">Save menu on the Skill Tree home page</a>. Each ladder then syncs its log to a private gist on your GitHub account.</p>
+        <div class="row" hidden>
           <label for="gh-token" class="sr-only">GitHub token</label>
           <input type="password" id="gh-token" placeholder="ghp_…" autocomplete="off" autocapitalize="off" spellcheck="false">
           <button class="primary" id="gh-connect">Connect</button>
@@ -1235,7 +1231,7 @@ button.rv-row { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 
     </ul>
   </section>
   <p class="foot" id="foot">Your log stays private to you.</p>
-  <p class="foot">App version 1 · Oct 27 · <a href="../" style="color: var(--accent-text); font-weight: 600">Skill Tree home</a></p>
+  <p class="foot">App version 2 · Oct 27 · <a href="../" style="color: var(--accent-text); font-weight: 600">Skill Tree home</a></p>
 </div>
 <script>
 (() => {
@@ -4560,5 +4556,6 @@ button.rv-row { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 
   aiInitViewer();
 })();
 </script>
+<script src="../tree.js" data-app="chess" defer></script>
 </body>
 </html>

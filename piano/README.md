@@ -81,7 +81,9 @@ The key stays in the browser's local storage and goes only to Claude's API. With
 
 ## Saving and sync
 
-Everything is saved in the browser's local storage. To share it across your phone and computer, connect each device under **Sync your phone and computer** with a GitHub token that has only `gist` scope. The log lives in a private gist (`piano-ladder-log.json`), merged by day. If Voice Ladder is already synced on the device, Piano Ladder uses the same token and keeps its own log file.
+Everything is saved in the browser's local storage. To share it across devices, turn on **Cloud save** once per device in the Save menu on the [Skill Tree home page](../#save), with a GitHub token that has only `gist` scope; it switches on every ladder at once. The log lives in a private gist (`piano-ladder-log.json`), merged by day.
+
+A **Skill Tree bar** under the header shows your player level, XP, and this app's branch of levels. Finishing a step pops "+XP", and a new level or badge throws confetti.
 
 ## Files
 
