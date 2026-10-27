@@ -207,6 +207,7 @@ select {
   padding: 0 10px;
 }
 label.inline { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink-2); }
+#song-pick { min-width: 0; width: 100%; max-width: max-content; } /* longest title would push the page wider than a phone */
 
 /* ---------- starting note ---------- */
 .home {
@@ -1450,7 +1451,7 @@ button.sess-item.done { border-color: var(--good); }
     </ul>
   </section>
   <p class="foot" id="foot">Your log stays private to you.</p>
-  <p class="foot">App version 10 · Oct 26 · <a href="../" style="color: var(--accent-text); font-weight: 600">Skill Ladder home</a></p>
+  <p class="foot">App version 11 · Oct 26 · <a href="../" style="color: var(--accent-text); font-weight: 600">Skill Ladder home</a></p>
 </div>
 <div class="mic-chip" id="mic-chip" hidden>
   <span class="dot" aria-hidden="true"></span>
