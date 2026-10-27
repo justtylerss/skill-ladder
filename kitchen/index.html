@@ -891,8 +891,8 @@ input.num, input.txt { font: inherit; font-size: 15px; min-height: 40px; padding
   <section class="coach" id="coach" aria-labelledby="coach-h">
     <div class="coach-top">
       <div>
-        <p class="eyebrow">Your chef</p>
-        <h2 id="coach-h">Today in the kitchen</h2>
+        <p class="eyebrow">Your mentor</p>
+        <h2 id="coach-h">Today's quest</h2>
       </div>
       <div class="lvl">
         <span class="lvl-num" id="lvl-num">Level 1</span>
@@ -985,7 +985,7 @@ input.num, input.txt { font: inherit; font-size: 15px; min-height: 40px; padding
   </section>
 
   <section class="home" id="setup" aria-labelledby="setup-h">
-    <h2 id="setup-h">Your kitchen</h2>
+    <h2 id="setup-h">🎒 Your kitchen</h2>
     <details class="plan" id="intro">
       <summary><span class="plan-title">Never really cooked? Start here</span></summary>
       <div class="plan-body">
@@ -1032,8 +1032,8 @@ input.num, input.txt { font: inherit; font-size: 15px; min-height: 40px; padding
 
   <section aria-labelledby="routine-h">
     <div class="sec-head">
-      <h2 id="routine-h">Today's cook</h2>
-      <p class="small" id="routine-progress">0 of 5 done</p>
+      <h2 id="routine-h">⚔️ Quest log: today's cook</h2>
+      <p class="small" id="routine-progress">0 of 5 quests complete</p>
     </div>
     <div class="progress" aria-hidden="true"><span id="routine-bar"></span></div>
     <ol class="ladder">
@@ -1061,7 +1061,7 @@ input.num, input.txt { font: inherit; font-size: 15px; min-height: 40px; padding
             <button class="primary" id="plan-go">Got everything: start prep</button>
           </div>
           <p class="feedback" id="plan-fb" role="status"></p>
-          <button class="done-btn" data-done="plan">Mark done</button>
+          <button class="done-btn" data-done="plan">Complete quest</button>
         </div>
       </li>
 
@@ -1077,7 +1077,7 @@ input.num, input.txt { font: inherit; font-size: 15px; min-height: 40px; padding
             <span class="mono small" id="prep-time"></span>
           </div>
           <p class="feedback" id="prep-fb" role="status"></p>
-          <button class="done-btn" data-done="prep">Mark done</button>
+          <button class="done-btn" data-done="prep">Complete quest</button>
         </div>
       </li>
 
@@ -1092,7 +1092,7 @@ input.num, input.txt { font: inherit; font-size: 15px; min-height: 40px; padding
           </div>
           <ol class="step-list" id="step-list"></ol>
           <p class="small muted" id="wake-note"></p>
-          <button class="done-btn" data-done="cook">Mark done</button>
+          <button class="done-btn" data-done="cook">Complete quest</button>
         </div>
       </li>
 
@@ -1105,7 +1105,7 @@ input.num, input.txt { font: inherit; font-size: 15px; min-height: 40px; padding
           <div class="row"><button class="primary" id="taste-ok">Tastes right as is</button><button id="taste-done">Done adjusting</button></div>
           <div class="fixes" id="taste-fixes"></div>
           <p class="feedback" id="taste-fb" role="status"></p>
-          <button class="done-btn" data-done="taste">Mark done</button>
+          <button class="done-btn" data-done="taste">Complete quest</button>
         </div>
       </li>
 
@@ -1125,7 +1125,7 @@ input.num, input.txt { font: inherit; font-size: 15px; min-height: 40px; padding
           <p class="small store-note" id="store-note"></p>
           <div class="row"><button class="primary" id="log-save">Save this cook</button></div>
           <p class="feedback" id="log-fb" role="status"></p>
-          <button class="done-btn" data-done="log">Mark done</button>
+          <button class="done-btn" data-done="log">Complete quest</button>
         </div>
       </li>
     </ol>
@@ -1133,7 +1133,7 @@ input.num, input.txt { font: inherit; font-size: 15px; min-height: 40px; padding
 
   <section class="lib-sec" id="lib" aria-labelledby="lib-h">
     <div class="sec-head">
-      <h2 id="lib-h">Kitchen library</h2>
+      <h2 id="lib-h">📜 Training grounds</h2>
       <p class="small" id="lib-count"></p>
     </div>
     <p class="small" style="margin-top: 6px; max-width: 38em">Short drills and reference cards between cooks. Your plan picks one on days you're not cooking.</p>
@@ -1238,7 +1238,7 @@ input.num, input.txt { font: inherit; font-size: 15px; min-height: 40px; padding
 
   <section aria-labelledby="log-h">
     <div class="sec-head">
-      <h2 id="log-h">Your progress</h2>
+      <h2 id="log-h">📖 Hero's journal</h2>
       <p class="small" id="sync-state">Saved on this device</p>
     </div>
     <p class="prog-head" id="prog-head"></p>
@@ -1278,7 +1278,7 @@ input.num, input.txt { font: inherit; font-size: 15px; min-height: 40px; padding
 
   <section class="road" aria-labelledby="road-h">
     <div class="sec-head">
-      <h2 id="road-h">Your roadmap</h2>
+      <h2 id="road-h">🗺️ Quest map</h2>
       <p class="small" id="road-pos"></p>
     </div>
     <p class="road-pace" id="road-pace"></p>
@@ -1289,7 +1289,7 @@ input.num, input.txt { font: inherit; font-size: 15px; min-height: 40px; padding
   </section>
 
   <section class="rules" aria-labelledby="rules-h">
-    <h2 id="rules-h">Kitchen rules</h2>
+    <h2 id="rules-h">🛡️ Kitchen rules</h2>
     <ul>
       <li>Chicken and ground poultry: 165°F (74°C). Ground beef and pork: 160°F (71°C). Steaks, chops, fish: 145°F (63°C), plus a 3-minute rest for meat.</li>
       <li>Refrigerate leftovers within 2 hours (rice within 1). Eat them within 3–4 days and reheat to 165°F.</li>
@@ -1300,7 +1300,7 @@ input.num, input.txt { font: inherit; font-size: 15px; min-height: 40px; padding
     </ul>
   </section>
   <p class="foot" id="foot">Your log stays private to you.</p>
-  <p class="foot">App version 4 · Oct 27 · <a href="../" style="color: var(--accent-text); font-weight: 600">Skill Tree home</a></p>
+  <p class="foot">App version 5 · Oct 27 · <a href="../" style="color: var(--accent-text); font-weight: 600">Skill Tree home</a></p>
 </div>
 <div class="timer-tray" id="timer-tray" hidden aria-live="polite"></div>
 <script>
@@ -3734,9 +3734,9 @@ input.num, input.txt { font: inherit; font-size: 15px; min-height: 40px; padding
       const done = !!steps[s];
       if (done) n++;
       r.classList.toggle('done', done);
-      r.querySelector('.done-btn').textContent = done ? 'Done ✓' : 'Mark done';
+      r.querySelector('.done-btn').textContent = done ? 'Quest complete ✓' : 'Complete quest';
     });
-    $('#routine-progress').textContent = n + ' of 5 done';
+    $('#routine-progress').textContent = n + ' of 5 quests complete';
     $('#routine-bar').style.width = (n / 5) * 100 + '%';
   }
 

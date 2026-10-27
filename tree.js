@@ -237,6 +237,60 @@ a.st-bar:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; 
 @keyframes st-pulse { 0%, 100% { box-shadow: 0 0 0 0 var(--accent-soft); } 50% { box-shadow: 0 0 0 7px var(--accent-soft); } }
 @media (prefers-reduced-motion: reduce) { .st-branch i.cur, .st-track span { animation: none !important; transition: none !important; } }
 `;
+  // The game theme for app pages: gold seals on finished quests, a stamp when you finish one, a pulse on
+  // the next quest, and segmented XP-style progress bars. CSS only, scoped to html.st-rpg.
+  const RPG_STYLE = `
+html.st-rpg { --st-gold: #8a6400; --st-gold-ink: #ffffff; --st-gold-soft: rgba(201, 150, 20, .16); }
+@media (prefers-color-scheme: dark) { html.st-rpg:not([data-theme="light"]) { --st-gold: #f0c75e; --st-gold-ink: #1a1406; --st-gold-soft: rgba(240, 199, 94, .16); } }
+html.st-rpg[data-theme="dark"] { --st-gold: #f0c75e; --st-gold-ink: #1a1406; --st-gold-soft: rgba(240, 199, 94, .16); }
+.st-rpg .rung { transition: background-color .3s; }
+.st-rpg .rung.done .notehead { background: var(--st-gold) !important; border-color: var(--st-gold) !important; color: var(--st-gold-ink) !important; box-shadow: 0 0 0 4px var(--st-gold-soft); }
+.st-rpg .rung.st-next .notehead { animation: st-next 2s ease-in-out infinite; }
+@keyframes st-next { 0%, 100% { box-shadow: 0 0 0 0 var(--accent-soft); } 50% { box-shadow: 0 0 0 8px var(--accent-soft); } }
+.st-rpg .rung.done .done-btn { background: var(--st-gold-soft); border-color: var(--st-gold); color: var(--ink); font-weight: 700; }
+.st-rpg .rung-body { position: relative; }
+.st-stamp { position: absolute; right: 4px; bottom: 2px; padding: 4px 10px; border: 2.5px solid var(--st-gold); border-radius: 8px; color: var(--st-gold); background: var(--card); font: 800 12px/1.1 var(--font-display, system-ui); letter-spacing: .08em; text-transform: uppercase; transform: rotate(-8deg); pointer-events: none; }
+.st-rpg .progress { height: 10px; border-radius: 99px; background: repeating-linear-gradient(90deg, var(--hair) 0 calc(20% - 3px), transparent calc(20% - 3px) 20%); }
+.st-rpg .progress span { border-radius: 99px; background: linear-gradient(90deg, var(--accent), var(--st-gold)); }
+.st-rpg .lvl-track span { background: linear-gradient(90deg, var(--accent), var(--st-gold)); }
+.st-rpg .lvl-num::before { content: "⚜ "; color: var(--st-gold); }
+.st-rpg button.sess-item.done { border-color: var(--st-gold); }
+.st-rpg button.sess-item.done .si-check { color: var(--st-gold); }
+.st-rpg .coach { border-top: 3px solid var(--st-gold); }
+@media (prefers-reduced-motion: reduce) { .st-rpg .rung.st-next .notehead { animation: none; } }
+`;
+  function rpgTheme() {
+    const html = document.documentElement;
+    if (html.classList.contains('st-rpg')) return;
+    html.classList.add('st-rpg');
+    const st = document.createElement('style');
+    st.id = 'st-rpg-style';
+    st.textContent = RPG_STYLE;
+    document.head.appendChild(st);
+    const rungs = Array.from(document.querySelectorAll('.rung'));
+    if (!rungs.length) return;
+    const stamp = (r, animate) => {
+      const body = r.querySelector('.rung-body');
+      let s = body && body.querySelector(':scope > .st-stamp');
+      const done = r.classList.contains('done');
+      if (done && body && !s) {
+        s = document.createElement('span');
+        s.className = 'st-stamp';
+        s.textContent = 'Quest complete';
+        s.setAttribute('aria-hidden', 'true');
+        body.appendChild(s);
+        if (animate && motion()) s.animate([{ transform: 'scale(2.4) rotate(-20deg)', opacity: 0 }, { transform: 'scale(.92) rotate(-8deg)', opacity: 1, offset: 0.6 }, { transform: 'rotate(-8deg)', opacity: 1 }], { duration: 520, easing: 'cubic-bezier(.2,.9,.3,1.2)' });
+      } else if (!done && s) s.remove();
+    };
+    const next = () => { const n = rungs.find(r => !r.classList.contains('done')); rungs.forEach(r => r.classList.toggle('st-next', r === n)); };
+    rungs.forEach(r => stamp(r, false));
+    next();
+    const mo = new MutationObserver(list => {
+      list.forEach(m => { if (m.attributeName === 'class') stamp(m.target, true); });
+      next();
+    });
+    rungs.forEach(r => mo.observe(r, { attributes: true, attributeFilter: ['class'] }));
+  }
   function addStyle() {
     if (document.getElementById('st-style')) return;
     const s = document.createElement('style');
@@ -251,6 +305,7 @@ a.st-bar:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; 
     const header = document.querySelector('header.top');
     if (!app || !header) return;
     addStyle();
+    rpgTheme();
     const bar = document.createElement('a');
     bar.className = 'st-bar';
     bar.href = '../';
