@@ -10,11 +10,22 @@
     { id: 'piano', key: 'piano-ladder-v1', name: 'Piano Ladder', short: 'Piano', skill: 'piano', levels: ['First keys', 'Both hands', 'Chord changes', 'Groove', 'Expression'] },
     { id: 'kitchen', key: 'kitchen-ladder-v1', name: 'Kitchen Ladder', short: 'Kitchen', skill: 'cooking', levels: ['Kitchen basics', 'Heat control', 'Flavor balance', 'No recipe needed', 'Your own dishes'] },
     { id: 'chess', key: 'chess-ladder-v1', name: 'Chess Ladder', short: 'Chess', skill: 'chess', levels: ['First moves', 'Safe pieces', 'Tactics', 'Plans', 'Club player'] },
+    { id: 'senses', key: 'senses-ladder-v1', name: 'Sense Quest', short: 'Senses', skill: 'your senses', levels: ['Dormant', 'Awakened', 'Attuned', 'Sharpened', 'Apex'] },
   ];
   // XP: 10 per step, 1 per practice minute (Voice, Piano), 30 per cook, 5 per first-try puzzle,
   // 20 per chess game, 100 per level gained in an app. Player level = floor(sqrt(XP / 40)) + 1.
   const XP = { step: 10, minute: 1, cook: 30, solve: 5, game: 20, level: 100 };
   const TITLES = ['Seedling', 'Sprout', 'Sapling', 'Young tree', 'Branching out', 'Leafy', 'In bloom', 'Sturdy oak', 'Old growth', 'Ancient tree', 'World tree'];
+  // RPG attributes: each app powers one, Willpower comes from consistency. Score = 8 + sqrt(XP / 20).
+  const ATTRS = [
+    { id: 'cha', name: 'Charisma', short: 'CHA', app: 'voice', icon: '🎤', cls: 'Bard', of: 'of Song' },
+    { id: 'dex', name: 'Dexterity', short: 'DEX', app: 'piano', icon: '🎹', cls: 'Virtuoso', of: 'of Keys' },
+    { id: 'con', name: 'Constitution', short: 'CON', app: 'kitchen', icon: '🍳', cls: 'Alchemist', of: 'of the Hearth' },
+    { id: 'int', name: 'Intellect', short: 'INT', app: 'chess', icon: '♟️', cls: 'Tactician', of: 'of Strategy' },
+    { id: 'per', name: 'Perception', short: 'PER', app: 'senses', icon: '👁️', cls: 'Ranger', of: 'of Keen Senses' },
+    { id: 'wil', name: 'Willpower', short: 'WIL', app: null, icon: '🔥', cls: 'Monk', of: 'of Iron Will' },
+  ];
+  const attrScore = xp => 8 + Math.floor(Math.sqrt(Math.max(0, xp) / 20));
   const lvlOf = xp => Math.floor(Math.sqrt(xp / 40)) + 1;
   const xpAt = L => 40 * (L - 1) * (L - 1);
   const titleOf = L => TITLES[Math.min(L, TITLES.length) - 1];
@@ -57,6 +68,10 @@
     if (id === 'chess') {
       return { streak, days: plural(streak, 'day', 'days'), steps, rating: Math.round(Number(obj(o.profile).rating) || 800), today: steps >= 1 || Object.keys(obj(obj(d.pz).res)).length > 0 };
     }
+    if (id === 'senses') {
+      const trained = Object.keys(days).filter(k => stepsOn(days[k]) >= 1).length;
+      return { streak, days: plural(streak, 'day', 'days'), steps, trained, trainedU: plural(trained, 'day', 'days'), today: steps >= 1 };
+    }
     const mins = Math.round(Number(d.mins) || 0);
     return { streak, days: plural(streak, 'day', 'days'), mins, steps, today: steps >= 1 || mins >= 3 };
   }
@@ -67,6 +82,7 @@
     piano: d => stepsOn(d) >= 1 || (Number(d.mins) || 0) >= 3,
     kitchen: d => count(d, 'cooks') > 0 || stepsOn(d) > 0,
     chess: d => stepsOn(d) >= 1 || Object.keys(obj(obj(d.pz).res)).length > 0,
+    senses: d => stepsOn(d) >= 1,
   };
   function summarize(id, o) {
     const days = obj(o.days), keys = Object.keys(days).sort();
@@ -85,8 +101,16 @@
       best = Math.max(best, run);
     });
     const lv = levelOf(o);
+    const wins = id === 'chess' ? sum(d => (Array.isArray(d.games) ? d.games.filter(g => g && g.result === 'win').length : 0)) : 0;
+    const xpByDay = {};
+    keys.forEach(k => {
+      const d = obj(days[k]);
+      const v = stepsOn(d) * XP.step + (id === 'voice' || id === 'piano' ? Math.round(Number(d.mins) || 0) * XP.minute : 0) + (id === 'kitchen' ? count(d, 'cooks') * XP.cook : 0)
+        + (id === 'chess' ? Object.values(obj(obj(d.pz).res)).filter(x => x === 1).length * XP.solve + count(d, 'games') * XP.game : 0);
+      if (v) xpByDay[k] = v;
+    });
     return {
-      lv, steps, best,
+      lv, steps, best, mins, cooks, solves, games, wins, xpByDay,
       xp: steps * XP.step + mins * XP.minute + cooks * XP.cook + solves * XP.solve + games * XP.game + (lv - 1) * XP.level,
       dates: keys.filter(k => practicedOn[id](obj(days[k]))),
     };
@@ -108,24 +132,35 @@
       round: S.filter(s => s.lv >= 2).length,
       mastered: apps.kitchen ? apps.kitchen.card.mastered : 0,
       rating: apps.chess ? apps.chess.card.rating : 0,
+      sensesTried: apps.senses ? Object.values(obj(obj(load('senses-ladder-v1')).profile).tried).filter(n => n > 0).length : 0,
     };
+    const N = APPS.length;
     const badges = [
       ['first', '🌱', 'First leaf', 'Finish a step in any app', T.steps, 1],
       ['roll', '🔥', 'On a roll', 'A 3-day streak', T.best, 3],
       ['week', '⚡', 'Week warrior', 'A 7-day streak', T.best, 7],
       ['month', '🏆', 'Unstoppable', 'A 30-day streak', T.best, 30],
       ['combo', '🎯', 'Combo', 'Two skills in one day', T.maxDay, 2],
-      ['all', '🎨', 'Renaissance', 'All four skills in one day', T.maxDay, 4],
-      ['branch', '🌿', 'Branching out', 'Start all four apps', T.started, 4],
+      ['all', '🎨', 'Renaissance', 'Every skill in one day', T.maxDay, N],
+      ['branch', '🌿', 'Branching out', 'Start every app', T.started, N],
       ['lv2', '⭐', 'Level up', 'Level 2 in any app', T.maxLevel, 2],
       ['lv3', '🌟', 'Halfway up', 'Level 3 in any app', T.maxLevel, 3],
       ['lv5', '👑', 'Top of the branch', 'Level 5 in any app', T.maxLevel, 5],
-      ['round', '🌳', 'Well-rounded', 'Level 2 in all four apps', T.round, 4],
+      ['round', '🌳', 'Well-rounded', 'Level 2 in every app', T.round, N],
       ['dish', '🍳', 'Signature dish', 'Master a dish in Kitchen', T.mastered, 1],
       ['sharp', '♟️', 'Sharp eye', 'Chess puzzle rating 1000', T.rating, 1000],
       ['century', '💯', 'Century', '100 steps in all', T.steps, 100],
+      ['sixth', '👁️', 'Sixth sense', 'Train all six senses in Sense Quest', T.sensesTried, 6],
     ].map(([id, icon, name, how, have, need]) => ({ id, icon, name, how, have, need, got: have >= need }));
-    return { apps, xp, L, title: titleOf(L), into: xp - xpAt(L), span: xpAt(L + 1) - xpAt(L), badges, earned: badges.filter(b => b.got).map(b => b.id) };
+    // attributes and class
+    const allDays = Object.keys(perDay);
+    const attrs = ATTRS.map(a => {
+      const v = a.app ? (apps[a.app] ? apps[a.app].sum.xp : 0) : allDays.length * 25 + T.best * 40;
+      return Object.assign({}, a, { xp: v, score: attrScore(v) });
+    });
+    const ranked = attrs.slice().sort((x, y) => y.score - x.score || y.xp - x.xp);
+    const cls = !S.length ? 'Adventurer' : ranked[0].cls + (ranked[1] && ranked[1].score > 8 ? ' ' + ranked[1].of : '');
+    return { apps, xp, L, title: titleOf(L), into: xp - xpAt(L), span: xpAt(L + 1) - xpAt(L), badges, earned: badges.filter(b => b.got).map(b => b.id), attrs, cls, perDay, T };
   }
 
   function seenGet() { try { return JSON.parse(localStorage.getItem('skill-tree-seen') || 'null'); } catch (e) { return null; } }
@@ -143,10 +178,12 @@
     const colors = ['--accent', '--heat-2', '--warn', '--good', '--bad', '--accent-soft'].map(css);
     for (let i = 0; i < n; i++) {
       const p = document.createElement('i');
-      p.style.left = Math.random() * 100 + '%';
+      // keep every piece's whole path on screen, so it can never widen the page
+      const W = Math.max(40, innerWidth - 20), x0 = Math.random() * W;
+      p.style.left = x0 + 'px';
       p.style.background = colors[i % colors.length] || '#3445c9';
       host.appendChild(p);
-      const dx = (Math.random() - 0.5) * 220, rot = (Math.random() - 0.5) * 900;
+      const dx = Math.max(-x0, Math.min(W - x0, (Math.random() - 0.5) * 220)), rot = (Math.random() - 0.5) * 900;
       p.animate([{ transform: 'translate(0, 0) rotate(0deg)', opacity: 1 }, { transform: 'translate(' + dx + 'px, ' + (innerHeight + 40) + 'px) rotate(' + rot + 'deg)', opacity: 0.85 }],
         { duration: 1900 + Math.random() * 1500, delay: Math.random() * 500, easing: 'cubic-bezier(.25,.6,.45,1)', fill: 'forwards' });
     }
@@ -174,7 +211,7 @@
 .st-toast.xp { font-family: var(--font-mono, monospace); font-size: 14px; }
 .st-toast.big { font-size: 18px; padding: 12px 20px; border-radius: 16px; }
 .st-toast.badge { background: var(--card); color: var(--ink); border: 2px solid var(--accent); }
-.st-confetti { position: fixed; inset: 0; pointer-events: none; z-index: 55; overflow: hidden; }
+.st-confetti { position: fixed; inset: 0; pointer-events: none; z-index: 55; overflow: hidden; contain: strict; }
 .st-confetti i { position: absolute; top: -16px; width: 8px; height: 13px; border-radius: 2px; }
 a.st-bar { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; align-items: center; padding: 12px 14px; border-radius: var(--r, 14px); border: 1px solid var(--line); background: var(--card); color: var(--ink); text-decoration: none; -webkit-tap-highlight-color: transparent; transition: border-color .15s, transform .1s; }
 a.st-bar:hover { border-color: var(--accent); }
@@ -232,8 +269,9 @@ a.st-bar:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; 
       const top = document.createElement('span');
       top.className = 'st-top';
       top.innerHTML = '<span class="st-title"></span><span class="st-xp"></span>';
-      top.firstChild.textContent = 'Skill Tree · ' + R.title;
-      top.lastChild.textContent = R.xp.toLocaleString() + ' XP';
+      top.firstChild.textContent = R.cls + ' · ' + R.title;
+      const done = stepsOn(obj(obj(load(app.key)).days)[back(0)]);
+      top.lastChild.textContent = R.xp.toLocaleString() + ' XP · ' + Math.min(done, 5) + '/5 quests today';
       const track = document.createElement('span');
       track.className = 'st-track';
       const fill = document.createElement('span');
@@ -241,7 +279,8 @@ a.st-bar:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; 
       const br = document.createElement('span');
       br.className = 'st-branch';
       br.innerHTML = '<span class="nm"></span>';
-      br.firstChild.textContent = app.short;
+      const at = R.attrs.find(x => x.app === appId);
+      br.firstChild.textContent = at ? at.short + ' ' + at.score : app.short;
       for (let n = 1; n <= 5; n++) {
         const i = document.createElement('i');
         i.className = (n <= lv ? 'on' : '') + (n === lv ? ' cur' : '');
@@ -251,7 +290,7 @@ a.st-bar:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; 
       }
       main.append(top, track, br);
       bar.append(lvEl, main);
-      bar.setAttribute('aria-label', 'Skill Tree: Level ' + R.L + ', ' + R.title + ', ' + R.xp.toLocaleString() + ' XP. ' + app.name + (s ? ' Level ' + lv + ' of 5' : ' not started') + '. Open the Skill Tree.');
+      bar.setAttribute('aria-label', 'Skill Tree: Level ' + R.L + ', ' + R.title + ' ' + R.cls + ', ' + R.xp.toLocaleString() + ' XP. ' + (at ? at.name + ' ' + at.score + '. ' : '') + app.name + (s ? ' Level ' + lv + ' of 5' : ' not started') + '. Open the Skill Tree.');
       const pct = (100 * R.into) / R.span + '%';
       if (!shown && motion()) requestAnimationFrame(() => requestAnimationFrame(() => { fill.style.width = pct; }));
       else { fill.style.transition = shown ? '' : 'none'; fill.style.width = pct; }
@@ -275,7 +314,8 @@ a.st-bar:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; 
       if (gained > 0) toast('+' + gained + ' XP', 'xp');
       if (nl > pl && pl) { toast(app.name + ': Level ' + nl + ', ' + app.levels[nl - 1] + '!', 'big'); party = 80; }
       if (R.L > prev.L) { toast('Level up! Level ' + R.L + ', ' + R.title, 'big'); party = 110; }
-      fresh.forEach(b => toast(b.icon + ' Badge: ' + b.name, 'badge'));
+      R.attrs.forEach((a, i) => { if (a.score > prev.attrs[i].score) toast(a.icon + ' ' + a.short + ' +' + (a.score - prev.attrs[i].score) + ' → ' + a.score, 'xp'); });
+      fresh.forEach(b => toast('🏆 Achievement: ' + b.icon + ' ' + b.name, 'badge'));
       if (fresh.length) party = Math.max(party, 45);
       if (party) confetti(party);
       if (R.L > prev.L || fresh.length) {
@@ -286,7 +326,7 @@ a.st-bar:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; 
     }, 1000);
   }
 
-  window.SkillTree = { APPS, XP, TITLES, lvlOf, xpAt, titleOf, compute, seenGet, seenSet, confetti, toast, motion, addStyle };
+  window.SkillTree = { APPS, ATTRS, XP, TITLES, lvlOf, xpAt, titleOf, attrScore, compute, seenGet, seenSet, confetti, toast, motion, addStyle };
   const me = document.currentScript;
   const appId = me && me.dataset.app;
   if (appId) {

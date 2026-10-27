@@ -1,0 +1,3302 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sense Quest</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Train sight, hearing, smell, taste, touch, and balance with the best-evidenced methods, each with the research behind it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+
+/* Layout: one practice column. Each day is a five-quest ladder across the senses, then a library of tests, progress, and a roadmap. */
+:root {
+  --bg: #f2f3f8;
+  --card: #ffffff;
+  --ink: #141a2e;
+  --ink-2: #464d6a;
+  --muted: #6d7495;
+  --line: #d9dde9;
+  --hair: #e7e9f1;
+  --accent: #3445c9;
+  --accent-ink: #ffffff;
+  --accent-soft: #e4e8fc;
+  --accent-text: #2a39ad;
+  --heat-0: #e7e9f1;
+  --heat-1: #c3cbf5;
+  --heat-2: #8090ea;
+  --heat-3: #3445c9;
+  --good: #0ca30c;
+  --good-text: #006300;
+  --warn: #fab219;
+  --warn-text: #845500;
+  --bad: #d03b3b;
+  --bad-text: #a92626;
+  --target: rgba(52, 69, 201, 0.10);
+  --good-soft: rgba(12, 163, 12, 0.18);
+  --warn-soft: rgba(250, 178, 25, 0.22);
+  --inhale: #9aa6ee;
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r: 14px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1020;
+    --card: #161a2d;
+    --ink: #eceef8;
+    --ink-2: #b5bad2;
+    --muted: #8a90ad;
+    --line: #2a3049;
+    --hair: #1f2439;
+    --accent: #8e9cff;
+    --accent-ink: #0d1020;
+    --accent-soft: #232a55;
+    --accent-text: #aab4ff;
+    --heat-0: #1f2439;
+    --heat-1: #2d3775;
+    --heat-2: #4d5dc6;
+    --heat-3: #8e9cff;
+    --good: #2dbe2d;
+    --good-text: #55d655;
+    --warn: #fab219;
+    --warn-text: #fab219;
+    --bad: #ec6262;
+    --bad-text: #f28585;
+    --target: rgba(142, 156, 255, 0.13);
+    --inhale: #4b58a8;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1020;
+  --card: #161a2d;
+  --ink: #eceef8;
+  --ink-2: #b5bad2;
+  --muted: #8a90ad;
+  --line: #2a3049;
+  --hair: #1f2439;
+  --accent: #8e9cff;
+  --accent-ink: #0d1020;
+  --accent-soft: #232a55;
+  --accent-text: #aab4ff;
+  --heat-0: #1f2439;
+  --heat-1: #2d3775;
+  --heat-2: #4d5dc6;
+  --heat-3: #8e9cff;
+  --good: #2dbe2d;
+  --good-text: #55d655;
+  --warn: #fab219;
+  --warn-text: #fab219;
+  --bad: #ec6262;
+  --bad-text: #f28585;
+  --target: rgba(142, 156, 255, 0.13);
+  --inhale: #4b58a8;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+}
+.wrap {
+  max-width: 620px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 24px 96px;
+  display: grid;
+  gap: 28px;
+}
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
+p { margin: 0; }
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.small { font-size: 13px; color: var(--ink-2); }
+.muted { color: var(--muted); }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ---------- header ---------- */
+.top { display: grid; gap: 10px; }
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+h1 {
+  font-size: clamp(38px, 11vw, 54px);
+  font-weight: 780;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  font-variation-settings: "opsz" 96;
+}
+h1 .clef { color: var(--accent); }
+.lede { color: var(--ink-2); font-size: 16px; max-width: 34em; }
+.stats {
+  margin: 6px 0 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.stats > div { padding: 10px 0; min-width: 0; }
+.stats > div + div { padding-left: 14px; border-left: 1px solid var(--line); }
+.stats dt { font-size: 12px; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+.stats dd { margin: 2px 0 0; font-family: var(--font-display); font-size: 24px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.stats dd small { font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--ink-2); margin-left: 2px; }
+
+/* ---------- controls ---------- */
+button, .btn {
+  font: inherit;
+  font-weight: 600;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  min-height: 44px;
+  padding: 0 18px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color .15s, border-color .15s, transform .1s;
+}
+button:active, .btn:active { transform: scale(0.97); }
+button:focus-visible, .btn:focus-visible, select:focus-visible, .sr-only:focus-visible + .btn {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.ghost { background: transparent; }
+.row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.stepper { display: inline-flex; align-items: center; gap: 4px; }
+.stepper button { width: 44px; padding: 0; font-size: 20px; line-height: 1; }
+.stepper output {
+  min-width: 56px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 17px;
+}
+select {
+  font: inherit;
+  font-size: 14px;
+  min-height: 40px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  padding: 0 10px;
+}
+label.inline { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink-2); }
+
+/* ---------- starting note ---------- */
+.home {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+.home-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.home-row > div:first-child { min-width: 0; flex: 1 1 220px; }
+.home h2 { font-size: 18px; font-weight: 680; }
+.chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip { min-height: 36px; padding: 0 14px; font-size: 14px; font-weight: 500; }
+.chip[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent-text); }
+
+/* ---------- section heads ---------- */
+.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.sec-head h2 { font-size: 26px; font-weight: 720; letter-spacing: -0.015em; }
+.progress { height: 6px; border-radius: 99px; background: var(--hair); overflow: hidden; margin-top: 10px; }
+.progress span { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 99px; transition: width .4s ease; }
+
+/* ---------- the ladder ---------- */
+.ladder { list-style: none; margin: 8px 0 0; padding: 0; }
+.rung {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 4px 12px;
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+.rung:last-child { border-bottom: 1px solid var(--line); }
+.head-col { display: flex; flex-direction: column; align-items: center; gap: 6px; padding-top: 4px; }
+.notehead {
+  width: 30px;
+  height: 21px;
+  border-radius: 50%;
+  border: 3px solid var(--accent);
+  transform: rotate(-22deg);
+  background: transparent;
+  transition: background-color .25s ease, transform .25s ease;
+}
+.rung.done .notehead { background: var(--accent); transform: rotate(-22deg) scale(1.08); }
+.syl {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--accent-text);
+}
+.rung-body { display: grid; gap: 12px; min-width: 0; }
+.rung-top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.rung h3 { font-size: 21px; font-weight: 680; letter-spacing: -0.01em; }
+.dur { font-family: var(--font-mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
+.rung p.how { color: var(--ink-2); max-width: 38em; }
+.done-btn { justify-self: start; min-height: 38px; font-size: 14px; }
+.rung.done .done-btn { background: var(--accent-soft); border-color: var(--accent); color: var(--accent-text); }
+
+.reps { display: inline-flex; gap: 6px; align-items: center; }
+.reps i {
+  width: 10px; height: 10px; border-radius: 50%;
+  border: 2px solid var(--accent);
+  display: block;
+  transition: background-color .2s;
+}
+.reps i.on { background: var(--accent); }
+.reps-label { font-size: 13px; color: var(--muted); }
+
+/* breath meter */
+.breath { display: grid; gap: 10px; }
+.breath-read { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.breath-phase { font-weight: 600; }
+.breath-time { font-family: var(--font-mono); font-size: 26px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.meter { position: relative; height: 14px; border-radius: 99px; background: var(--hair); overflow: hidden; }
+.meter .fill { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--accent); border-radius: 99px; }
+.meter .fill.inhale { background: var(--inhale); }
+.meter .best { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--ink); opacity: .55; }
+
+/* note pills */
+.pills { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+.pill {
+  flex-direction: column;
+  gap: 0;
+  border-radius: 12px;
+  min-height: 58px;
+  padding: 6px 2px;
+  line-height: 1.15;
+}
+.pill .s { font-family: var(--font-display); font-style: italic; font-weight: 600; font-size: 15px; }
+.pill .n { font-family: var(--font-mono); font-size: 12px; color: var(--muted); font-weight: 500; }
+.pill[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
+.pill[aria-pressed="true"] .s { color: var(--accent-text); }
+.pill.sounding { box-shadow: 0 0 0 3px var(--accent) inset; }
+
+/* scale pattern */
+.pattern { display: flex; flex-wrap: wrap; gap: 4px; }
+.pattern .pc {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  min-height: 34px;
+  padding: 0 9px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--hair);
+  color: var(--ink-2);
+  transition: background-color .12s, color .12s;
+}
+.pattern .pc.lit { background: var(--accent); color: var(--accent-ink); }
+
+/* ---------- pitch check ---------- */
+.check {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 18px 16px;
+  display: grid;
+  gap: 14px;
+}
+.badge {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 3px 9px;
+  border-radius: 99px;
+  border: 1px dashed var(--muted);
+  color: var(--ink-2);
+}
+.badge.mine { border-style: solid; border-color: var(--accent); color: var(--accent-text); }
+.live-read {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 4px 16px;
+  padding: 10px 0;
+}
+.live-note { font-family: var(--font-display); font-size: 56px; font-weight: 780; line-height: 1; letter-spacing: -0.03em; min-width: 2.4ch; }
+.live-cents { font-family: var(--font-mono); font-size: 18px; font-weight: 600; }
+.live-dir { font-size: 15px; color: var(--ink-2); }
+.graph-wrap { position: relative; width: 100%; }
+.graph-wrap canvas { display: block; width: 100%; height: 260px; touch-action: pan-y; }
+.tip {
+  position: absolute;
+  top: 6px;
+  pointer-events: none;
+  background: var(--ink);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 5px 8px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--ink-2); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 18px; height: 3px; border-radius: 2px; display: inline-block; }
+.legend .band { width: 14px; height: 10px; border-radius: 3px; background: var(--target); border: 1px solid var(--accent); opacity: .8; }
+.take-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0; }
+.take-stats > div { min-width: 0; }
+.take-stats dt { font-size: 12px; color: var(--muted); }
+.take-stats dd { margin: 2px 0 0; font-family: var(--font-display); font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.take-stats dd small { font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--ink-2); }
+.status { font-size: 14px; color: var(--ink-2); min-height: 1.5em; }
+.status.err { color: var(--bad-text); }
+.status:empty { display: none; }
+
+/* ---------- log ---------- */
+.cal { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; margin-top: 12px; }
+.cal .dow { font-family: var(--font-mono); font-size: 11px; color: var(--muted); text-align: center; }
+.cal .day {
+  aspect-ratio: 1 / 1;
+  max-width: 100%;
+  border-radius: 9px;
+  background: var(--heat-0);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 4px 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+.cal .day.l1 { background: var(--heat-1); color: var(--ink-2); }
+.cal .day.l2 { background: var(--heat-2); color: var(--ink); }
+.cal .day.l3 { background: var(--heat-3); color: var(--accent-ink); }
+.cal .day.future { background: transparent; border: 1px dashed var(--line); }
+.cal .day.today { box-shadow: 0 0 0 2px var(--ink); }
+.cal-legend { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 12px; color: var(--muted); margin-top: 10px; }
+.cal-legend i { width: 14px; height: 14px; border-radius: 4px; display: inline-block; }
+.trends { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin-top: 18px; }
+.trend { margin: 0; min-width: 0; }
+.trend figcaption { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+.trend svg { width: 100%; height: 96px; display: block; overflow: visible; }
+.trend .read { font-family: var(--font-mono); font-size: 12px; color: var(--ink-2); min-height: 1.5em; margin-top: 4px; }
+.empty { font-size: 13px; color: var(--muted); padding: 30px 0; text-align: center; border: 1px dashed var(--line); border-radius: 10px; }
+
+/* ---------- mic feedback ---------- */
+.ico { width: 18px; height: 18px; flex: none; }
+.mic-row { display: grid; gap: 10px; padding-top: 14px; border-top: 1px solid var(--line); }
+.mic-row h3 { font-size: 16px; font-weight: 680; }
+.level { position: relative; height: 10px; border-radius: 99px; background: var(--hair); overflow: hidden; }
+.level .fill { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--accent); border-radius: 99px; transition: width .06s linear; }
+.level .fill.good { background: var(--good); }
+.level .fill.warn { background: var(--warn); }
+.level .band { position: absolute; top: 0; bottom: 0; background: var(--good-soft); border-left: 2px solid var(--good); border-right: 2px solid var(--good); }
+.hiss-level { height: 16px; }
+.feedback { font-size: 14px; font-weight: 600; color: var(--ink-2); }
+.feedback:empty { display: none; }
+.feedback.ok { color: var(--good-text); }
+.feedback.meh { color: var(--warn-text); }
+.feedback.bad { color: var(--bad-text); }
+.tuner {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+}
+.tuner-top { display: flex; align-items: baseline; gap: 4px 12px; flex-wrap: wrap; }
+.tuner-note { font-family: var(--font-display); font-size: 36px; font-weight: 780; line-height: 1; letter-spacing: -0.02em; min-width: 2.6ch; }
+.tuner-cents { font-family: var(--font-mono); font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.tuner-hint { font-size: 14px; color: var(--ink-2); flex-basis: 100%; min-height: 1.5em; }
+.tuner-bar { position: relative; height: 36px; border-radius: 10px; background: var(--hair); overflow: hidden; }
+.tuner-bar .z-close { position: absolute; top: 0; bottom: 0; left: 20%; right: 20%; background: var(--warn-soft); }
+.tuner-bar .z-on { position: absolute; top: 0; bottom: 0; left: 37.5%; right: 37.5%; background: var(--good-soft); }
+.tuner-bar .center { position: absolute; top: 5px; bottom: 5px; left: 50%; width: 2px; margin-left: -1px; background: var(--good); }
+.tuner-bar .needle {
+  position: absolute; top: 3px; bottom: 3px; left: 50%;
+  width: 8px; margin-left: -4px; border-radius: 4px;
+  background: var(--ink);
+  opacity: 0;
+  transition: opacity .15s;
+}
+.tuner-bar .needle.on { opacity: 1; }
+.tuner-scale { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+.hold { height: 8px; border-radius: 99px; background: var(--hair); overflow: hidden; }
+.hold span { display: block; height: 100%; width: 0; background: var(--good); border-radius: 99px; }
+.hold-label { font-size: 13px; color: var(--muted); }
+.slide-cv { display: block; width: 100%; height: 150px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+.pill.matched { border-color: var(--good); }
+.pill.matched .n::after { content: " ✓"; color: var(--good-text); font-weight: 700; }
+.pattern .pc.cur { background: var(--accent-soft); color: var(--accent-text); box-shadow: 0 0 0 2px var(--accent) inset; }
+.pattern .pc.r-on { background: var(--good-soft); color: var(--good-text); box-shadow: 0 0 0 1.5px var(--good) inset; }
+.pattern .pc.r-on::after { content: " ✓"; }
+.pattern .pc.r-close { background: var(--warn-soft); color: var(--warn-text); box-shadow: 0 0 0 1.5px var(--warn) inset; }
+.pattern .pc.r-close::after { content: " ~"; }
+.pattern .pc.r-miss { background: transparent; color: var(--bad-text); box-shadow: 0 0 0 1.5px var(--bad) inset; }
+.pattern .pc.r-miss::after { content: " ✗"; }
+.mic-chip {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 6px 6px 14px;
+  border-radius: 99px;
+  background: var(--ink);
+  color: var(--bg);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  max-width: calc(100% - 32px);
+}
+.mic-chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--bad); flex: none; }
+.mic-chip .level { width: 64px; height: 6px; background: var(--ink-2); flex: none; }
+.mic-chip .level .fill { background: var(--bg); }
+.mic-chip button { min-height: 34px; padding: 0 12px; font-size: 13px; background: transparent; color: var(--bg); border-color: var(--ink-2); }
+
+/* ---------- progress ---------- */
+.prog-head { font-size: 16px; color: var(--ink-2); margin-top: 8px; max-width: 36em; }
+.prog-list { display: grid; margin-top: 10px; }
+.prog-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 0; border-top: 1px solid var(--line); }
+.prog-row:last-of-type { border-bottom: 1px solid var(--line); }
+.pr-main { min-width: 0; }
+.pr-name { font-weight: 650; }
+.pr-detail { font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.pr-missing { margin-top: 10px; }
+.vchip { flex: none; font-size: 12px; font-weight: 650; padding: 4px 10px; border-radius: 99px; white-space: nowrap; }
+.vchip.v-up { background: var(--good-soft); color: var(--good-text); }
+.vchip.v-down { background: var(--warn-soft); color: var(--warn-text); }
+.vchip.v-flat { background: var(--hair); color: var(--ink-2); }
+.vchip.v-early { border: 1px dashed var(--line); color: var(--muted); }
+.sub-h { font-size: 17px; font-weight: 680; margin-top: 22px; }
+
+/* ---------- voice type test ---------- */
+.vt-step { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent-text); }
+.vt-cv { display: block; width: 100%; height: 96px; margin-top: 10px; }
+.vt-read { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
+.vt-result { display: grid; gap: 10px; }
+.vt-result:empty { display: none; }
+.vt-type { font-family: var(--font-display); font-size: 30px; font-weight: 760; letter-spacing: -0.02em; line-height: 1.05; }
+.vt-sub { color: var(--ink-2); font-size: 15px; }
+.vt-chart { width: 100%; display: block; }
+
+/* ---------- coach ---------- */
+.coach { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 16px; display: grid; gap: 12px; }
+.coach-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.coach h2 { font-size: 24px; font-weight: 720; letter-spacing: -0.015em; }
+.lvl { display: grid; justify-items: end; text-align: right; flex: none; }
+.lvl-num { font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--accent-text); letter-spacing: 0.06em; text-transform: uppercase; }
+.lvl-name { font-family: var(--font-display); font-weight: 680; font-size: 16px; }
+.lvl-track { height: 6px; border-radius: 99px; background: var(--hair); overflow: hidden; }
+.lvl-track span { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 99px; transition: width .4s ease; }
+.focus { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
+.focus li { padding-left: 2px; }
+.focus li.rest { color: var(--accent-text); font-weight: 600; }
+.goal-tip { font-size: 13px; color: var(--ink-2); border-top: 1px solid var(--line); padding-top: 10px; }
+.goal-tip:empty { display: none; }
+#focus-drill { display: grid; gap: 10px; }
+#focus-drill[hidden] { display: none; }
+.feedback .tip { display: block; font-weight: 500; color: var(--ink-2); margin-top: 4px; }
+
+/* ---------- plan ---------- */
+.plan summary { cursor: pointer; list-style: none; display: flex; flex-direction: column; gap: 2px; }
+.plan summary::-webkit-details-marker { display: none; }
+.plan summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; border-radius: 6px; }
+.plan-title { font-family: var(--font-display); font-weight: 680; font-size: 18px; }
+.plan-title::after { content: " ▾"; color: var(--muted); font-size: 14px; }
+.plan[open] .plan-title::after { content: " ▴"; }
+.plan-body { display: grid; gap: 16px; margin-top: 14px; }
+.plan fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+.plan legend { font-size: 13px; font-weight: 600; color: var(--ink-2); padding: 0; margin-bottom: 6px; }
+.seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg label { position: relative; }
+.seg input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.seg span { display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px; border-radius: 99px; border: 1px solid var(--line); background: var(--card); font-size: 14px; font-weight: 500; cursor: pointer; }
+.seg input:checked + span { background: var(--accent-soft); border-color: var(--accent); color: var(--accent-text); font-weight: 600; }
+.seg input:focus-visible + span { outline: 3px solid var(--accent); outline-offset: 2px; }
+.checks { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+.chips .chip:disabled { opacity: 0.5; cursor: default; }
+
+/* ---------- level drills ---------- */
+.bonus { display: grid; gap: 14px; margin-top: 18px; }
+.drill { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 16px; display: grid; gap: 12px; }
+.drill h3 { font-size: 20px; font-weight: 680; }
+
+/* ---------- roadmap ---------- */
+.road-list { list-style: none; margin: 16px 0 0; padding: 0; display: grid; }
+.mile { position: relative; padding: 0 0 22px 36px; }
+.mile::before { content: ""; position: absolute; left: 12px; top: 20px; bottom: 0; width: 2px; background: var(--line); }
+.mile:last-child::before { display: none; }
+.mile-head { display: flex; align-items: flex-start; gap: 10px; }
+.mile-dot { position: absolute; left: 0; top: 4px; width: 24px; height: 17px; border-radius: 50%; border: 3px solid var(--accent); transform: rotate(-22deg); background: var(--bg); }
+.mile.reached .mile-dot { background: var(--accent); }
+.mile.next .mile-dot { box-shadow: 0 0 0 5px var(--accent-soft); }
+.mile-title { display: grid; flex: 1; min-width: 0; }
+.mile-when { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.mile-title strong { font-family: var(--font-display); font-size: 18px; font-weight: 680; }
+.mile-count { font-family: var(--font-mono); font-size: 12px; color: var(--ink-2); flex: none; padding-top: 2px; }
+.mile-expect { color: var(--ink-2); font-size: 14px; margin-top: 4px; max-width: 38em; }
+.mile-goals { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 4px; font-size: 14px; }
+.mile-goals li { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.mile-goals .g-mark { width: 1em; color: var(--muted); }
+.mile-goals li.done .g-mark { color: var(--good-text); font-weight: 700; }
+.g-prog { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+.mile-here { font-size: 13px; font-weight: 600; color: var(--accent-text); margin-top: 6px; }
+
+/* ---------- level check & practice time ---------- */
+.lvl-msg { font-weight: 650; color: var(--accent-text); }
+.lvl-msg:empty { display: none; }
+.lc { display: grid; gap: 10px; padding: 14px; border: 1.5px solid var(--accent); border-radius: 12px; background: var(--bg); }
+.lc-live { display: flex; align-items: center; gap: 14px; }
+.lc-meter { flex: 1; min-width: 0; display: grid; gap: 6px; }
+.lc-dots { display: flex; gap: 8px; flex-wrap: wrap; }
+.lc-dot { width: 15px; height: 11px; border-radius: 50%; border: 2px solid var(--accent); transform: rotate(-22deg); transition: background-color .2s; }
+.lc-dot.done { background: var(--accent); }
+.lc-dot.cur { box-shadow: 0 0 0 4px var(--accent-soft); }
+.lc-dot.lit { background: var(--heat-2); }
+.lc-result { display: grid; gap: 10px; padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); }
+.lc-result .ghost { justify-self: start; }
+.lc-table { display: grid; }
+.lc-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; padding: 9px 0; border-top: 1px solid var(--line); align-items: center; }
+.lc-name { font-weight: 600; font-size: 14px; }
+.lc-val { grid-column: 1; font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.lc-chip { grid-column: 2; grid-row: 1 / span 2; font-family: var(--font-mono); font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 99px; background: var(--accent-soft); color: var(--accent-text); white-space: nowrap; }
+.lc-chip.none { background: var(--hair); color: var(--muted); }
+.ptime { display: grid; gap: 6px; border-top: 1px solid var(--line); padding-top: 12px; }
+.ptime-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.ptime-label { font-weight: 650; font-size: 14px; }
+.ptime-val { font-family: var(--font-mono); font-weight: 600; font-size: 14px; font-variant-numeric: tabular-nums; }
+.ptime-bar { position: relative; height: 10px; border-radius: 99px; background: var(--hair); }
+.ptime-fill { position: absolute; inset: 0 auto 0 0; width: 0; border-radius: 99px; background: var(--accent); transition: width .4s ease; }
+.ptime-fill.done { background: var(--good); }
+.ptime-fill.over { background: var(--bad); }
+.ptime-rec { position: absolute; top: -4px; bottom: -4px; width: 2px; margin-left: -1px; background: var(--ink); opacity: .7; }
+.ptime-scale { position: relative; display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; color: var(--muted); height: 1.4em; }
+.ptime-reclab { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+.ptime.static .ptime-bar, .ptime.static .ptime-val, .ptime.static .ptime-scale { display: none; }
+
+/* ---------- roadmap chart ---------- */
+.road-pace { font-size: 16px; color: var(--ink-2); margin-top: 8px; max-width: 36em; }
+.road-chart { margin-top: 12px; }
+.road-chart svg { display: block; width: 100%; height: auto; overflow: visible; touch-action: pan-y; }
+.road-read { font-family: var(--font-mono); font-size: 12px; color: var(--ink-2); min-height: 1.5em; margin: 4px 0 8px; }
+
+/* ---------- exercise library ---------- */
+.lib { display: grid; gap: 14px; margin-top: 14px; }
+.ex-head { display: flex; align-items: baseline; justify-content: space-between; gap: 6px 10px; flex-wrap: wrap; }
+.ex-head h3 { font-size: 20px; font-weight: 680; }
+.ex-tags { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.tag { font-size: 11px; font-weight: 650; padding: 2px 8px; border-radius: 99px; white-space: nowrap; }
+.tag-pick { background: var(--accent); color: var(--accent-ink); }
+.tag-done { background: var(--good-soft); color: var(--good-text); }
+.ex-why { font-size: 14px; color: var(--ink-2); max-width: 38em; }
+.lock-note { font-size: 13px; color: var(--muted); }
+.lock-note:empty { display: none; }
+.ex-body { display: grid; gap: 12px; }
+.drill.locked { background: transparent; border-style: dashed; gap: 6px; }
+.drill.locked .ex-body { display: none; }
+.drill.locked h3 { color: var(--ink-2); }
+.drill.flash { animation: flash 1.4s ease; }
+@keyframes flash { 0% { box-shadow: 0 0 0 4px var(--accent); } 100% { box-shadow: 0 0 0 0 transparent; } }
+.post-steps { margin: 0; padding-left: 22px; display: grid; gap: 6px; color: var(--ink-2); }
+.post-steps li { transition: color .2s; }
+.post-steps li.cur { color: var(--ink); font-weight: 650; }
+.post-steps li.done { color: var(--muted); }
+.sus { display: flex; align-items: center; gap: 14px; }
+.sus-prompt { font-family: var(--font-display); font-size: 34px; font-weight: 760; line-height: 1; min-width: 3.2ch; color: var(--accent-text); }
+.sus-track { flex: 1; height: 8px; border-radius: 99px; background: var(--hair); overflow: hidden; }
+.sus-track span { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 99px; }
+.vow-res { display: flex; flex-wrap: wrap; gap: 6px; }
+.vow-res:empty { display: none; }
+.song-words { font-style: italic; color: var(--ink-2); font-size: 14px; }
+.picks { display: grid; gap: 8px; }
+.picks-h { font-size: 12px; font-weight: 650; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
+.picks-list { display: grid; gap: 8px; }
+button.pick { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; text-align: left; border-radius: 12px; padding: 10px 12px; min-height: 0; justify-content: stretch; align-items: center; }
+.pick-title { font-weight: 650; }
+.pick-why { grid-column: 1; font-size: 13px; font-weight: 400; color: var(--ink-2); }
+.pick-go { grid-column: 2; grid-row: 1 / span 2; font-family: var(--font-mono); font-size: 12px; color: var(--accent-text); white-space: nowrap; }
+button.pick.done { border-color: var(--good); }
+
+/* ---------- today's session ---------- */
+.checkin { display: grid; gap: 8px; padding: 12px; border-radius: 12px; background: var(--bg); border: 1px solid var(--line); }
+.ci-q { font-weight: 650; font-size: 14px; }
+.checkin .seg span { min-height: 32px; font-size: 13px; padding: 0 12px; }
+.sess-head, .sess-foot { margin: 0; display: grid; gap: 12px; }
+.sess-head dt, .sess-foot dt { font-size: 12px; font-weight: 650; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
+.sess-head dd, .sess-foot dd { margin: 2px 0 0; font-size: 15px; max-width: 38em; }
+#s-focus { font-family: var(--font-display); font-size: 19px; font-weight: 650; line-height: 1.3; }
+.sess-title { font-family: var(--font-display); font-weight: 680; font-size: 17px; border-top: 1px solid var(--line); padding-top: 12px; }
+.sess-list { display: grid; gap: 6px; }
+.sess-sec { font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-text); margin-top: 6px; }
+button.sess-item { display: flex; align-items: flex-start; gap: 10px; text-align: left; justify-content: flex-start; border-radius: 12px; padding: 9px 12px; min-height: 0; font-weight: 500; }
+button.sess-item.static { cursor: default; }
+button.sess-item.done { border-color: var(--good); }
+.si-check { width: 1.1em; flex: none; color: var(--muted); font-weight: 700; }
+.sess-item.done .si-check { color: var(--good-text); }
+.si-main { display: grid; gap: 1px; min-width: 0; }
+.si-title { font-weight: 650; }
+.si-meta { font-family: var(--font-mono); font-size: 12px; color: var(--ink-2); }
+.si-listen { font-size: 13px; color: var(--ink-2); }
+#notes-h[hidden] { display: none; }
+.flash { animation: flash 1.4s ease; }
+.cp { display: grid; gap: 6px; border-top: 1px solid var(--line); padding-top: 12px; }
+.cp a { color: var(--accent-text); font-weight: 600; }
+.cp-text { width: 100%; font-family: var(--font-mono); font-size: 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); padding: 8px; }
+.field { display: grid; gap: 4px; font-size: 13px; font-weight: 600; color: var(--ink-2); }
+.field input, .field textarea { font: inherit; font-weight: 400; font-size: 15px; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; min-width: 0; width: 100%; }
+.field input:focus-visible, .field textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 1px; }
+.quiz-opts { display: flex; flex-wrap: wrap; gap: 6px; }
+.quiz-opts button { min-height: 40px; }
+.quiz-opts button.right { border-color: var(--good); background: var(--good-soft); color: var(--good-text); }
+.quiz-opts button.wrong { border-color: var(--bad); color: var(--bad-text); }
+
+/* ---------- Claude coach ---------- */
+.ai { display: grid; gap: 10px; border-top: 1px solid var(--line); padding-top: 12px; }
+.ai-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+#ai-setup, #ai-on { display: grid; gap: 10px; }
+.ai input[type="password"], .chat-form input { font: inherit; font-size: 15px; flex: 1 1 200px; min-width: 0; min-height: 44px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); padding: 0 12px; }
+.ai input:focus-visible, .chat-form input:focus-visible { outline: 3px solid var(--accent); outline-offset: 1px; }
+.ai-out { display: grid; gap: 8px; padding: 12px 14px; border-radius: 12px; background: var(--accent-soft); color: var(--ink); font-size: 14px; line-height: 1.5; }
+.ai-body { display: grid; gap: 8px; }
+.ai-out p, .bubble p { margin: 0; }
+.md-h { font-family: var(--font-display); font-weight: 680; font-size: 15px; }
+.md-list { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+.ai-think { color: var(--ink-2); font-style: italic; }
+.ai-out > button, .ai-why { justify-self: start; min-height: 34px; font-size: 13px; }
+.chat { display: grid; gap: 8px; }
+.chat-log { display: grid; gap: 8px; max-height: 440px; overflow-y: auto; padding: 2px; }
+.bubble { padding: 10px 12px; border-radius: 14px; font-size: 14px; line-height: 1.5; max-width: 92%; display: grid; gap: 6px; min-width: 0; }
+.bubble.me { justify-self: end; background: var(--accent); color: var(--accent-ink); border-bottom-right-radius: 4px; }
+.bubble.coach { justify-self: start; background: var(--accent-soft); border-bottom-left-radius: 4px; }
+.chat-form { display: flex; gap: 8px; }
+#ai-model { font-size: 13px; }
+
+/* ---------- lyrics ---------- */
+.lyrics { display: flex; flex-wrap: wrap; gap: 4px 6px; font-size: 17px; line-height: 1.5; }
+.lyrics .syl { padding: 1px 5px; border-radius: 6px; color: var(--ink-2); transition: background-color .1s, color .1s; }
+.lyrics .syl.hold { color: var(--muted); }
+.lyrics .syl.now { background: var(--accent); color: var(--accent-ink); font-weight: 650; }
+.lyrics .syl.r-on { background: var(--good-soft); color: var(--good-text); }
+.lyrics .syl.r-close { background: var(--warn-soft); color: var(--warn-text); }
+.lyrics .syl.r-miss { color: var(--bad-text); text-decoration: underline wavy; text-decoration-thickness: 1px; }
+.along-opts { display: grid; gap: 8px; }
+.along-opts .seg span { min-height: 32px; font-size: 13px; padding: 0 12px; }
+
+/* ---------- device sync ---------- */
+.sync {
+  margin-top: 22px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 16px;
+  display: grid;
+  gap: 10px;
+}
+.sync h3 { font-size: 18px; font-weight: 680; }
+.sync ol { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+.sync a { color: var(--accent-text); font-weight: 600; }
+.sync input[type="password"] {
+  font: inherit;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  flex: 1 1 200px;
+  min-width: 0;
+  min-height: 44px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+  padding: 0 12px;
+}
+.sync input:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.sync-status { font-size: 14px; color: var(--ink-2); }
+.sync-status.ok { color: var(--good-text); }
+.sync-status.err { color: var(--bad-text); }
+
+/* ---------- rules ---------- */
+.rules h2 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+.rules ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; color: var(--ink-2); }
+.foot { font-size: 12px; color: var(--muted); }
+
+@media (max-width: 420px) {
+  .rung { grid-template-columns: 40px minmax(0, 1fr); gap: 4px 10px; }
+  .notehead { width: 26px; height: 18px; }
+  .stats dd { font-size: 21px; }
+  .take-stats dd { font-size: 19px; }
+  .graph-wrap canvas { height: 230px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ---------- sense quest additions ---------- */
+.notehead, .rung.done .notehead { transform: none; }
+.notehead { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-size: 15px; color: var(--accent-text); }
+.rung.done .notehead { color: var(--accent-ink); transform: scale(1.06); }
+@media (max-width: 520px) { .notehead { width: 26px; height: 26px; font-size: 13px; } }
+.opts { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.opts .seg span { min-height: 34px; font-size: 13px; padding: 0 12px; }
+.sub-h { font-family: var(--font-display); font-weight: 680; font-size: 16px; }
+.field-group { display: grid; gap: 8px; }
+.intro-list { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 14px; color: var(--ink-2); }
+.intro-list strong { color: var(--ink); }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 8px; }
+.rcard { padding: 12px; border-radius: 12px; background: var(--bg); display: grid; gap: 4px; font-size: 14px; color: var(--ink-2); }
+.rcard-t { font-family: var(--font-display); font-weight: 700; font-size: 16px; color: var(--ink); }
+.flash-card { font-family: var(--font-display); font-size: 30px; font-weight: 760; color: var(--accent-text); min-height: 1.2em; }
+.flash-card:empty { display: none; }
+.mastery { display: grid; gap: 10px; margin-top: 8px; }
+.m-group { display: grid; }
+.m-lvl { font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); padding-bottom: 4px; }
+.m-row { display: grid; grid-template-columns: minmax(0, 1fr) auto 8.5em; gap: 10px; align-items: center; padding: 6px 0; border-top: 1px solid var(--hair); font-size: 14px; }
+.m-row.done .m-name { font-weight: 650; }
+.m-dots { display: inline-flex; gap: 4px; }
+.m-dots i { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--accent); }
+.m-dots i.on { background: var(--accent); }
+.m-stat { font-family: var(--font-mono); font-size: 12px; color: var(--ink-2); text-align: right; white-space: nowrap; }
+.m-row.done .m-stat { color: var(--good-text); }
+.m-row.rec { grid-template-columns: minmax(0, 1fr) auto; }
+.m-row.rec .m-stat { white-space: normal; }
+.wrap { padding-bottom: 120px; }
+
+/* evidence: the little "why this works" signifier next to every exercise */
+details.why { border-radius: 12px; }
+details.why > summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+details.why > summary::-webkit-details-marker { display: none; }
+details.why > summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 99px; }
+.ev { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 99px; white-space: nowrap; }
+.ev.a { background: var(--good-soft); color: var(--good-text); }
+.ev.b { background: var(--accent-soft); color: var(--accent-text); }
+.ev.c { background: var(--warn-soft); color: var(--warn-text); }
+.ev-more { font-size: 12px; font-weight: 600; color: var(--accent-text); }
+details.why[open] .ev-more::after { content: " ▴"; }
+details.why:not([open]) .ev-more::after { content: " ▾"; }
+.why-body { display: grid; gap: 6px; margin-top: 8px; padding: 10px 12px; border-radius: 10px; background: var(--bg); border-left: 3px solid var(--accent); font-size: 14px; color: var(--ink-2); }
+.why-body strong { color: var(--ink); }
+.why-cite { font-size: 12px; color: var(--muted); }
+.why-cite a { color: var(--accent-text); font-weight: 600; }
+
+/* stimulus area */
+.stage { position: relative; width: 100%; max-width: 420px; aspect-ratio: 1; border-radius: 12px; background: #808080; overflow: hidden; display: grid; place-items: center; touch-action: manipulation; user-select: none; -webkit-user-select: none; }
+.stage canvas { width: 100%; height: 100%; display: block; }
+.stage .fix { position: absolute; width: 10px; height: 10px; border-radius: 50%; background: #202020; }
+.stage-msg { position: absolute; inset: auto 0 10px 0; text-align: center; font-size: 13px; color: #1a1a1a; font-weight: 600; }
+.answers { display: grid; grid-template-columns: repeat(auto-fit, minmax(72px, 1fr)); gap: 8px; max-width: 420px; }
+.answers button { min-height: 52px; font-size: 18px; }
+.answers button.right { border-color: var(--good); background: var(--good-soft); color: var(--good-text); }
+.answers button.wrong { border-color: var(--bad); color: var(--bad-text); }
+.answers:empty { display: none; }
+.meter { font-family: var(--font-mono); font-size: 13px; color: var(--ink-2); }
+.timer-big { font-family: var(--font-display); font-size: 48px; font-weight: 780; font-variant-numeric: tabular-nums; line-height: 1; color: var(--accent-text); }
+.scent-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 10px; align-items: center; padding: 8px 0; border-top: 1px solid var(--hair); }
+.scent-row .seg span { min-height: 30px; padding: 0 10px; font-size: 12px; }
+.sense-tag { font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+.cups { display: flex; gap: 10px; flex-wrap: wrap; }
+.cups button { min-width: 64px; min-height: 64px; border-radius: 16px; font-size: 22px; font-family: var(--font-display); }
+@media (max-width: 420px) {
+  .rung .stage { margin-left: -50px; width: calc(100% + 50px); max-width: none; }
+}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <p class="eyebrow" id="today-label">Today</p>
+    <h1>Sense Quest</h1>
+    <p class="lede">Train sight, hearing, smell, taste, touch, and balance with methods that have research behind them. Every exercise shows how strong its evidence is, and why it works.</p>
+    <dl class="stats">
+      <div><dt>Streak</dt><dd><span id="st-streak">0</span><small id="st-streak-u">days</small></dd></div>
+      <div><dt>This week</dt><dd><span id="st-week">0</span><small>/ 7</small></dd></div>
+      <div><dt>Senses</dt><dd><span id="st-senses">0</span><small>/ 6 tested</small></dd></div>
+    </dl>
+  </header>
+
+  <section class="coach" id="coach" aria-labelledby="coach-h">
+    <div class="coach-top">
+      <div>
+        <p class="eyebrow">Your guide</p>
+        <h2 id="coach-h">Today's quest</h2>
+      </div>
+      <div class="lvl">
+        <span class="lvl-num" id="lvl-num">Level 1</span>
+        <span class="lvl-name" id="lvl-name">Dormant</span>
+      </div>
+    </div>
+    <div class="lvl-track" aria-hidden="true"><span id="lvl-fill"></span></div>
+    <p class="lvl-msg" id="lvl-msg" role="status"></p>
+    <p class="small" id="lvl-note"></p>
+    <div class="checkin" id="checkin">
+      <p class="ci-q">Today's check-in</p>
+      <div class="seg" role="radiogroup" aria-label="Time today">
+        <label><input type="radio" name="ci-time" value="10"><span>10 min</span></label>
+        <label><input type="radio" name="ci-time" value="20"><span>20+ min</span></label>
+      </div>
+      <div class="seg" role="radiogroup" aria-label="Partner around">
+        <label><input type="radio" name="ci-partner" value="yes"><span>Partner here</span></label>
+        <label><input type="radio" name="ci-partner" value="no"><span>Solo</span></label>
+      </div>
+    </div>
+    <dl class="sess-head">
+      <div><dt>Today's focus</dt><dd id="s-focus"></dd></div>
+      <div><dt>Since last time</dt><dd id="s-since"></dd></div>
+    </dl>
+    <p class="sess-title" id="s-title">Daily quest</p>
+    <div class="sess-list" id="s-list"></div>
+    <dl class="sess-foot">
+      <div><dt>Next milestone</dt><dd id="s-next"></dd></div>
+    </dl>
+    <div class="ptime" id="ptime">
+      <div class="ptime-head"><span class="ptime-label">Training days this week</span><span class="ptime-val" id="ptime-val">0 of 3</span></div>
+      <div class="ptime-bar" aria-hidden="true"><span class="ptime-fill" id="ptime-fill"></span><span class="ptime-rec" id="ptime-rec"></span></div>
+      <p class="small" id="ptime-note"></p>
+    </div>
+    <div class="ai" id="ai">
+      <div class="ai-head"><p class="picks-h">Claude coach</p><span class="small" id="ai-mode"></span></div>
+      <div id="ai-setup" hidden>
+        <p class="small">Connect a Claude API key and Claude plans your training from your records and explains the evidence behind any exercise. You can connect it once for every ladder in the <a href="../#save" style="color: var(--accent-text); font-weight: 600">Save menu</a>.</p>
+        <div class="row">
+          <label for="ai-key" class="sr-only">Claude API key</label>
+          <input type="password" id="ai-key" placeholder="sk-ant-…" autocomplete="off" autocapitalize="off" spellcheck="false">
+          <button class="primary" id="ai-save">Connect</button>
+        </div>
+        <p class="small" id="ai-status" role="status"></p>
+      </div>
+      <div id="ai-on" hidden>
+        <div class="row"><button class="primary" id="ai-plan">Plan my next 4 weeks</button></div>
+        <div class="ai-out" id="ai-plan-out" hidden></div>
+        <div class="chat">
+          <div class="chat-log" id="chat-log" aria-live="polite" hidden></div>
+          <div class="chips" id="chat-presets"></div>
+          <form class="chat-form" id="chat-form">
+            <label for="chat-in" class="sr-only">Ask your coach</label>
+            <input id="chat-in" type="text" placeholder="Ask your coach anything…" autocomplete="off">
+            <button class="primary" type="submit" id="chat-send">Send</button>
+          </form>
+        </div>
+        <div class="row" id="ai-keyrow">
+          <label class="inline" for="ai-model">Model
+            <select id="ai-model">
+              <option value="claude-sonnet-5-5">Sonnet (best coaching)</option>
+              <option value="claude-haiku-5-5">Haiku (fastest)</option>
+              <option value="claude-opus-5-5">Opus (deepest)</option>
+            </select>
+          </label>
+          <button class="ghost" id="ai-disconnect">Disconnect key</button>
+        </div>
+      </div>
+    </div>
+    <div class="cp">
+      <div class="row"><button id="cp-btn">Copy coach prompt for Claude</button><a class="small" href="https://claude.ai/new" target="_blank" rel="noopener">Open Claude</a></div>
+      <p class="small" id="cp-status">Fills a coach prompt with your records and the evidence behind each exercise.</p>
+      <label for="cp-text" class="sr-only">Coach prompt</label>
+      <textarea id="cp-text" class="cp-text" rows="8" readonly hidden></textarea>
+    </div>
+  </section>
+
+  <section class="home" id="setup" aria-labelledby="setup-h">
+    <h2 id="setup-h">Your senses</h2>
+    <details class="plan" id="intro">
+      <summary><span class="plan-title">How Sense Quest works</span></summary>
+      <div class="plan-body">
+        <ul class="intro-list">
+          <li><strong>Only methods with evidence.</strong> Each exercise has a chip: <span class="ev a">strong</span> (meta-analysis or large trial), <span class="ev b">good, with a caveat</span>, or <span class="ev c">promising</span> (small or early studies). Tap it to see why it works, the numbers, and the papers.</li>
+          <li><strong>Your first score is your baseline.</strong> Most measures depend on your screen, headphones, and room, so the app compares you with yourself. Use the same device, brightness, and distance each time.</li>
+          <li><strong>Short and often.</strong> The studies used a few weeks of regular sessions; gains fade if you stop.</li>
+          <li><strong>Safety first:</strong> sounds at a quiet-conversation volume, balance work next to a counter, essential oils only in jars, food-grade tastes you sip and spit. Sudden changes in any sense are a reason to see a professional, not to train.</li>
+        </ul>
+      </div>
+    </details>
+    <div class="field-group">
+      <p class="sub-h">Headphones</p>
+      <p class="small">Set your volume so this sounds like quiet conversation, never at maximum. Then check left and right; turn off spatial audio and mono audio.</p>
+      <div class="row"><button id="ref-sound">Play reference sound</button><button id="side-left">Left ear</button><button id="side-right">Right ear</button></div>
+    </div>
+    <div class="row">
+      <div class="field" style="max-width: 9em"><label for="me-age">Your age (for norms)</label><input id="me-age" type="number" min="5" max="110" inputmode="numeric"></div>
+    </div>
+    <details class="plan">
+      <summary><span class="plan-title">About you, for your coach</span></summary>
+      <div class="plan-body">
+        <div class="field"><label for="me-name">Your name (optional)</label><input id="me-name" type="text" autocomplete="given-name"></div>
+        <div class="field"><label for="me-about">Goals</label><textarea id="me-about" rows="3" placeholder="For example: sharper eyes for tennis, better ear for music, taste wine like a pro"></textarea></div>
+      </div>
+    </details>
+  </section>
+
+  <section aria-labelledby="routine-h">
+    <div class="sec-head">
+      <h2 id="routine-h">Today's quests</h2>
+      <p class="small" id="routine-progress">0 of 5 done</p>
+    </div>
+    <div class="progress" aria-hidden="true"><span id="routine-bar"></span></div>
+    <ol class="ladder">
+      <li class="rung" data-step="sight" id="rung-sight">
+        <div class="head-col" aria-hidden="true"><span class="notehead">👁️</span><span class="syl">sight</span></div>
+        <div class="rung-body">
+          <div class="rung-top"><h3>Sight</h3><span class="dur">4–5 min</span></div>
+          <div class="drill" id="ex-ss">
+            <div class="ex-head"><h3>Speed Sight</h3><span data-ev="speed"></span></div>
+            <p class="ex-why">A shape in the center and a star near the edge flash together. Name the shape, then tap where the star was. The flash shortens as you get both right.</p>
+            <div id="ss-stage"></div>
+            <div class="answers" id="ss-ans"></div>
+            <div class="row"><button class="primary" id="ss-go">Start</button><span class="meter" id="ss-count"></span></div>
+            <p class="feedback" id="ss-fb" role="status"></p>
+          </div>
+          <div class="drill" id="ex-ch">
+            <div class="ex-head"><h3>Contrast Hunt</h3><span data-ev="contrast"></span></div>
+            <p class="ex-why">A faint striped patch appears. Is it tilted left or right? It fades as you get it right. Use the arrow keys on a computer.</p>
+            <div id="ch-stage"></div>
+            <div class="answers"><button id="ch-left">↖ Left</button><button id="ch-right">↗ Right</button></div>
+            <div class="row"><button class="primary" id="ch-go">Start</button><span class="meter" id="ch-count"></span></div>
+            <p class="feedback" id="ch-fb" role="status"></p>
+          </div>
+          <button class="done-btn" data-done="sight">Mark done</button>
+        </div>
+      </li>
+
+      <li class="rung" data-step="hearing" id="rung-hearing">
+        <div class="head-col" aria-hidden="true"><span class="notehead">👂</span><span class="syl">hear</span></div>
+        <div class="rung-body">
+          <div class="rung-top"><h3>Hearing</h3><span class="dur">3–4 min</span></div>
+          <div class="drill" id="ex-pd">
+            <div class="ex-head"><h3>Pitch Duel</h3><span data-ev="pitch"></span></div>
+            <p class="ex-why">Two tones. Which one is higher? The difference shrinks as you get it right. Keys 1 and 2 work too.</p>
+            <div class="answers"><button id="pd-first">First</button><button id="pd-second">Second</button></div>
+            <div class="row"><button class="primary" id="pd-go">Start</button><span class="meter" id="pd-count"></span></div>
+            <p class="feedback" id="pd-fb" role="status"></p>
+          </div>
+          <div class="drill" id="ex-sc">
+            <div class="ex-head"><h3>Sound Compass</h3><span data-ev="compass"></span></div>
+            <p class="ex-why">Headphones on. A burst of sound comes from somewhere around your head; tap the direction.</p>
+            <div id="sc-dial" style="position: relative; width: 100%; max-width: 300px; aspect-ratio: 1; margin: 0 auto; border-radius: 50%; border: 2px dashed var(--line)"><span aria-hidden="true" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:30px">🙂</span></div>
+            <div class="row"><button class="primary" id="sc-go">Start</button><span class="meter" id="sc-count"></span></div>
+            <p class="feedback" id="sc-fb" role="status"></p>
+          </div>
+          <div data-ev="hearcare"></div>
+          <button class="done-btn" data-done="hearing">Mark done</button>
+        </div>
+      </li>
+
+      <li class="rung" data-step="smell" id="rung-smell">
+        <div class="head-col" aria-hidden="true"><span class="notehead">👃</span><span class="syl">smell</span></div>
+        <div class="rung-body">
+          <div class="rung-top"><h3>Smell</h3><span class="dur">2–10 min</span></div>
+          <div class="drill" id="ex-sm">
+            <div class="ex-head"><h3>Scent Memory</h3><span data-ev="scentMemory"></span></div>
+            <p class="ex-why">Put each scent in two small cups or tins (<span id="sm-pairs">4</span> pairs), cover them with foil, and mix them up. Find the pairs by sniffing, two at a time, like the memory card game. Then try naming each one.</p>
+            <p class="small" id="sm-set"></p>
+            <div class="row">
+              <div class="field" style="max-width: 10em"><label for="sm-turns">Turns to clear</label><input id="sm-turns" type="number" min="1" inputmode="numeric"></div>
+              <div class="field" style="max-width: 10em"><label for="sm-named">Named right</label><input id="sm-named" type="number" min="0" inputmode="numeric"></div>
+              <button class="primary" id="sm-save">Log game</button>
+            </div>
+            <p class="feedback" id="sm-fb" role="status"></p>
+          </div>
+          <div class="drill" id="ex-ot">
+            <div class="ex-head"><h3>Quick jars</h3><span data-ev="jars"></span></div>
+            <p class="ex-why">Four jars: rose, lemon, eucalyptus, clove (a drop of oil on a cotton pad, or the real thing). Ten seconds each, morning and evening.</p>
+            <p class="sense-tag" id="ot-now"></p>
+            <p class="timer-big" id="ot-time"></p>
+            <p class="small" id="ot-how"></p>
+            <div class="answers" id="ot-rate" hidden></div>
+            <div class="row"><button class="primary" id="ot-go">Start the jars</button></div>
+            <p class="feedback" id="ot-fb" role="status"></p>
+          </div>
+          <button class="done-btn" data-done="smell">Mark done</button>
+        </div>
+      </li>
+
+      <li class="rung" data-step="balance" id="rung-balance">
+        <div class="head-col" aria-hidden="true"><span class="notehead">🦶</span><span class="syl">balance</span></div>
+        <div class="rung-body">
+          <div class="rung-top"><h3>Balance</h3><span class="dur">2–5 min</span></div>
+          <div class="drill" id="ex-bal">
+            <div class="ex-head"><h3>Steady Stance</h3><span data-ev="balance"></span></div>
+            <p class="ex-why">Four stances, two sets of 30 seconds each, next to a counter. They step up as your eyes-closed test improves.</p>
+            <p class="sense-tag" id="bal-now"></p>
+            <p class="timer-big" id="bal-time"></p>
+            <p class="small" id="bal-how"></p>
+            <div class="row"><button class="primary" id="bal-go">Start the set</button><button class="ghost" id="bal-stop" hidden>Stop</button></div>
+            <p class="feedback" id="bal-fb" role="status"></p>
+          </div>
+          <div class="drill" id="ex-qs">
+            <div class="ex-head"><h3>Quick Step</h3><span data-ev="step"></span></div>
+            <p class="ex-why">Stand in the middle of a clear space. When the app calls a direction, step that way fast, then step back. Two minutes.</p>
+            <p class="flash-card" id="qs-cue" aria-live="assertive"></p>
+            <div class="row"><button class="primary" id="qs-go">Start</button><button class="ghost" id="qs-stop" hidden>Stop</button></div>
+            <p class="feedback" id="qs-fb" role="status"></p>
+          </div>
+          <div class="drill" id="ex-bt">
+            <div class="ex-head"><h3>Eyes-closed test</h3><span data-ev="stanceTest"></span></div>
+            <p class="ex-why">Once a week: one leg, eyes closed, arms crossed, barefoot. Best of three, up to 45 seconds.</p>
+            <p class="small" id="bt-state"></p>
+            <p class="timer-big" id="bt-time"></p>
+            <div class="row"><button class="primary" id="bt-go">Start the test</button><button class="primary" id="bt-start" hidden>Start</button><button class="primary" id="bt-stop" hidden>Stop</button></div>
+            <p class="feedback" id="bt-fb" role="status"></p>
+          </div>
+          <button class="done-btn" data-done="balance">Mark done</button>
+        </div>
+      </li>
+
+      <li class="rung" data-step="bonus" id="rung-bonus">
+        <div class="head-col" aria-hidden="true"><span class="notehead">✋</span><span class="syl">touch</span></div>
+        <div class="rung-body">
+          <div class="rung-top"><h3>Touch &amp; taste</h3><span class="dur">1–10 min</span></div>
+          <div class="drill" id="ex-tl">
+            <div class="ex-head"><h3>Touch Lab</h3><span data-ev="touch"></span></div>
+            <p class="ex-why">With a partner and a paper clip bent so its two tips are a set gap apart. Close your eyes; your partner presses the tips on your fingertip, along it or across it, and you say which. Your partner taps the answer.</p>
+            <p class="flash-card" id="tl-card" style="font-size: 20px"></p>
+            <div class="answers"><button id="tl-yes">✓ They got it</button><button id="tl-no">✗ Missed</button></div>
+            <div class="row"><button class="primary" id="tl-go">Start</button><span class="meter" id="tl-count"></span></div>
+            <p class="feedback" id="tl-fb" role="status"></p>
+          </div>
+          <div class="drill" id="ex-tt">
+            <div class="ex-head"><h3>Taste Ladder</h3><span data-ev="taste"></span></div>
+            <p class="ex-why">Make a stock, then halve it five times (half stock, half water) for six steps. Start at the weakest. Sip, swish, spit, rinse with water between cups.</p>
+            <div class="row"><label class="inline" for="tt-taste">Taste <select id="tt-taste"></select></label><button class="primary" id="tt-go">Start</button></div>
+            <p class="small" id="tt-card"></p>
+            <div class="answers" id="tt-ask" hidden><button id="tt-yes">✓ Picked it</button><button id="tt-no">✗ Wrong cup</button></div>
+            <p class="feedback" id="tt-fb" role="status"></p>
+          </div>
+          <div class="drill" id="ex-rt">
+            <div class="ex-head"><h3>Quick Tap</h3><span data-ev="react"></span></div>
+            <p class="ex-why">Tap the box the instant it turns green. Ten taps; your median counts.</p>
+            <div id="rt-box" class="flash-card" role="button" tabindex="0" style="display: grid; place-items: center; min-height: 140px; border-radius: 14px; background: var(--hair); font-size: 22px; cursor: pointer; user-select: none">Tap Start</div>
+            <div class="row"><button class="primary" id="rt-go">Start</button></div>
+            <p class="feedback" id="rt-fb" role="status"></p>
+          </div>
+          <button class="done-btn" data-done="bonus">Mark done</button>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="lib-sec" id="lib" aria-labelledby="lib-h">
+    <div class="sec-head"><h2 id="lib-h">Library</h2></div>
+    <div class="lib">
+      <div class="drill" id="ex-ap">
+        <div class="ex-head"><h3>Perfect Pitch Project</h3><span data-ev="abspitch"></span></div>
+        <p class="ex-why">Name the note you hear. You start with three notes and gain one each time you score 85% or more.</p>
+        <div class="quiz-opts" id="ap-opts"></div>
+        <div class="row"><button class="primary" id="ap-go">Start 20 notes</button><span class="meter" id="ap-count"></span></div>
+        <p class="feedback" id="ap-fb" role="status"></p>
+      </div>
+      <div class="drill">
+        <div class="ex-head"><h3>Eye care habits</h3><span data-ev="eyecare"></span></div>
+        <ul class="intro-list">
+          <li><strong>20-20-20:</strong> every 20 minutes of screen time, look about 20 feet away for 20 seconds.</li>
+          <li><strong>Daylight:</strong> outdoor time matters most for children's eyes; for adults it's still good for sleep and mood.</li>
+          <li><strong>Regular eye exams:</strong> training can't replace glasses or catch eye disease.</li>
+        </ul>
+      </div>
+      <div class="drill">
+        <div class="ex-head"><h3>Myths: what doesn't work</h3></div>
+        <p class="ex-why">Popular methods the evidence doesn't support, so you don't spend time on them.</p>
+        <div class="cards" id="myths"></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="log-h">
+    <div class="sec-head">
+      <h2 id="log-h">Your progress</h2>
+      <p class="small" id="sync-state">Saved on this device</p>
+    </div>
+    <p class="prog-head" id="prog-head"></p>
+    <div class="prog-list" id="prog-list"></div>
+    <h3 class="sub-h">Personal records</h3>
+    <div class="mastery" id="records"></div>
+    <h3 class="sub-h">Last 4 weeks</h3>
+    <div class="cal" id="cal"></div>
+    <div class="cal-legend" aria-hidden="true">
+      <i style="background: var(--heat-0)"></i>no training
+      <i style="background: var(--heat-1)"></i>1–2 quests
+      <i style="background: var(--heat-2)"></i>3–4 quests
+      <i style="background: var(--heat-3)"></i>all 5
+    </div>
+    <h3 class="sub-h" id="charts-h" hidden>Over time</h3>
+    <div class="trends" id="trends"></div>
+
+    <div class="sync" id="sync-panel" hidden>
+      <h3>Sync your phone and computer</h3>
+      <div id="sync-setup">
+        <p class="small">Turn on cloud save once for all your ladders in the <a href="../#save">Save menu on the Skill Tree home page</a>. Each ladder then syncs its log to a private gist on your GitHub account.</p>
+        <div class="row" hidden>
+          <label for="gh-token" class="sr-only">GitHub token</label>
+          <input type="password" id="gh-token" placeholder="ghp_…" autocomplete="off" autocapitalize="off" spellcheck="false">
+          <button class="primary" id="gh-connect">Connect</button>
+        </div>
+      </div>
+      <p class="sync-status" id="gh-status" role="status"></p>
+      <div class="row" id="sync-actions" hidden>
+        <button id="gh-sync-now">Sync now</button>
+        <button class="ghost" id="gh-disconnect">Disconnect this device</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="road" aria-labelledby="road-h">
+    <div class="sec-head">
+      <h2 id="road-h">Your roadmap</h2>
+      <p class="small" id="road-pos"></p>
+    </div>
+    <ol class="road-list" id="road-list"></ol>
+  </section>
+
+  <section class="rules" aria-labelledby="rules-h">
+    <h2 id="rules-h">Sense rules</h2>
+    <ul>
+      <li>Quiet-conversation volume, never maximum. Stop if your ears ring.</li>
+      <li>Balance work within reach of a counter, on a clear floor.</li>
+      <li>Essential oils stay in jars: never on skin, never swallowed.</li>
+      <li>Sip and spit when tasting, and make fresh solutions each day.</li>
+      <li>A sudden change in any sense is a reason to see a professional, not to train harder.</li>
+    </ul>
+  </section>
+  <p class="foot" id="foot">Your log stays private to you.</p>
+  <p class="foot">App version 1 · Oct 27 · <a href="../" style="color: var(--accent-text); font-weight: 600">Skill Tree home</a></p>
+</div>
+<script>
+(() => {
+  'use strict';
+  // ---------- helpers ----------
+  const $ = s => document.querySelector(s);
+  const $$ = s => Array.from(document.querySelectorAll(s));
+  const pad = n => String(n).padStart(2, '0');
+  const dkey = d => d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+  const todayKey = () => dkey(new Date());
+  const clone = o => JSON.parse(JSON.stringify(o));
+  const fmtDate = k => {
+    const [y, m, d] = k.split('-').map(Number);
+    return new Date(y, m - 1, d).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+  };
+  const dayNum = k => {
+    const [y, m, d] = k.split('-').map(Number);
+    return Math.round(new Date(y, m - 1, d).getTime() / 86400000);
+  };
+  const el = (tag, cls, text) => {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  };
+  const mean = arr => (arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : null);
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const pct = (a, b) => (b ? Math.round((100 * a) / b) : 0);
+  const plural = (n, w) => n + ' ' + w + (n === 1 ? '' : 's');
+  const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const pick = a => a[Math.floor(Math.random() * a.length)];
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+
+
+  // ---------- levels ----------
+  // Dormant → Apex. You move up with practice days, by testing every sense, and by beating your own
+  // baseline (10% or more) on more and more measures.
+  const LEVELS = [null,
+    { name: 'Dormant', days: 0, senses: 0, improved: 0, about: 'Your baseline: test each sense once so the app knows where you start.', unlock: '' },
+    { name: 'Awakened', days: 5, senses: 3, improved: 0, about: 'Daily quests in sight, hearing, smell, and balance. Distractors join Speed Sight at Level 3.', unlock: 'Unlocked: the full daily quest.' },
+    { name: 'Attuned', days: 15, senses: 5, improved: 2, about: 'Harder versions: distractors in Speed Sight, more scent pairs, tougher stances.', unlock: 'Unlocked: Speed Sight with distractors.' },
+    { name: 'Sharpened', days: 30, senses: 6, improved: 4, about: 'Every sense tested and several measures beyond your baseline.', unlock: 'Unlocked: the Sharpened badge on your tree.' },
+    { name: 'Apex', days: 60, senses: 6, improved: 6, about: 'Measurably sharper on six measures. Keep the habit: gains fade without practice.', unlock: 'Top of the branch.' },
+  ];
+  const SENSES = { sight: '👁️ Sight', hearing: '👂 Hearing', smell: '👃 Smell', taste: '👅 Taste', touch: '✋ Touch', balance: '🦶 Balance' };
+  // Each measure: which way is better, its unit, and the sense and rung it belongs to.
+  const METRIC_DEFS = {
+    speed: { name: 'Speed Sight', unit: ' ms', better: 'down', sense: 'sight', thr: 20 },
+    contrast: { name: 'Contrast Hunt', unit: '%', better: 'down', sense: 'sight', thr: 0.3, dp: 2 },
+    pitch: { name: 'Pitch Duel', unit: ' cents', better: 'down', sense: 'hearing', thr: 3, dp: 1 },
+    compass: { name: 'Sound Compass', unit: '°', better: 'down', sense: 'hearing', thr: 5 },
+    abspitch: { name: 'Perfect Pitch', unit: '%', better: 'up', sense: 'hearing', thr: 5, max: 100 },
+    scentMemory: { name: 'Scent Memory', unit: '%', better: 'up', sense: 'smell', thr: 5, max: 100 },
+    naming: { name: 'Scent naming', unit: '%', better: 'up', sense: 'smell', thr: 5, max: 100 },
+    jars: { name: 'Scent strength', unit: ' / 10', better: 'up', sense: 'smell', thr: 0.5, max: 10, dp: 1 },
+    stance: { name: 'Eyes-closed stance', unit: ' s', better: 'up', sense: 'balance', thr: 2, dp: 1 },
+    touch: { name: 'Touch Lab', unit: ' mm', better: 'down', sense: 'touch', thr: 0.2, dp: 2 },
+    react: { name: 'Quick Tap', unit: ' ms', better: 'down', sense: 'touch', thr: 10 },
+    taste: { name: 'Taste Ladder', unit: ' step', better: 'up', sense: 'taste', thr: 0.5, max: 6 },
+  };
+  const RUNG_OF = { sight: 'sight', hearing: 'hearing', smell: 'smell', balance: 'balance', taste: 'bonus', touch: 'bonus' };
+
+  // ---------- evidence ----------
+  // The signifier next to every exercise. a = strong (meta-analysis or large RCT in a fitting group),
+  // b = good with a caveat, c = promising (small or early studies). Numbers are from the papers' abstracts.
+  const PM = id => 'https://pubmed.ncbi.nlm.nih.gov/' + id + '/';
+  const DOI = id => 'https://doi.org/' + id;
+  const EVIDENCE = {
+    speed: { tag: 'b', icon: '🔬', label: 'Large RCT · 65+',
+      why: 'In the ACTIVE trial (2,832 adults aged 65–94), <strong>87% of people who did speed training improved reliably</strong>. Over about 6 years, trained drivers had <strong>43% fewer at-fault crashes</strong> (rate ratio 0.57). A meta-analysis of 17 trials found the adaptive kind works best: the flash gets shorter as you improve, like here.',
+      caveat: 'Proven in adults 65+; untested in younger adults, so read your score as a measure of processing speed. Gains show up on this task and in driving, not as general brain power.',
+      cites: [['Ball et al. 2002, JAMA', PM(12425704)], ['Ball et al. 2010, J Am Geriatr Soc', PM(21054291)], ['Edwards et al. 2018, Neurosci Biobehav Rev', PM(29175362)]] },
+    contrast: { tag: 'c', icon: '🧪', label: 'Small studies',
+      why: 'Perceptual learning means practicing right at the edge of what you can see. Healthy adults who trained 24 sessions improved <strong>eye-chart acuity from 20/19.3 to 20/16.7</strong> while controls didn\'t; baseball players who did 30 sessions sharpened acuity <strong>31%</strong>. In people with age-related near blur, near acuity got <strong>about 1.6× sharper</strong> with no change in the eye itself: the gain is in how the brain reads the signal.',
+      caveat: 'Small, non-randomized studies, partly by researchers with a stake in an app; the FTC said one such app\'s claims weren\'t proven. Your score is relative to this screen, so keep the same device, brightness, and distance.',
+      cites: [['Deveau, Lovcik & Seitz 2014, Vision Res', PM(24406157)], ['Deveau, Ozer & Seitz 2014, Curr Biol', PM(24556432)], ['Polat et al. 2012, Sci Rep', PM(22363834)], ['FTC on Ultimeyes, 2015', 'https://www.ftc.gov/node/44710']] },
+    pitch: { tag: 'c', icon: '🧪', label: 'Lab studies',
+      why: 'Pitch discrimination is very trainable. Non-musicians start with thresholds <strong>more than 6× higher</strong> than musicians\', and in one group <strong>8 non-musicians matched musicians after 4–8 hours</strong> of practice. Pitch is exact on any device, so this score doesn\'t depend on your headphones.',
+      caveat: 'Part of the early gain is just getting used to the task, and it mostly improves this task; help with hearing speech in noise is limited.',
+      cites: [['Micheyl et al. 2006, Hear Res', PM(16839723)], ['Amitay et al. 2006, Nat Neurosci', PM(17028582)], ['Gao et al. 2020, Sci Rep', PM(33168921)]] },
+    compass: { tag: 'c', icon: '🧪', label: 'Small RCT',
+      why: 'Training with feedback on 3D headphone sound <strong>cut localization errors compared with an untrained group</strong>, and the gain held across days. Two 30-minute sessions reduced front-back mix-ups in <strong>4 of 5 listeners for at least 4 months</strong>.',
+      caveat: 'This trains you to read 3D audio on headphones; it isn\'t shown to sharpen hearing in the real world. Turn off spatial audio and mono audio first.',
+      cites: [['Steadman et al. 2019, Sci Rep', PM(31798004)], ['Zahorik et al. 2006, J Acoust Soc Am', PM(16875231)]] },
+    abspitch: { tag: 'c', icon: '🧪', label: 'Small studies · long',
+      why: 'Adults can learn some absolute pitch, but it takes time and not everyone gets there: after 12–40 hours, <strong>6 of 43 people (14%) named all 12 notes at 90%+</strong>; 1 of 6 pre-selected adults passed every test after 32 hours.',
+      caveat: 'At 15 minutes a day, 32 hours is about 4 months. Treat it as a long side project.',
+      cites: [['Wong et al. 2020, Atten Percept Psychophys', PM(31686378)], ['Van Hedger et al. 2019, PLoS One', PM(31550277)]] },
+    hearcare: { tag: 'a', icon: '📏', label: 'WHO standard',
+      why: 'Safe listening for adults is <strong>80 dB(A) for 40 hours a week</strong>, and every 3 dB louder halves the time: 86 dB for 10 hours, 92 dB for 2.5 hours, 98 dB for 37.5 minutes. Noise is the biggest preventable cause of hearing loss.',
+      caveat: 'The app can\'t measure loudness at your ear. Set the volume with the reference sound, never at maximum, and stop if you notice ringing, muffling, or pain. See an audiologist if ringing lasts.',
+      cites: [['WHO-ITU H.870 safe listening, 2018', 'https://www.who.int/publications/i/item/9789241515276']] },
+    scentMemory: { tag: 'a', icon: '🔬', label: 'RCT · healthy adults',
+      why: 'In a randomized trial with 72 healthy adults, a smell-memory game for about 10 minutes a day over 40 days improved <strong>scent discrimination (12.3 → 13.9 of 16)</strong> and <strong>naming (5.4 → 7.1 of 16)</strong>, while people who played a visual version didn\'t improve. Another trial found better overall smell after 6 weeks.',
+      caveat: 'It sharpens recognizing and naming, not raw sensitivity. That\'s also what sets wine experts and perfumers apart: learned recognition, not a keener nose.',
+      cites: [['Olofsson et al. 2020, Chem Senses', DOI('10.1093/chemse/bjaa049')], ['Al Aïn et al. 2019, NeuroImage', DOI('10.1016/j.neuroimage.2019.01.008')], ['Parr et al. 2002, Chem Senses', DOI('10.1093/chemse/27.8.747')]] },
+    jars: { tag: 'b', icon: '📊', label: 'Meta-analysis · patients',
+      why: 'Sniffing four strong scents twice a day for 12 weeks is the best-studied smell training. In people who had lost smell, meta-analyses show <strong>large gains (pooled g = 0.76 across 36 articles)</strong>.',
+      caveat: 'With a normal nose the results are mixed: in 77 healthy people the olfactory bulb grew but smell scores didn\'t change; in 68 adults aged 50–88, sensitivity improved. It\'s the quick daily version; Scent Memory is the stronger drill for normal noses. Keep oils in the jars, never on skin, away from children and pets.',
+      cites: [['Hummel et al. 2009, Laryngoscope', DOI('10.1002/lary.20101')], ['Delgado-Lima et al. 2024, Eur Arch Otorhinolaryngol', DOI('10.1007/s00405-024-08733-7')], ['Torvik Heian et al. 2026, Rhinology', DOI('10.4193/Rhin25.424')], ['Oleszkiewicz et al. 2021, Behav Neurosci', DOI('10.1037/bne0000478')]] },
+    taste: { tag: 'c', icon: '🧪', label: 'Small RCT',
+      why: 'Practicing with a dilution ladder <strong>lowered recognition thresholds for all four tastes</strong> in a 42-person trial. Separately, cutting salt for months <strong>makes food taste saltier</strong> and lowers the salt level you prefer.',
+      caveat: 'One small, unblinded trial, with no evidence yet that real food tastes different. Cutting sugar is mixed: one trial found puddings tasted about 40% sweeter, a larger one found no change. Sip and spit, and make fresh solutions each day.',
+      cites: [['Otsubo et al. 2022, Sci Rep', DOI('10.1038/s41598-022-18255-z')], ['Bertino et al. 1982, Am J Clin Nutr', DOI('10.1093/ajcn/36.6.1134')], ['Wise et al. 2016, Am J Clin Nutr', DOI('10.3945/ajcn.115.112300')], ['Čad et al. 2026, Am J Clin Nutr', DOI('10.1016/j.ajcnut.2025.09.041')]] },
+    balance: { tag: 'a', icon: '📊', label: 'Meta-analysis',
+      why: 'Across 25 randomized trials in people aged 16–40, balance training improved steady balance with a <strong>solid effect (ES 0.73)</strong>. The best dose was <strong>3 sessions a week of 11–15 minutes, 4 exercises × 2 sets × 21–40 seconds</strong>, which is what this quest uses. In people 60+, balance exercise <strong>cuts falls by 24%</strong> (Cochrane review, 108 trials).',
+      caveat: 'Gains are mostly specific to what you practice, so the drills step up through harder stances. Stand within reach of a counter on a clear floor.',
+      cites: [['Lesinski et al. 2015, Sports Med', PM(25430598)], ['Sherrington et al. 2019, Cochrane', PM(30703272)], ['Kümmel et al. 2016, Sports Med', PM(26993132)]] },
+    step: { tag: 'b', icon: '📊', label: 'Meta-analysis · 60+',
+      why: 'Training to step quickly in a called-out direction <strong>halved falls</strong> in people 60+ (rate ratio 0.48 across 7 trials), and improved stepping speed and one-leg balance.',
+      caveat: 'Shown in older adults; not yet tested in younger ones. Clear floor, wall nearby, no socks.',
+      cites: [['Okubo et al. 2017, Br J Sports Med', PM(26746905)]] },
+    stanceTest: { tag: 'b', icon: '📏', label: 'Published norms',
+      why: 'Eyes-closed single-leg stance norms from 549 adults: <strong>about 15 s at 18–39, 13 s in your 40s, 8 s in your 50s, 4 s in your 60s</strong>. Best of 3, barefoot, arms crossed, capped at 45 s.',
+      caveat: 'Failing a 10-second stance predicts health risks later in life, but that\'s an association; it doesn\'t prove training adds years.',
+      cites: [['Springer et al. 2007, J Geriatr Phys Ther', PM(19839175)], ['Araujo et al. 2022, Br J Sports Med', PM(35728834)]] },
+    touch: { tag: 'c', icon: '🧪', label: 'Small lab studies',
+      why: 'Fingertip acuity is trainable: 1,900 practice trials over 4 days sharpened it by <strong>0.5 mm on the trained finger and 0.37 mm on an untrained one</strong>. Braille readers\' sharper touch tracks their weekly reading time, so it comes from practice; blind readers matched sighted people <strong>23 years younger</strong>.',
+      caveat: 'Your sessions are much shorter than the studies. This uses the along-or-across version, because the classic two-point test gives misleading scores. Same light pressure every time, blunt tips only.',
+      cites: [['Wong et al. 2013, J Neurosci', PM(23719803)], ['Wong et al. 2011, J Neurosci', PM(21562264)], ['Goldreich & Kanics 2003, J Neurosci', PM(12716952)], ['Tong et al. 2013', PM(24062677)]] },
+    react: { tag: 'c', icon: '📏', label: 'Measure only',
+      why: 'Lab-tested adults aged 18–65 average <strong>231 ms</strong>, slowing about <strong>0.55 ms a year</strong>. Phone browsers add 58–70 ms of their own, so compare with yourself on the same device.',
+      caveat: 'Tap-reaction games show little transfer to daily life; for training, Quick Step (in Balance) has the evidence.',
+      cites: [['Woods et al. 2015, Front Hum Neurosci', PM(25859198)], ['Pronk et al. 2020, Behav Res Methods', PM(31823223)], ['Simons et al. 2016, Psychol Sci Public Interest', PM(27697851)]] },
+    eyecare: { tag: 'b', icon: '📋', label: 'Habits',
+      why: 'Outdoor time protects against nearsightedness in children: 40 extra minutes a day cut new myopia over 3 years from <strong>39.5% to 30.4%</strong> in a trial of 1,903 six-year-olds. For screen strain, the 20-20-20 rule (every 20 minutes, look 20 feet away for 20 seconds) eased symptoms in a small study while people kept doing it.',
+      caveat: 'Outdoor light doesn\'t reverse adult nearsightedness, and the 20-20-20 benefit faded a week after stopping.',
+      cites: [['He et al. 2015, JAMA', PM(26372583)], ['Talens-Estarelles et al. 2023, Cont Lens Anterior Eye', PM(35963776)]] },
+  };
+  // What doesn't work, so nobody wastes their time.
+  const MYTHS = [
+    ['Eye exercises (the Bates method) fix glasses prescriptions.', 'A review of 43 studies found no clear evidence for nearsightedness or acuity.', 'Rawstron et al. 2005', PM(15825744)],
+    ['Blue-light glasses prevent eye strain.', 'A Cochrane review of 17 trials: they may not reduce strain and don\'t change acuity.', 'Singh et al. 2023', PM(37593770)],
+    ['Brain-training games make you sharper in daily life.', 'People improve on the trained task, with little transfer beyond it.', 'Simons et al. 2016', PM(27697851)],
+    ['Musicians hear better in noise, so an instrument will fix that.', 'Studies of existing musicians can\'t show cause; training studies show small effects.', 'Neves et al. 2022', PM(35843347)],
+    ['Sound apps cure tinnitus.', 'A Cochrane review found no evidence that sound therapy beats placebo or waiting.', 'Sereda et al. 2018', PM(30589445)],
+    ['Smelling coffee beans resets your nose.', 'No better than lemon or plain air.', 'Grosofsky et al. 2011', DOI('10.2466/24.PMS.112.2.536-538')],
+    ['There\'s a tongue map: sweet at the tip, bitter at the back.', 'Every part of the tongue senses every taste.', 'Chandrashekar et al. 2006', DOI('10.1038/nature05401')],
+    ['The classic two-point test measures touch acuity.', 'People score above chance even at 0 mm; the orientation version is valid.', 'Tong et al. 2013', PM(24062677)],
+    ['Kinesiology tape boosts balance.', '51 of 58 meta-analyses of ankle taping found no effect.', 'Nunes et al. 2021', PM(33081510)],
+    ['Passive buzzing devices sharpen touch for good.', 'Gains faded within 8 hours and needed about 2 hours of stimulation.', 'Godde et al. 2000', PM(10662849)],
+  ];
+  function defaultProfile() {
+    return { name: '', about: '', age: null, level: 1, levelSince: null, levelLog: [], notice: null, introSeen: false,
+      best: {}, first: {}, tried: {}, stanceStage: 0, stanceSessions: 0, scentPairs: 4, apNotes: 3, taste: {} };
+  }
+  function normProfile(p) {
+    const d = defaultProfile();
+    if (!p || typeof p !== 'object') return d;
+    const o = Object.assign(d, p);
+    ['best', 'first', 'tried', 'taste'].forEach(k => { o[k] = p[k] && typeof p[k] === 'object' ? p[k] : {}; });
+    o.levelLog = Array.isArray(p.levelLog) ? p.levelLog : [];
+    o.level = clamp(Number(p.level) || 1, 1, 5);
+    o.age = p.age ? clamp(Number(p.age), 5, 110) : null;
+    return o;
+  }
+  // ---------- state ----------
+  const state = { settingsUpdated: 0, days: {}, profile: defaultProfile() };
+  const P = () => state.profile;
+  const lv = () => LEVELS[P().level];
+  const peekDay = k => state.days[k] || null;
+  const dayOf = k => state.days[k] || (state.days[k] = { date: k, steps: {}, updated: 0 });
+  const STEPS = ['sight', 'hearing', 'smell', 'balance', 'bonus'];
+  const stepsDone = k => { const d = peekDay(k); return d && d.steps ? STEPS.filter(s => d.steps[s]).length : 0; };
+  const isPracticeDay = k => stepsDone(k) >= 1;
+  const practiceDays = () => Object.keys(state.days).filter(isPracticeDay).length;
+  // ---------- storage ----------
+  const LS_KEY = 'senses-ladder-v1';
+  function lsLoad() {
+    try {
+      const o = JSON.parse(localStorage.getItem(LS_KEY) || 'null');
+      if (o && typeof o === 'object') {
+        if (o.days && typeof o.days === 'object') state.days = o.days;
+        state.settingsUpdated = o.settingsUpdated || 0;
+        if (o.profile) state.profile = normProfile(o.profile);
+      }
+    } catch (e) { /* storage unavailable */ }
+  }
+  function lsSave() {
+    try { localStorage.setItem(LS_KEY, JSON.stringify({ days: state.days, settingsUpdated: state.settingsUpdated, profile: state.profile })); } catch (e) {}
+  }
+  const remote = { col: null };
+  const chains = {}, timers = {};
+  function setSyncText(kind) {
+    const e = $('#sync-state');
+    if (!e) return;
+    e.textContent = kind === 'account' ? 'Saved to your Claude account' : kind === 'retry' ? "Couldn't reach your account just now. Saved on this device." : kind === 'gh' ? 'Syncing across your devices' : 'Saved on this device';
+  }
+  function queueWrite(id, getBody) {
+    if (!remote.col) return;
+    clearTimeout(timers[id]);
+    timers[id] = setTimeout(() => {
+      const body = clone(getBody());
+      chains[id] = (chains[id] || Promise.resolve())
+        .then(() => (remote.col ? remote.col.doc(id).set(body) : null))
+        .then(() => { if (remote.col) setSyncText('account'); })
+        .catch(err => {
+          const code = err && err.code;
+          if (code === 'unavailable' || code === 'resource_exhausted') { setSyncText('retry'); return; }
+          remote.col = null;
+          setSyncText('device');
+        });
+    }, 600);
+  }
+  function saveDay(k) {
+    dayOf(k).updated = Date.now();
+    lsSave();
+    queueWrite('day-' + k, () => state.days[k]);
+    ghSchedule();
+  }
+  function saveSettings() {
+    state.settingsUpdated = Date.now();
+    lsSave();
+    queueWrite('settings', () => ({ profile: state.profile, updated: state.settingsUpdated }));
+    ghSchedule();
+  }
+
+  // ---------- device sync through a private GitHub gist (self-hosted copy only) ----------
+  // The token is shared with the other ladders on this site, so connecting one app connects all of them.
+  // Each app keeps its own log file in its own gist.
+  const GH_KEY = 'senses-ladder-gh', GH_SHARED = 'voice-ladder-gh';
+  const GIST_FILE = 'senses-ladder-log.json';
+  const GH = { token: null, gistId: null, busy: false, again: false, timer: 0, lastSync: 0, retried: false, shared: false };
+  function ghLoadCfg() {
+    try {
+      const o = JSON.parse(localStorage.getItem(GH_KEY) || 'null');
+      if (o && o.off) return;
+      if (o && o.token) { GH.token = o.token; GH.gistId = o.gistId || null; return; }
+      const s = JSON.parse(localStorage.getItem(GH_SHARED) || 'null');
+      if (s && s.token) { GH.token = s.token; GH.gistId = null; GH.shared = true; }
+    } catch (e) {}
+  }
+  function ghSaveCfg() {
+    try {
+      if (GH.token) localStorage.setItem(GH_KEY, JSON.stringify({ token: GH.token, gistId: GH.gistId }));
+      else localStorage.setItem(GH_KEY, JSON.stringify({ off: true }));
+    } catch (e) {}
+  }
+  async function gh(path, opts) {
+    opts = opts || {};
+    const method = opts.method || 'GET';
+    const url = 'https://api.github.com' + path + (method === 'GET' ? (path.indexOf('?') >= 0 ? '&' : '?') + '_=' + Date.now() : '');
+    const headers = { Accept: 'application/vnd.github+json', Authorization: 'Bearer ' + GH.token };
+    if (opts.body) headers['Content-Type'] = 'application/json';
+    let res;
+    try {
+      res = await fetch(url, { method, headers, body: opts.body ? JSON.stringify(opts.body) : undefined });
+    } catch (e) {
+      const err = new Error('network');
+      err.status = 0;
+      throw err;
+    }
+    if (!res.ok) {
+      const err = new Error('GitHub ' + res.status);
+      err.status = res.status;
+      try { const j = await res.json(); err.msg = j.message || ''; } catch (e) { err.msg = ''; }
+      err.rate = res.status === 429 || (res.status === 403 && (res.headers.get('x-ratelimit-remaining') === '0' || /rate limit/i.test(err.msg)));
+      err.retryAfter = Number(res.headers.get('retry-after')) || 0;
+      throw err;
+    }
+    return res.status === 204 ? null : res.json();
+  }
+  const payload = () => ({ v: 1, profile: state.profile, settingsUpdated: state.settingsUpdated, days: state.days });
+  function mergeIn(o) {
+    let changedLocal = false, localNewer = false;
+    const days = o && o.days && typeof o.days === 'object' ? o.days : {};
+    new Set([...Object.keys(days), ...Object.keys(state.days)]).forEach(k => {
+      const r = days[k], l = state.days[k];
+      const ru = r ? r.updated || 0 : -1, lu = l ? l.updated || 0 : -1;
+      if (r && ru > lu) { state.days[k] = r; changedLocal = true; }
+      else if (l && lu > ru) localNewer = true;
+    });
+    const rs = o && o.profile ? o.settingsUpdated || 0 : -1;
+    if (rs > state.settingsUpdated) { state.profile = normProfile(o.profile); state.settingsUpdated = rs; changedLocal = true; }
+    else if (state.settingsUpdated > rs && state.settingsUpdated > 0) localNewer = true;
+    return { changedLocal, localNewer };
+  }
+  async function ghFindOrCreate() {
+    const list = await gh('/gists?per_page=100');
+    const hit = Array.isArray(list) ? list.find(g => g.files && g.files[GIST_FILE]) : null;
+    if (hit) GH.gistId = hit.id;
+    else {
+      const g = await gh('/gists', { method: 'POST', body: { description: 'Sense Quest practice log', public: false, files: { [GIST_FILE]: { content: JSON.stringify(payload()) } } } });
+      GH.gistId = g.id;
+    }
+    ghSaveCfg();
+  }
+  function ghErrText(e) {
+    if (!e) return "Couldn't sync just now.";
+    if (e.status === 0) return "Couldn't reach GitHub. Check your connection, or a browser extension may be blocking api.github.com.";
+    if (e.rate) return 'GitHub is limiting how often the app can save. It will try again on its own in a few minutes.';
+    if (e.status === 403) return 'GitHub refused the request (403' + (e.msg ? ': ' + e.msg : '') + '). The token may be missing gist access; create a new one with the gist box ticked.';
+    if (e.status === 422) return 'GitHub rejected the update (422' + (e.msg ? ': ' + e.msg : '') + ').';
+    if (e.status >= 500) return 'GitHub is having trouble right now (' + e.status + '). It will try again on its own.';
+    return 'Sync failed (GitHub ' + e.status + (e.msg ? ': ' + e.msg : '') + ').';
+  }
+  function setGhStatus(kind, err) {
+    const e = $('#gh-status');
+    e.classList.remove('ok', 'err');
+    const connected = !!GH.token;
+    $('#sync-setup').hidden = connected && kind !== 'auth';
+    $('#sync-actions').hidden = !connected || kind === 'auth';
+    if (kind === 'busy') e.textContent = 'Syncing with GitHub…';
+    else if (kind === 'ok') {
+      e.classList.add('ok');
+      e.textContent = '✓ Synced with GitHub at ' + new Date(GH.lastSync).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }) + (GH.shared ? ' (using the token from Voice Ladder)' : '');
+    } else if (kind === 'err') {
+      e.classList.add('err');
+      e.textContent = ghErrText(err) + ' Your log is still saved on this device.';
+    } else if (kind === 'auth') {
+      e.classList.add('err');
+      e.textContent = "GitHub didn't accept that token. It may have expired or be missing gist access. Paste a new one.";
+    } else e.textContent = '';
+    setSyncText(connected && kind !== 'auth' ? 'gh' : 'device');
+    $('#foot').textContent = connected && kind !== 'auth' ? 'Your log syncs through a private gist on your GitHub account.' : 'Your log is saved in this browser.';
+  }
+  async function ghSync() {
+    if (!GH.token) return;
+    if (GH.busy) { GH.again = true; return; }
+    GH.busy = true;
+    setGhStatus('busy');
+    try {
+      if (!GH.gistId) await ghFindOrCreate();
+      const g = await gh('/gists/' + GH.gistId);
+      const f = g.files && g.files[GIST_FILE];
+      let content = f ? f.content : '';
+      if (f && f.truncated && f.raw_url) content = await (await fetch(f.raw_url)).text();
+      let remoteObj = {};
+      try { remoteObj = JSON.parse(content || '{}'); } catch (e) { remoteObj = {}; }
+      const { changedLocal, localNewer } = mergeIn(remoteObj);
+      if (changedLocal) { lsSave(); renderAll(); }
+      if (localNewer || !f) await gh('/gists/' + GH.gistId, { method: 'PATCH', body: { files: { [GIST_FILE]: { content: JSON.stringify(payload()) } } } });
+      GH.lastSync = Date.now();
+      GH.retried = false;
+      setGhStatus('ok');
+    } catch (e) {
+      if (e.status === 401) setGhStatus('auth');
+      else if (e.status === 404 && !GH.retried) { GH.gistId = null; GH.retried = true; ghSaveCfg(); GH.again = true; }
+      else {
+        setGhStatus('err', e);
+        if (window.console) console.warn('Sense Quest sync failed', e.status, e.msg || e.message);
+        clearTimeout(GH.retryTimer);
+        GH.retryTimer = setTimeout(ghSync, Math.max(120, e.retryAfter || 0) * 1000);
+      }
+    } finally {
+      GH.lastTry = Date.now();
+      GH.busy = false;
+      if (GH.again) { GH.again = false; ghSync(); }
+    }
+  }
+  // Save at most about once a minute while practicing.
+  function ghSchedule() {
+    if (!GH.token) return;
+    clearTimeout(GH.timer);
+    const w = Math.max(2500, (GH.lastTry || 0) + 60000 - Date.now());
+    GH.timer = setTimeout(ghSync, w);
+  }
+  async function ghConnect() {
+    const input = $('#gh-token');
+    const token = input.value.trim();
+    if (!token) { input.focus(); return; }
+    GH.token = token;
+    GH.gistId = null;
+    GH.shared = false;
+    setGhStatus('busy');
+    try {
+      await ghFindOrCreate();
+      input.value = '';
+      await ghSync();
+    } catch (e) {
+      GH.token = null;
+      GH.gistId = null;
+      if (e.status === 401 || e.status === 403 || e.status === 404) setGhStatus('auth');
+      else setGhStatus('err', e);
+      $('#sync-setup').hidden = false;
+      $('#sync-actions').hidden = true;
+    }
+  }
+  function ghDisconnect() {
+    clearTimeout(GH.timer);
+    GH.token = null;
+    GH.gistId = null;
+    GH.shared = false;
+    ghSaveCfg();
+    setGhStatus('none');
+  }
+  async function initRemote() {
+    const c = window.claude;
+    if (!c || typeof c.use !== 'function') return;
+    try {
+      const [db, user] = await Promise.all([c.use('db'), c.use('user')]);
+      if (!db || !user) return;
+      const uid = await user.id();
+      if (!uid) return;
+      const col = db.collection('data/users/' + uid);
+      const snap = await col.get();
+      const serverDays = {};
+      let serverSettings = null;
+      snap.docs.forEach(d => {
+        if (!d.exists) return;
+        const v = d.data();
+        if (!v) return;
+        if (d.id === 'settings') serverSettings = clone(v);
+        else if (d.id.indexOf('day-') === 0 && typeof v.date === 'string') serverDays[v.date] = clone(v);
+      });
+      const push = [];
+      new Set([...Object.keys(serverDays), ...Object.keys(state.days)]).forEach(k => {
+        const s = serverDays[k], l = state.days[k];
+        if (s && (!l || (s.updated || 0) >= (l.updated || 0))) state.days[k] = s;
+        else if (l) push.push(k);
+      });
+      let pushSettings = false;
+      if (serverSettings && serverSettings.profile && (serverSettings.updated || 0) >= state.settingsUpdated) {
+        state.profile = normProfile(serverSettings.profile);
+        state.settingsUpdated = serverSettings.updated || 0;
+      } else if (state.settingsUpdated) pushSettings = true;
+      remote.col = col;
+      lsSave();
+      setSyncText('account');
+      renderAll();
+      push.forEach(k => queueWrite('day-' + k, () => state.days[k]));
+      if (pushSettings) queueWrite('settings', () => ({ profile: state.profile, updated: state.settingsUpdated }));
+    } catch (e) {
+      setSyncText('device');
+    }
+  }
+
+  // ---------- small shared bits ----------
+  const radio = name => { const i = document.querySelector('input[name="' + name + '"]:checked'); return i ? i.value : null; };
+  function setRadio(name, val) { $$('input[name="' + name + '"]').forEach(i => { i.checked = i.value === val; }); }
+  function chipRow(host, opts, cur, onPick) {
+    host.innerHTML = '';
+    opts.forEach(o => {
+      const b = el('button', 'chip' + (o.cls ? ' ' + o.cls : ''), o.label);
+      b.type = 'button';
+      b.setAttribute('aria-pressed', String(o.id === cur));
+      b.addEventListener('click', () => onPick(o.id));
+      host.appendChild(b);
+    });
+  }
+  function stepFeedback(fb, cls, text) { fb.className = 'feedback ' + cls; fb.textContent = text; }
+  function markStep(step) {
+    const k = todayKey();
+    const d = dayOf(k);
+    d.steps = d.steps || {};
+    if (d.steps[step]) return;
+    d.steps[step] = 1;
+    saveDay(k);
+    renderRungs();
+    renderStats();
+    renderCoach();
+    renderCal();
+  }
+
+  // ---------- tools: staircase, stage, sound ----------
+  // 2-down-1-up staircase on a ratio scale: two right answers make it harder, one miss makes it easier,
+  // so it settles near 71% correct. Smaller x is harder. Threshold = geometric mean of the last 6 reversals.
+  function makeStair(o) {
+    const S = { x: o.start, min: o.min, max: o.max, step: o.step || 2, run: 0, dir: 0, rev: [], n: 0, ok: 0 };
+    S.record = correct => {
+      S.n++;
+      if (correct) S.ok++;
+      let move = 0;
+      if (correct) { if (++S.run >= 2) { S.run = 0; move = -1; } } else { S.run = 0; move = 1; }
+      if (!move) return;
+      if (S.dir && move !== S.dir) S.rev.push(S.x);
+      S.dir = move;
+      const f = S.rev.length < 2 ? S.step : Math.sqrt(S.step);
+      S.x = clamp(move < 0 ? S.x / f : S.x * f, S.min, S.max);
+    };
+    S.threshold = () => { const r = S.rev.slice(-6); return r.length ? Math.exp(mean(r.map(Math.log))) : S.x; };
+    return S;
+  }
+  // A square canvas at device resolution (capped at 2x) on a mid-grey background.
+  function makeStage(host) {
+    const wrap = el('div', 'stage');
+    const cv = el('canvas');
+    wrap.appendChild(cv);
+    const msg = el('p', 'stage-msg');
+    wrap.appendChild(msg);
+    host.appendChild(wrap);
+    const S = { wrap, cv, msg, ctx: cv.getContext('2d'), size: 0 };
+    S.fit = () => {
+      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      S.size = Math.round((wrap.clientWidth || 320) * dpr);
+      cv.width = cv.height = S.size;
+    };
+    S.grey = () => { S.fit(); S.ctx.fillStyle = 'rgb(128,128,128)'; S.ctx.fillRect(0, 0, S.size, S.size); };
+    S.say = t => { msg.textContent = t || ''; };
+    S.grey();
+    return S;
+  }
+  const frame = () => new Promise(r => requestAnimationFrame(r));
+  async function holdFor(ms) { const t0 = performance.now(); let t = t0; while (t - t0 < ms - 8) t = await frame(); return t - t0; }
+  // Web Audio, made on the first tap (browsers need a user gesture). One master gain keeps levels moderate.
+  let AC = null, MASTER = null;
+  function audio() {
+    if (!AC) {
+      const Ctx = window.AudioContext || window.webkitAudioContext;
+      if (!Ctx) return null;
+      AC = new Ctx();
+      MASTER = AC.createGain();
+      MASTER.gain.value = 0.35;
+      MASTER.connect(AC.destination);
+    }
+    if (AC.state === 'suspended') AC.resume();
+    return AC;
+  }
+
+  // ---------- sight ----------
+  // Speed Sight: a center shape and a peripheral star flash together, then a mask. Name the shape and
+  // tap where the star was. The flash shortens as you get both right (Useful Field of View style).
+  let ssStage = null;
+  const SS = { run: null };
+  const SS_POS = [[0, -1], [0.71, -0.71], [1, 0], [0.71, 0.71], [0, 1], [-0.71, 0.71], [-1, 0], [-0.71, -0.71]];
+  const SS_NAMES = ['top', 'top right', 'right', 'bottom right', 'bottom', 'bottom left', 'left', 'top left'];
+  function ssDraw(it, masked) {
+    const S = ssStage, c = S.ctx, n = S.size, mid = n / 2, r = n * 0.38, u = n / 26;
+    S.grey();
+    if (masked) {
+      for (let i = 0; i < 900; i++) { c.fillStyle = Math.random() < 0.5 ? '#1e1e1e' : '#e8e8e8'; c.fillRect(Math.random() * n, Math.random() * n, u * 0.9, u * 0.9); }
+      return;
+    }
+    if (it.distract) {
+      c.strokeStyle = '#2a2a2a'; c.lineWidth = Math.max(1, u / 6);
+      for (let k = 0; k < 24; k++) { const a = Math.random() * Math.PI * 2, rr = n * (0.18 + Math.random() * 0.28), x = mid + Math.cos(a) * rr, y = mid + Math.sin(a) * rr; c.beginPath(); c.moveTo(x, y - u * 0.6); c.lineTo(x + u * 0.55, y + u * 0.4); c.lineTo(x - u * 0.55, y + u * 0.4); c.closePath(); c.stroke(); }
+    }
+    c.fillStyle = '#141414';
+    if (it.shape === 'circle') { c.beginPath(); c.arc(mid, mid, u * 1.1, 0, Math.PI * 2); c.fill(); }
+    else c.fillRect(mid - u, mid - u, u * 2, u * 2);
+    const [dx, dy] = SS_POS[it.pos], x = mid + dx * r, y = mid + dy * r;
+    c.beginPath();
+    for (let k = 0; k < 10; k++) { const a = -Math.PI / 2 + (k * Math.PI) / 5, rr = k % 2 ? u * 0.5 : u * 1.25; c.lineTo(x + Math.cos(a) * rr, y + Math.sin(a) * rr); }
+    c.closePath(); c.fill();
+  }
+  function ssStart() {
+    SS.run = { stair: makeStair({ start: 500, min: 17, max: 1000, step: 1.6 }), trials: 0, max: 30, distract: P().level >= 3 };
+    $('#ss-go').textContent = 'Restart';
+    stepFeedback($('#ss-fb'), '', '');
+    ssTrial();
+  }
+  async function ssTrial() {
+    const R = SS.run;
+    if (!R) return;
+    if (R.trials >= R.max) { ssFinish(); return; }
+    const it = { shape: Math.random() < 0.5 ? 'circle' : 'square', pos: Math.floor(Math.random() * 8), distract: R.distract };
+    R.cur = it;
+    $('#ss-count').textContent = (R.trials + 1) + ' / ' + R.max + ' · ' + Math.round(R.stair.x) + ' ms';
+    $('#ss-ans').innerHTML = '';
+    ssStage.grey();
+    const c = ssStage.ctx;
+    c.fillStyle = '#202020'; c.beginPath(); c.arc(ssStage.size / 2, ssStage.size / 2, ssStage.size / 90, 0, Math.PI * 2); c.fill();
+    ssStage.say('');
+    await holdFor(600);
+    if (SS.run !== R) return;
+    ssDraw(it, false);
+    it.shown = await holdFor(R.stair.x);
+    ssDraw(it, true);
+    await holdFor(250);
+    if (SS.run !== R) return;
+    ssStage.grey();
+    ssStage.say('Which shape, and where was the star?');
+    it.shapeAns = null; it.posAns = null;
+    const ans = $('#ss-ans');
+    [['circle', '●'], ['square', '■']].forEach(([v, g]) => {
+      const b = el('button', '', g + ' ' + v);
+      b.type = 'button';
+      b.addEventListener('click', () => { it.shapeAns = v; ans.querySelectorAll('button[data-k="s"]').forEach(x => x.setAttribute('aria-pressed', String(x === b))); ssMaybeDone(); });
+      b.dataset.k = 's';
+      ans.appendChild(b);
+    });
+    // star positions: tap targets laid over the stage
+    ssStage.wrap.querySelectorAll('.ss-pos').forEach(n => n.remove());
+    SS_POS.forEach(([dx, dy], k) => {
+      const b = el('button', 'ss-pos');
+      b.type = 'button';
+      b.setAttribute('aria-label', 'Star was ' + SS_NAMES[k]);
+      b.style.cssText = 'position:absolute;width:18%;height:18%;left:' + (50 + dx * 38 - 9) + '%;top:' + (50 + dy * 38 - 9) + '%;border-radius:50%;min-height:0;padding:0;background:rgba(255,255,255,.35);border:2px solid rgba(20,20,20,.5)';
+      b.addEventListener('click', () => { it.posAns = k; ssStage.wrap.querySelectorAll('.ss-pos').forEach(x => { x.style.background = x === b ? 'rgba(52,69,201,.6)' : 'rgba(255,255,255,.35)'; }); ssMaybeDone(); });
+      ssStage.wrap.appendChild(b);
+    });
+  }
+  function ssMaybeDone() {
+    const R = SS.run, it = R && R.cur;
+    if (!it || it.shapeAns == null || it.posAns == null) return;
+    const ok = it.shapeAns === it.shape && it.posAns === it.pos;
+    R.stair.record(ok);
+    R.trials++;
+    ssStage.wrap.querySelectorAll('.ss-pos').forEach(n => n.remove());
+    stepFeedback($('#ss-fb'), ok ? 'good' : 'bad', ok ? 'Both right.' : 'It was a ' + it.shape + ', star at ' + SS_NAMES[it.pos] + '.');
+    R.cur = null;
+    setTimeout(ssTrial, ok ? 300 : 700);
+  }
+  function ssFinish() {
+    const R = SS.run;
+    SS.run = null;
+    const ms = Math.round(R.stair.threshold());
+    ssStage.grey();
+    ssStage.say('');
+    $('#ss-ans').innerHTML = '';
+    $('#ss-count').textContent = '';
+    $('#ss-go').textContent = 'Go again';
+    const best = bestOf('speed');
+    stepFeedback($('#ss-fb'), 'good', 'Your flash threshold: ' + ms + ' ms (both answers right about 71% of the time).' + (best != null && ms < best ? ' New best.' : best != null ? ' Best: ' + Math.round(best) + ' ms.' : ''));
+    record('speed', ms, 'sight');
+    aiExplain($('#ss-fb'), 'Speed Sight (UFOV-style) threshold ' + ms + ' ms after ' + R.trials + ' trials' + (R.distract ? ' with distractors' : '') + '. Previous best: ' + (best == null ? 'none' : Math.round(best) + ' ms') + '.', 'Speed Sight');
+  }
+
+  // Contrast Hunt: a faint striped patch (a Gabor) tilts left or right. Three stripe widths, each with its
+  // own staircase. Dithering lets contrast go below the screen's 8-bit step near grey.
+  let chStage = null;
+  const CH = { run: null };
+  const CH_SF = [{ k: 'wide', cyc: 3 }, { k: 'medium', cyc: 6 }, { k: 'fine', cyc: 11 }];
+  function chDraw(c, tilt, sfCyc) {
+    const S = chStage, n = S.size;
+    const img = S.ctx.createImageData(n, n), d = img.data;
+    const mid = n / 2, sigma = n * 0.13, f = sfCyc / (n * 0.55), th = tilt * Math.PI / 4;
+    const cos = Math.cos(th), sin = Math.sin(th), phase = Math.random() * Math.PI * 2;
+    for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) {
+      const dx = x - mid, dy = y - mid;
+      const env = Math.exp(-(dx * dx + dy * dy) / (2 * sigma * sigma));
+      const g = env > 0.002 ? env * Math.cos(2 * Math.PI * f * (dx * cos + dy * sin) + phase) : 0;
+      const v = Math.max(0, Math.min(255, Math.floor(128 + 127 * c * g + Math.random())));
+      const i = (y * n + x) * 4;
+      d[i] = d[i + 1] = d[i + 2] = v; d[i + 3] = 255;
+    }
+    S.ctx.putImageData(img, 0, 0);
+  }
+  function chStart() {
+    CH.run = { stairs: CH_SF.map(() => makeStair({ start: 0.25, min: 0.0015, max: 1, step: 1.8 })), trials: 0, max: 60, order: [] };
+    for (let i = 0; i < 20; i++) CH.run.order.push(...shuffle([0, 1, 2]));
+    $('#ch-go').textContent = 'Restart';
+    stepFeedback($('#ch-fb'), '', '');
+    chTrial();
+  }
+  async function chTrial() {
+    const R = CH.run;
+    if (!R) return;
+    if (R.trials >= R.max) { chFinish(); return; }
+    const si = R.order[R.trials], tilt = Math.random() < 0.5 ? -1 : 1;
+    R.cur = { si, tilt };
+    $('#ch-count').textContent = (R.trials + 1) + ' / ' + R.max;
+    chStage.grey();
+    chStage.say('');
+    await holdFor(350);
+    if (CH.run !== R) return;
+    chDraw(R.stairs[si].x, tilt, CH_SF[si].cyc);
+    await holdFor(500);
+    if (CH.run !== R) return;
+    chStage.grey();
+    chStage.say('Tilted left or right?');
+    R.cur.ready = true;
+  }
+  function chAnswer(dir) {
+    const R = CH.run, cur = R && R.cur;
+    if (!cur || !cur.ready) return;
+    const ok = dir === cur.tilt;
+    R.stairs[cur.si].record(ok);
+    R.trials++;
+    R.cur = null;
+    stepFeedback($('#ch-fb'), ok ? 'good' : 'bad', ok ? 'Yes.' : 'It tilted ' + (cur.tilt < 0 ? 'left' : 'right') + '.');
+    setTimeout(chTrial, 250);
+  }
+  function chFinish() {
+    const R = CH.run;
+    CH.run = null;
+    const th = R.stairs.map(s => s.threshold() * 100);
+    const avg = Math.exp(mean(th.map(Math.log)));
+    chStage.grey();
+    chStage.say('');
+    $('#ch-count').textContent = '';
+    $('#ch-go').textContent = 'Go again';
+    const best = bestOf('contrast');
+    stepFeedback($('#ch-fb'), 'good', 'Faintest patch you saw: ' + CH_SF.map((s, i) => s.k + ' ' + th[i].toFixed(1) + '%').join(', ') + '. Average ' + avg.toFixed(1) + '% contrast' + (best != null && avg < best ? ', a new best.' : best != null ? ' (best ' + best.toFixed(1) + '%).' : '.'));
+    record('contrast', Math.round(avg * 100) / 100, 'sight');
+    aiExplain($('#ch-fb'), 'Contrast Hunt thresholds (% contrast, lower is better): ' + CH_SF.map((s, i) => s.k + ' stripes ' + th[i].toFixed(2)).join(', ') + '. Previous best average: ' + (best == null ? 'none' : best.toFixed(2)) + '.', 'Contrast Hunt');
+  }
+  function setupVision() {
+    ssStage = makeStage($('#ss-stage'));
+    chStage = makeStage($('#ch-stage'));
+    $('#ss-go').addEventListener('click', ssStart);
+    $('#ch-go').addEventListener('click', chStart);
+    $('#ch-left').addEventListener('click', () => chAnswer(-1));
+    $('#ch-right').addEventListener('click', () => chAnswer(1));
+    document.addEventListener('keydown', e => {
+      if (!CH.run || !CH.run.cur || !CH.run.cur.ready) return;
+      if (e.key === 'ArrowLeft') { e.preventDefault(); chAnswer(-1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); chAnswer(1); }
+    });
+  }
+
+  // ---------- hearing ----------
+  // All sound goes through MASTER (moderate gain) with short fades so nothing starts abruptly.
+  function tone(freq, dur, when, gainDb) {
+    const ac = audio();
+    if (!ac) return;
+    const t = (when || ac.currentTime) + 0.02, g = ac.createGain(), o = ac.createOscillator();
+    o.type = 'sine';
+    o.frequency.value = freq;
+    const peak = 0.5 * Math.pow(10, (gainDb || 0) / 20);
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(peak, t + 0.02);
+    g.gain.setValueAtTime(peak, t + dur - 0.02);
+    g.gain.linearRampToValueAtTime(0, t + dur);
+    o.connect(g).connect(MASTER);
+    o.start(t);
+    o.stop(t + dur + 0.05);
+  }
+  const beep = (f, d) => tone(f || 880, d || 0.12);
+  // a soft piano-like note: a few harmonics with a decay
+  function pluck(freq, dur) {
+    const ac = audio();
+    if (!ac) return;
+    const t = ac.currentTime + 0.02;
+    [1, 2, 3, 4].forEach((h, i) => {
+      const g = ac.createGain(), o = ac.createOscillator();
+      o.frequency.value = freq * h;
+      const a = 0.35 / (i + 1);
+      g.gain.setValueAtTime(0, t);
+      g.gain.linearRampToValueAtTime(a, t + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.0005, t + dur);
+      o.connect(g).connect(MASTER);
+      o.start(t);
+      o.stop(t + dur + 0.05);
+    });
+  }
+  function noiseBuffer(sec) {
+    const ac = audio();
+    const b = ac.createBuffer(1, Math.round(ac.sampleRate * sec), ac.sampleRate), d = b.getChannelData(0);
+    let last = 0;
+    for (let i = 0; i < d.length; i++) { last = 0.97 * last + 0.03 * (Math.random() * 2 - 1); d[i] = last * 6; } // soft, pink-ish
+    return b;
+  }
+  function burst(sec, pan) {
+    const ac = audio();
+    if (!ac) return;
+    const t = ac.currentTime + 0.02, src = ac.createBufferSource(), g = ac.createGain();
+    src.buffer = noiseBuffer(sec);
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(0.6, t + 0.015);
+    g.gain.setValueAtTime(0.6, t + sec - 0.03);
+    g.gain.linearRampToValueAtTime(0, t + sec);
+    let out = g;
+    if (pan) out = g.connect(pan);
+    src.connect(g);
+    out.connect(MASTER);
+    src.start(t);
+  }
+  // Setup checks: a reference sound for volume, and left/right.
+  function refSound() { burst(2.5); }
+  function sideCheck(side) {
+    const ac = audio();
+    if (!ac) return;
+    const p = ac.createStereoPanner ? ac.createStereoPanner() : null;
+    if (p) p.pan.value = side === 'left' ? -1 : 1;
+    burst(0.6, p);
+  }
+
+  // Pitch Duel: two tones, which is higher? The gap in cents shrinks as you get it right. The base pitch and
+  // loudness roam a little each time so you have to judge pitch, not memory or loudness.
+  const PD = { run: null };
+  function pdStart() {
+    if (!audio()) { stepFeedback($('#pd-fb'), 'bad', 'This browser can\'t play sound.'); return; }
+    PD.run = { stair: makeStair({ start: 100, min: 1, max: 600, step: 1.6 }), trials: 0, max: 40 };
+    $('#pd-go').textContent = 'Restart';
+    stepFeedback($('#pd-fb'), '', '');
+    pdTrial();
+  }
+  function pdTrial() {
+    const R = PD.run;
+    if (!R) return;
+    if (R.trials >= R.max) { pdFinish(); return; }
+    const base = 400 * Math.pow(2, Math.random() * 1.3), cents = R.stair.x, up = base * Math.pow(2, cents / 1200);
+    const firstHigher = Math.random() < 0.5;
+    const ac = audio(), t = ac.currentTime + 0.05;
+    tone(firstHigher ? up : base, 0.4, t, (Math.random() - 0.5) * 6);
+    tone(firstHigher ? base : up, 0.4, t + 0.7, (Math.random() - 0.5) * 6);
+    R.cur = { firstHigher, ready: false };
+    $('#pd-count').textContent = (R.trials + 1) + ' / ' + R.max + ' · gap ' + (cents < 10 ? cents.toFixed(1) : Math.round(cents)) + ' cents';
+    setTimeout(() => { if (PD.run === R && R.cur) R.cur.ready = true; }, 1150);
+  }
+  function pdAnswer(first) {
+    const R = PD.run, cur = R && R.cur;
+    if (!cur || !cur.ready) return;
+    const ok = first === cur.firstHigher;
+    R.stair.record(ok);
+    R.trials++;
+    R.cur = null;
+    stepFeedback($('#pd-fb'), ok ? 'good' : 'bad', ok ? 'Right.' : 'The ' + (cur.firstHigher ? 'first' : 'second') + ' was higher.');
+    setTimeout(pdTrial, 450);
+  }
+  function pdFinish() {
+    const R = PD.run;
+    PD.run = null;
+    const c = R.stair.threshold();
+    $('#pd-count').textContent = '';
+    $('#pd-go').textContent = 'Go again';
+    const best = bestOf('pitch');
+    const v = Math.round(c * 10) / 10;
+    stepFeedback($('#pd-fb'), 'good', 'Your pitch threshold: ' + v + ' cents (100 cents is a semitone; smaller is sharper)' + (best != null && v < best ? '. A new best.' : best != null ? '. Best: ' + best + ' cents.' : '.'));
+    record('pitch', v, 'hearing');
+    aiExplain($('#pd-fb'), 'Pitch Duel threshold ' + v + ' cents after ' + R.trials + ' trials. Previous best: ' + (best == null ? 'none' : best + ' cents') + '.', 'Pitch Duel');
+  }
+
+  // Sound Compass: a noise burst comes from one of 8 directions around your head (3D audio on headphones).
+  // Tap where it came from; the true spot lights up. Score: average error in degrees.
+  const SC = { run: null };
+  const SC_NAMES = ['front', 'front right', 'right', 'back right', 'back', 'back left', 'left', 'front left'];
+  function scStart() {
+    const ac = audio();
+    if (!ac || !ac.createPanner) { stepFeedback($('#sc-fb'), 'bad', 'This browser can\'t place sounds in 3D.'); return; }
+    SC.run = { trials: 0, max: 16, errs: [] };
+    $('#sc-go').textContent = 'Restart';
+    stepFeedback($('#sc-fb'), '', '');
+    scTrial();
+  }
+  function scTrial() {
+    const R = SC.run;
+    if (R.trials >= R.max) { scFinish(); return; }
+    const k = Math.floor(Math.random() * 8), az = (k * 45 * Math.PI) / 180;
+    const ac = audio(), p = ac.createPanner();
+    p.panningModel = 'HRTF';
+    p.distanceModel = 'inverse';
+    // front is -z in Web Audio; right is +x
+    const x = Math.sin(az), z = -Math.cos(az);
+    if (p.positionX) { p.positionX.value = x; p.positionY.value = 0; p.positionZ.value = z; } else p.setPosition(x, 0, z);
+    burst(0.35, p);
+    R.cur = k;
+    $('#sc-count').textContent = (R.trials + 1) + ' / ' + R.max;
+    $$('#sc-dial button').forEach(b => { b.classList.remove('right', 'wrong'); b.disabled = false; });
+  }
+  function scAnswer(k) {
+    const R = SC.run;
+    if (!R || R.cur == null) return;
+    const d = Math.abs(k - R.cur) % 8, err = Math.min(d, 8 - d) * 45;
+    R.errs.push(err);
+    R.trials++;
+    const btns = $$('#sc-dial button');
+    btns.forEach(b => { b.disabled = true; });
+    btns[R.cur].classList.add('right');
+    if (k !== R.cur) btns[k].classList.add('wrong');
+    stepFeedback($('#sc-fb'), err ? 'bad' : 'good', err ? 'It came from ' + SC_NAMES[R.cur] + ' (' + err + '° off).' : 'Spot on.');
+    R.cur = null;
+    setTimeout(scTrial, 900);
+  }
+  function scFinish() {
+    const R = SC.run;
+    SC.run = null;
+    const avg = Math.round(mean(R.errs));
+    const exact = R.errs.filter(e => !e).length;
+    $('#sc-count').textContent = '';
+    $('#sc-go').textContent = 'Go again';
+    stepFeedback($('#sc-fb'), 'good', exact + ' of ' + R.errs.length + ' exact; average error ' + avg + '°. Front–back mix-ups are normal at first and drop with practice.');
+    record('compass', avg, 'hearing');
+  }
+
+  // Perfect Pitch Project (library): name the note. Starts with 3 notes and adds one when you're at 85%+.
+  const NOTE_NAMES = ['C', 'C♯', 'D', 'E♭', 'E', 'F', 'F♯', 'G', 'A♭', 'A', 'B♭', 'B'];
+  const AP_ORDER = [0, 4, 7, 2, 9, 5, 11, 1, 6, 3, 8, 10];
+  const AP = { run: null };
+  function apNotes() { return AP_ORDER.slice(0, clamp(P().apNotes || 3, 3, 12)); }
+  function apStart() {
+    if (!audio()) return;
+    AP.run = { trials: 0, max: 20, ok: 0 };
+    $('#ap-go').textContent = 'Restart';
+    apRenderButtons();
+    apTrial();
+  }
+  function apRenderButtons() {
+    const host = $('#ap-opts');
+    host.innerHTML = '';
+    apNotes().slice().sort((a, b) => a - b).forEach(n => {
+      const b = el('button', '', NOTE_NAMES[n]);
+      b.type = 'button';
+      b.addEventListener('click', () => apAnswer(n, b));
+      host.appendChild(b);
+    });
+  }
+  function apTrial() {
+    const R = AP.run;
+    if (R.trials >= R.max) { apFinish(); return; }
+    const n = pick(apNotes()), oct = 3 + Math.floor(Math.random() * 3);
+    R.cur = n;
+    pluck(261.63 * Math.pow(2, (n + (oct - 4) * 12) / 12), 1.2);
+    $('#ap-count').textContent = (R.trials + 1) + ' / ' + R.max + ' · ' + apNotes().length + ' notes';
+    $$('#ap-opts button').forEach(b => b.classList.remove('right', 'wrong'));
+  }
+  function apAnswer(n, btn) {
+    const R = AP.run;
+    if (!R || R.cur == null) return;
+    const ok = n === R.cur;
+    if (ok) R.ok++;
+    btn.classList.add(ok ? 'right' : 'wrong');
+    stepFeedback($('#ap-fb'), ok ? 'good' : 'bad', ok ? 'Yes, ' + NOTE_NAMES[n] + '.' : 'That was ' + NOTE_NAMES[R.cur] + '.');
+    R.cur = null;
+    R.trials++;
+    setTimeout(apTrial, 900);
+  }
+  function apFinish() {
+    const R = AP.run;
+    AP.run = null;
+    const p = pct(R.ok, R.max);
+    let msg = p + '% right with ' + apNotes().length + ' notes.';
+    if (p >= 85 && apNotes().length < 12) { P().apNotes = apNotes().length + 1; saveSettings(); msg += ' Next time: ' + NOTE_NAMES[AP_ORDER[apNotes().length - 1]] + ' joins.'; apRenderButtons(); }
+    $('#ap-count').textContent = '';
+    $('#ap-go').textContent = 'Go again';
+    stepFeedback($('#ap-fb'), 'good', msg);
+    record('abspitch', p, 'hearing', true);
+  }
+  function setupHearing() {
+    $('#pd-go').addEventListener('click', pdStart);
+    $('#pd-first').addEventListener('click', () => pdAnswer(true));
+    $('#pd-second').addEventListener('click', () => pdAnswer(false));
+    document.addEventListener('keydown', e => {
+      if (!PD.run || !PD.run.cur) return;
+      if (e.key === '1') pdAnswer(true);
+      if (e.key === '2') pdAnswer(false);
+    });
+    $('#sc-go').addEventListener('click', scStart);
+    const dial = $('#sc-dial');
+    SC_NAMES.forEach((name, k) => {
+      const b = el('button', '', ['↑', '↗', '→', '↘', '↓', '↙', '←', '↖'][k]);
+      b.type = 'button';
+      b.setAttribute('aria-label', name);
+      const a = (k * 45 * Math.PI) / 180;
+      b.style.cssText = 'position:absolute;left:calc(50% + ' + (Math.sin(a) * 38).toFixed(1) + '% - 24px);top:calc(50% - ' + (Math.cos(a) * 38).toFixed(1) + '% - 24px);width:48px;height:48px;min-height:0;padding:0';
+      b.addEventListener('click', () => scAnswer(k));
+      dial.appendChild(b);
+    });
+    $('#ap-go').addEventListener('click', apStart);
+    $('#ref-sound').addEventListener('click', refSound);
+    $('#side-left').addEventListener('click', () => sideCheck('left'));
+    $('#side-right').addEventListener('click', () => sideCheck('right'));
+  }
+
+  // ---------- balance, touch, reaction ----------
+  // Steady Stance: the dose from the balance-training meta-analysis (4 exercises × 2 sets × ~30 s),
+  // stepped up as you improve. Then a test: single-leg stance, eyes closed, best of 3, capped at 45 s.
+  const STANCE = [
+    { id: 'narrow', name: 'Feet together', how: 'Stand with your feet touching, arms crossed.' },
+    { id: 'tandem', name: 'Heel to toe', how: 'One foot directly in front of the other, like on a tightrope.' },
+    { id: 'one', name: 'One leg, eyes open', how: 'Lift one foot a few inches. Switch legs on the second set.' },
+    { id: 'oneClosed', name: 'One leg, eyes closed', how: 'Same, with your eyes closed. Keep a hand near the counter.' },
+    { id: 'heads', name: 'One leg, head turns', how: 'Eyes open, slowly turn your head left and right.' },
+    { id: 'towel', name: 'One leg on a folded towel', how: 'A soft surface makes your ankles and body sense work harder.' },
+  ];
+  // Springer et al. 2007: mean seconds, eyes open / eyes closed, by age band.
+  const STANCE_NORMS = [[18, 39, 44.7, 15.2], [40, 49, 41.9, 12.7], [50, 59, 41.2, 8.3], [60, 69, 32.1, 4.4], [70, 79, 21.5, 3.1], [80, 120, 9.4, 1.9]];
+  const stanceNorm = age => { const r = STANCE_NORMS.find(([a, b]) => age >= a && age <= b); return r ? { open: r[2], closed: r[3] } : null; };
+  // Pick 4 drills around your current stage: one easier, two at it, one harder.
+  function stanceSet() {
+    const st = clamp(P().stanceStage || 0, 0, STANCE.length - 1);
+    const idx = [Math.max(0, st - 1), st, st, Math.min(STANCE.length - 1, st + 1)];
+    return idx.map(i => STANCE[i]);
+  }
+  const BAL = { run: null };
+  function balStart() {
+    const set = stanceSet();
+    const plan = [];
+    set.forEach(d => { plan.push(d, d); });
+    BAL.run = { plan, i: 0, steady: 0 };
+    $('#bal-go').hidden = true;
+    $('#bal-stop').hidden = false;
+    balNext();
+  }
+  function balNext() {
+    const R = BAL.run;
+    if (!R) return;
+    if (R.i >= R.plan.length) { balFinish(); return; }
+    const d = R.plan[R.i];
+    $('#bal-now').textContent = (R.i + 1) + ' / ' + R.plan.length + ' · ' + d.name;
+    $('#bal-how').textContent = d.how + ' 30 seconds. If you wobble out, touch down and carry on.';
+    let left = 30;
+    $('#bal-time').textContent = left;
+    clearInterval(R.tick);
+    R.tick = setInterval(() => {
+      left--;
+      $('#bal-time').textContent = Math.max(0, left);
+      if (left <= 0) { clearInterval(R.tick); beep(880, 0.15); R.i++; setTimeout(balNext, 1200); }
+    }, 1000);
+    beep(660, 0.1);
+  }
+  function balFinish() {
+    const R = BAL.run;
+    clearInterval(R && R.tick);
+    BAL.run = null;
+    $('#bal-go').hidden = false;
+    $('#bal-stop').hidden = true;
+    $('#bal-now').textContent = '';
+    $('#bal-time').textContent = '';
+    $('#bal-how').textContent = '';
+    P().stanceSessions = (P().stanceSessions || 0) + 1;
+    saveSettings();
+    stepFeedback($('#bal-fb'), 'good', 'Balance set done: 8 × 30 seconds. Three sessions a week is the dose that worked best in the studies. Test yourself below once a week.');
+    record(null, null, 'balance');
+  }
+  // the eyes-closed test
+  const BT = { run: null };
+  function btStart() {
+    BT.run = { tries: [], t0: 0 };
+    btReady();
+  }
+  function btReady() {
+    const R = BT.run;
+    $('#bt-state').textContent = 'Try ' + (R.tries.length + 1) + ' of 3. Lift one foot, close your eyes, and say "go". Tap Start, then tap Stop the moment your foot touches down or you open your eyes.';
+    $('#bt-start').hidden = false;
+    $('#bt-stop').hidden = true;
+    $('#bt-go').hidden = true;
+  }
+  function btBegin() {
+    const R = BT.run;
+    R.t0 = performance.now();
+    $('#bt-start').hidden = true;
+    $('#bt-stop').hidden = false;
+    $('#bt-state').textContent = 'Eyes closed. Tap Stop when you touch down.';
+    clearInterval(R.tick);
+    R.tick = setInterval(() => {
+      const s = (performance.now() - R.t0) / 1000;
+      $('#bt-time').textContent = s.toFixed(1);
+      if (s >= 45) btStop();
+    }, 100);
+  }
+  function btStop() {
+    const R = BT.run;
+    clearInterval(R.tick);
+    const s = Math.min(45, (performance.now() - R.t0) / 1000);
+    R.tries.push(Math.round(s * 10) / 10);
+    $('#bt-time').textContent = s.toFixed(1);
+    if (s >= 45) beep(990, 0.2);
+    if (R.tries.length < 3) { btReady(); return; }
+    const best = Math.max(...R.tries);
+    BT.run = null;
+    $('#bt-start').hidden = $('#bt-stop').hidden = true;
+    $('#bt-go').hidden = false;
+    $('#bt-go').textContent = 'Test again';
+    const norm = P().age ? stanceNorm(P().age) : null;
+    const prev = bestOf('stance');
+    // move the drills up when the test shows it
+    if (best >= 10 && (P().stanceStage || 0) < 3) P().stanceStage = 3;
+    if (best >= 20 && (P().stanceStage || 0) < 4) P().stanceStage = 4;
+    if (best >= 30) P().stanceStage = 5;
+    saveSettings();
+    $('#bt-state').textContent = 'Tries: ' + R.tries.join(' s, ') + ' s. Best: ' + best + ' s' + (norm ? '. Typical for your age: ' + norm.closed + ' s eyes closed (Springer 2007).' : '. Add your age in Your senses to compare with norms.');
+    record('stance', best, 'balance');
+    stepFeedback($('#bt-fb'), 'good', prev != null && best > prev ? 'New best eyes-closed stance.' : 'Logged.');
+  }
+
+  // Touch Lab: a partner presses a bent paper clip on your fingertip, its two tips either along the finger
+  // or across it, and you say which. The gap narrows as you get it right (the orientation version is
+  // the valid one; the classic two-point test isn't).
+  const TL = { run: null };
+  const TL_GAPS = [5, 4, 3, 2.5, 2, 1.5, 1.25, 1, 0.75, 0.5];
+  function tlStart() {
+    TL.run = { gi: 0, run: 0, trials: 0, max: 24, rev: [], dir: 0 };
+    $('#tl-go').textContent = 'Restart';
+    stepFeedback($('#tl-fb'), '', '');
+    tlShow();
+  }
+  function tlShow() {
+    const R = TL.run;
+    if (R.trials >= R.max) { tlFinish(); return; }
+    R.cur = Math.random() < 0.5 ? 'along' : 'across';
+    $('#tl-card').textContent = 'Partner: set the gap to ' + TL_GAPS[R.gi] + ' mm and press ' + R.cur.toUpperCase() + ' the finger.';
+    $('#tl-count').textContent = (R.trials + 1) + ' / ' + R.max;
+  }
+  function tlAnswer(ok) {
+    const R = TL.run;
+    if (!R) return;
+    R.trials++;
+    let move = 0;
+    if (ok) { if (++R.run >= 2) { R.run = 0; move = 1; } } else { R.run = 0; move = -1; }
+    if (move) {
+      if (R.dir && move !== R.dir) R.rev.push(TL_GAPS[R.gi]);
+      R.dir = move;
+      R.gi = clamp(R.gi + move, 0, TL_GAPS.length - 1);
+    }
+    stepFeedback($('#tl-fb'), ok ? 'good' : 'bad', ok ? 'Right.' : 'Missed. Same light pressure every time.');
+    tlShow();
+  }
+  function tlFinish() {
+    const R = TL.run;
+    TL.run = null;
+    const th = R.rev.length ? mean(R.rev.slice(-4)) : TL_GAPS[R.gi];
+    $('#tl-card').textContent = '';
+    $('#tl-count').textContent = '';
+    $('#tl-go').textContent = 'Go again';
+    stepFeedback($('#tl-fb'), 'good', 'Your fingertip threshold: about ' + th.toFixed(2) + ' mm (smaller is sharper).');
+    record('touch', Math.round(th * 100) / 100, 'touch');
+  }
+
+  // Quick Tap: tap the moment the box turns green. Scores against your own baseline on this device,
+  // since phone browsers add 58–70 ms of their own.
+  let rtStage = null;
+  const RT = { run: null };
+  function rtStart() {
+    RT.run = { times: [], n: 10, waiting: false };
+    $('#rt-go').hidden = true;
+    rtNext();
+  }
+  function rtNext() {
+    const R = RT.run;
+    if (R.times.length >= R.n) { rtFinish(); return; }
+    rtStage.style.background = 'var(--hair)';
+    rtStage.textContent = 'Wait for green…';
+    R.waiting = true;
+    R.go = 0;
+    clearTimeout(R.timer);
+    R.timer = setTimeout(() => { R.go = performance.now(); rtStage.style.background = 'var(--good)'; rtStage.textContent = 'Tap!'; }, 900 + Math.random() * 2100);
+  }
+  function rtTap() {
+    const R = RT.run;
+    if (!R || !R.waiting) return;
+    if (!R.go) { clearTimeout(R.timer); rtStage.textContent = 'Too soon. Wait for green.'; rtStage.style.background = 'var(--warn-soft)'; setTimeout(rtNext, 900); return; }
+    const ms = performance.now() - R.go;
+    R.times.push(ms);
+    R.waiting = false;
+    rtStage.textContent = Math.round(ms) + ' ms';
+    rtStage.style.background = 'var(--accent-soft)';
+    setTimeout(rtNext, 600);
+  }
+  function rtFinish() {
+    const R = RT.run;
+    RT.run = null;
+    const sorted = R.times.slice().sort((a, b) => a - b);
+    const med = Math.round(sorted[Math.floor(sorted.length / 2)]);
+    rtStage.textContent = 'Median ' + med + ' ms';
+    $('#rt-go').hidden = false;
+    $('#rt-go').textContent = 'Go again';
+    const prev = bestOf('react');
+    stepFeedback($('#rt-fb'), 'good', 'Median of 10: ' + med + ' ms' + (prev != null ? ' (best ' + Math.round(prev) + ' ms)' : '') + '. Compare with your own baseline on this device; lab-measured adults average about 231 ms, and phone browsers add 58–70 ms.');
+    record('react', med, 'touch');
+  }
+  function setupBody() {
+    $('#bal-go').addEventListener('click', balStart);
+    $('#bal-stop').addEventListener('click', () => { const R = BAL.run; if (R) { clearInterval(R.tick); BAL.run = null; } $('#bal-go').hidden = false; $('#bal-stop').hidden = true; $('#bal-now').textContent = 'Stopped.'; $('#bal-time').textContent = ''; });
+    $('#bt-go').addEventListener('click', btStart);
+    $('#bt-start').addEventListener('click', btBegin);
+    $('#bt-stop').addEventListener('click', btStop);
+    $('#tl-go').addEventListener('click', tlStart);
+    $('#tl-yes').addEventListener('click', () => tlAnswer(true));
+    $('#tl-no').addEventListener('click', () => tlAnswer(false));
+    rtStage = $('#rt-box');
+    rtStage.addEventListener('pointerdown', rtTap);
+    rtStage.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); rtTap(); } });
+    $('#rt-go').addEventListener('click', rtStart);
+  }
+
+  // ---------- smell and taste ----------
+  // Scent Memory: a memory game played by smell (Olofsson 2020). Fill pairs of small tins or cups with
+  // household scents, mix them up, and find the pairs by sniffing. The app scores turns to clear the board
+  // and rotates between two scent sets every 5 days, as in the trial.
+  const SCENT_SETS = [
+    ['coffee', 'cinnamon', 'lemon peel', 'garlic', 'vanilla', 'black tea', 'cumin', 'mint'],
+    ['orange peel', 'cloves', 'rosemary', 'cocoa', 'ginger', 'basil', 'vinegar', 'soy sauce'],
+  ];
+  const scentSet = () => SCENT_SETS[Math.floor(dayNum(todayKey()) / 5) % 2];
+  function smRender() {
+    const set = scentSet(), pairs = clamp(P().scentPairs || 4, 3, 8);
+    $('#sm-set').textContent = 'This week\'s set (' + pairs + ' pairs): ' + set.slice(0, pairs).join(', ') + '.';
+    $('#sm-pairs').textContent = pairs;
+  }
+  function smSave() {
+    const turns = Number($('#sm-turns').value);
+    const named = Number($('#sm-named').value);
+    const pairs = clamp(P().scentPairs || 4, 3, 8);
+    if (!turns || turns < pairs) { stepFeedback($('#sm-fb'), 'bad', 'Enter how many turns (two sniffs each) it took to find all ' + pairs + ' pairs.'); return; }
+    // a perfect game needs one turn per pair; score = pairs / turns
+    const eff = Math.round((100 * pairs) / turns);
+    const prev = bestOf('scentMemory');
+    record('scentMemory', eff, 'smell');
+    if (named >= 0 && $('#sm-named').value !== '') logMetric('naming', pct(Math.min(named, pairs), pairs));
+    let msg = 'Cleared ' + pairs + ' pairs in ' + turns + ' turns: ' + eff + '% efficiency' + (prev != null && eff > prev ? ', a new best.' : '.');
+    if (eff >= 70 && pairs < 8) { P().scentPairs = pairs + 1; saveSettings(); msg += ' Add a pair next time (' + (pairs + 1) + ').'; }
+    stepFeedback($('#sm-fb'), 'good', msg);
+    $('#sm-turns').value = '';
+    $('#sm-named').value = '';
+    smRender();
+  }
+  // Quick jars: classic olfactory training. Four jars, 10 seconds each, morning and evening.
+  const JARS = ['rose', 'lemon', 'eucalyptus', 'clove'];
+  const OT = { run: null };
+  function otStart() {
+    OT.run = { i: 0, ratings: [] };
+    $('#ot-go').hidden = true;
+    otNext();
+  }
+  function otNext() {
+    const R = OT.run;
+    if (R.i >= JARS.length) { otFinish(); return; }
+    const j = JARS[R.i];
+    $('#ot-now').textContent = (R.i + 1) + ' / 4 · ' + j;
+    $('#ot-how').textContent = 'Open the ' + j + ' jar, hold it under your nose, and take short gentle sniffs. Think of what ' + j + ' is like.';
+    $('#ot-rate').hidden = true;
+    let left = 10;
+    $('#ot-time').textContent = left;
+    clearInterval(R.tick);
+    R.tick = setInterval(() => {
+      left--;
+      $('#ot-time').textContent = Math.max(0, left);
+      if (left <= 0) { clearInterval(R.tick); beep(880, 0.12); $('#ot-rate').hidden = false; $('#ot-how').textContent = 'How strong was the ' + j + '? 0 is nothing, 10 is very strong.'; }
+    }, 1000);
+  }
+  function otRate(v) {
+    const R = OT.run;
+    if (!R) return;
+    R.ratings.push(v);
+    R.i++;
+    otNext();
+  }
+  function otFinish() {
+    const R = OT.run;
+    OT.run = null;
+    $('#ot-go').hidden = false;
+    $('#ot-go').textContent = 'Second round (evening)';
+    $('#ot-now').textContent = '';
+    $('#ot-time').textContent = '';
+    $('#ot-how').textContent = '';
+    $('#ot-rate').hidden = true;
+    const avg = Math.round(mean(R.ratings) * 10) / 10;
+    const d = dayOf(todayKey());
+    d.jars = (d.jars || 0) + 1;
+    saveDay(todayKey());
+    stepFeedback($('#ot-fb'), 'good', 'Jars done (' + d.jars + ' today). Average strength ' + avg + ' / 10. Twice a day for 12 weeks is the studied dose.');
+    record('jars', avg, 'smell');
+  }
+
+  // Taste Ladder: a halving dilution series, tasted with a three-cup forced choice (one cup has the taste,
+  // two are water). Start weakest; two right at the same step is your threshold for that taste.
+  const TASTES = [
+    { id: 'sweet', name: 'sweet', stock: '4 teaspoons of sugar in 1 cup (240 ml) of water' },
+    { id: 'salty', name: 'salty', stock: '1 teaspoon of salt in 1 cup (240 ml) of water' },
+    { id: 'sour', name: 'sour', stock: '2 tablespoons of lemon juice in 1 cup (240 ml) of water' },
+    { id: 'bitter', name: 'bitter', stock: 'tonic water, straight (skip it if you are pregnant)' },
+  ];
+  const TT = { run: null };
+  function ttStart() {
+    const t = TASTES.find(x => x.id === ($('#tt-taste').value || 'sweet'));
+    TT.run = { t, step: 6, hits: 0, trials: 0 };
+    $('#tt-go').textContent = 'Restart';
+    stepFeedback($('#tt-fb'), '', '');
+    ttShow();
+  }
+  function ttShow() {
+    const R = TT.run;
+    $('#tt-card').textContent = 'Step ' + R.step + ' of 6 (' + (R.step === 1 ? 'the stock' : 'stock halved ' + (R.step - 1) + ' time' + (R.step > 2 ? 's' : '')) + '). Put it in a cup marked underneath, with two cups of plain water. Mix them up without looking, sip each, rinse, and pick the ' + R.t.name + ' one. Then check underneath.';
+    $('#tt-ask').hidden = false;
+  }
+  function ttAnswer(ok) {
+    const R = TT.run;
+    if (!R) return;
+    R.trials++;
+    if (ok) {
+      if (++R.hits >= 2) { ttFinish(R.step); return; }
+      stepFeedback($('#tt-fb'), 'good', 'Right. Once more at this step to be sure.');
+    } else {
+      R.hits = 0;
+      if (R.step === 1) { ttFinish(null); return; }
+      R.step--;
+      stepFeedback($('#tt-fb'), 'bad', 'Missed. Next, one step stronger.');
+    }
+    ttShow();
+  }
+  function ttFinish(step) {
+    const R = TT.run;
+    TT.run = null;
+    $('#tt-ask').hidden = true;
+    $('#tt-card').textContent = '';
+    $('#tt-go').textContent = 'Test another taste';
+    if (step == null) { stepFeedback($('#tt-fb'), 'bad', 'You didn\'t pick out even the stock reliably. Make a fresh stock and try again; if a taste stays missing, mention it to a doctor.'); return; }
+    // higher step = weaker solution = keener taste
+    const t = R.t;
+    P().taste = P().taste || {};
+    const prev = P().taste[t.id];
+    P().taste[t.id] = Math.max(prev || 0, step);
+    saveSettings();
+    stepFeedback($('#tt-fb'), 'good', 'Your ' + t.name + ' threshold: step ' + step + ' of 6' + (prev && step > prev ? ', keener than last time.' : '.') + ' Higher is keener.');
+    record('taste', step, 'taste');
+  }
+  function setupChem() {
+    smRender();
+    $('#sm-save').addEventListener('click', smSave);
+    $('#ot-go').addEventListener('click', otStart);
+    for (let v = 0; v <= 10; v += 2) {
+      const b = el('button', '', String(v));
+      b.type = 'button';
+      b.addEventListener('click', () => otRate(v));
+      $('#ot-rate').appendChild(b);
+    }
+    $('#tt-taste').innerHTML = TASTES.map(t => '<option value="' + t.id + '">' + t.name[0].toUpperCase() + t.name.slice(1) + '</option>').join('');
+    $('#tt-go').addEventListener('click', ttStart);
+    $('#tt-yes').addEventListener('click', () => ttAnswer(true));
+    $('#tt-no').addEventListener('click', () => ttAnswer(false));
+  }
+  function metricPoints(key) {
+    return Object.keys(state.days).sort().map(k => ({ k, v: state.days[k][key] })).filter(p => typeof p.v === 'number').slice(-30);
+  }
+  function fitTrend(points) {
+    if (points.length < 3) return null;
+    const xs = points.map(p => dayNum(p.k)), ys = points.map(p => p.v);
+    const span = xs[xs.length - 1] - xs[0];
+    if (span < 2) return null;
+    const mx = mean(xs), my = mean(ys);
+    let sxy = 0, sxx = 0;
+    for (let i = 0; i < xs.length; i++) { sxy += (xs[i] - mx) * (ys[i] - my); sxx += (xs[i] - mx) * (xs[i] - mx); }
+    const slope = sxx ? sxy / sxx : 0;
+    const at = x => my + slope * (x - mx);
+    return { x0: xs[0], x1: xs[xs.length - 1], y0: at(xs[0]), y1: at(xs[xs.length - 1]), change: slope * span };
+  }
+  function verdict(m, fit) {
+    if (!fit) return 'early';
+    const c = m.better === 'up' ? fit.change : -fit.change;
+    return c >= m.thr ? 'up' : c <= -m.thr ? 'down' : 'flat';
+  }
+  function niceMax(v) {
+    if (v <= 0) return 10;
+    const p = Math.pow(10, Math.floor(Math.log10(v)));
+    for (const x of [1, 2, 2.5, 5, 10]) if (x * p >= v) return x * p;
+    return 10 * p;
+  }
+  const NS = 'http://www.w3.org/2000/svg';
+  function svgAdd(svg, tag, attrs, text) {
+    const e = document.createElementNS(NS, tag);
+    Object.entries(attrs).forEach(([a, v]) => { if (String(v).indexOf('var(') === 0) e.style.setProperty(a, v); else e.setAttribute(a, v); });
+    if (text != null) e.textContent = text;
+    svg.appendChild(e);
+    return e;
+  }
+  function drawTrend(host, read, points, m, fit) {
+    const W = Math.max(200, host.clientWidth || 280), H = 104;
+    const L = 34, R = 50, T = 10, B = 18;
+    const vals = points.map(p => p.v).concat(fit ? [fit.y0, fit.y1] : []);
+    // Ratings sit far from zero, so their axis starts near the lowest value.
+    const min = m.key === 'rating' ? Math.floor((Math.min(...vals) - 50) / 100) * 100 : 0;
+    const max = m.max || (m.key === 'rating' ? Math.ceil((Math.max(...vals) + 50) / 100) * 100 : niceMax(Math.max(...vals) * 1.1));
+    const x0 = dayNum(points[0].k), x1 = dayNum(points[points.length - 1].k);
+    const xd = n => (x1 === x0 ? L + (W - L - R) / 2 : L + ((n - x0) / (x1 - x0)) * (W - L - R));
+    const x = k => xd(dayNum(k));
+    const y = v => T + (1 - (clamp(v, min, max) - min) / (max - min)) * (H - T - B);
+    const svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    svg.setAttribute('role', 'img');
+    svg.setAttribute('aria-label', m.chart + ': ' + points.map(p => fmtDate(p.k) + ' ' + fmtV(m, p.v)).join(', '));
+    const add = (tag, attrs, text) => svgAdd(svg, tag, attrs, text);
+    [min, (min + max) / 2, max].forEach(v => {
+      add('line', { x1: L, x2: W - R, y1: y(v), y2: y(v), stroke: 'var(--hair)', 'stroke-width': 1 });
+      add('text', { x: L - 6, y: y(v) + 4, 'text-anchor': 'end', fill: 'var(--muted)', 'font-size': 10, 'font-family': 'var(--font-mono)' }, Math.round(v * 10) / 10);
+    });
+    if (points.length > 1) {
+      const d = points.map((p, i) => (i ? 'L' : 'M') + x(p.k).toFixed(1) + ' ' + y(p.v).toFixed(1)).join(' ');
+      add('path', { d: d + ' L' + x(points[points.length - 1].k).toFixed(1) + ' ' + y(min) + ' L' + x(points[0].k).toFixed(1) + ' ' + y(min) + ' Z', fill: 'var(--accent)', opacity: 0.1, stroke: 'none' });
+      add('path', { d, fill: 'none', stroke: 'var(--accent)', 'stroke-width': 2, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' });
+    }
+    if (fit) add('line', { x1: xd(fit.x0), x2: xd(fit.x1), y1: y(fit.y0), y2: y(fit.y1), stroke: 'var(--ink-2)', 'stroke-width': 1.5, 'stroke-dasharray': '5 4' });
+    points.forEach((p, i) => add('circle', { cx: x(p.k), cy: y(p.v), r: i === points.length - 1 ? 5 : 3.5, fill: 'var(--accent)', stroke: 'var(--bg)', 'stroke-width': 2 }));
+    const lp = points[points.length - 1];
+    add('text', { x: x(lp.k) + 8, y: y(lp.v) + 4, fill: 'var(--ink)', 'font-size': 11, 'font-weight': 600, 'font-family': 'var(--font-mono)' }, fmtV(m, lp.v));
+    add('text', { x: L, y: H - 3, fill: 'var(--muted)', 'font-size': 10, 'font-family': 'var(--font-mono)' }, fmtDate(points[0].k));
+    if (points.length > 1) add('text', { x: W - R, y: H - 3, 'text-anchor': 'end', fill: 'var(--muted)', 'font-size': 10, 'font-family': 'var(--font-mono)' }, fmtDate(lp.k));
+    read.textContent = 'Latest: ' + fmtDate(lp.k) + ' · ' + fmtV(m, lp.v) + (fit ? ' · dashed line = your trend' : '');
+    host.appendChild(svg);
+  }
+  // ---------- Claude coach ----------
+  // GitHub version: your own API key, shared with the other ladders on the same site.
+  // Claude version: the page asks Claude on the viewer's account, no key needed.
+  const AI_KEY = 'voice-ladder-ai';
+  const AI = { key: null, model: 'claude-sonnet-5-5', sample: null, chat: [], busy: 0 };
+  function aiLoad() {
+    try {
+      const o = JSON.parse(localStorage.getItem(AI_KEY) || 'null');
+      if (o && o.key) { AI.key = o.key; AI.model = o.model || AI.model; }
+    } catch (e) {}
+  }
+  function aiSave() {
+    try {
+      if (AI.key) localStorage.setItem(AI_KEY, JSON.stringify({ key: AI.key, model: AI.model }));
+      else localStorage.removeItem(AI_KEY);
+    } catch (e) {}
+  }
+  const aiOn = () => !!(AI.sample || AI.key);
+  // Newer models think before answering, and thinking counts toward max_tokens, so budgets
+  // are generous (you're billed for what's used). Quick calls keep thinking to a minimum.
+  async function askClaude({ system, messages, maxTokens, onText, signal, quick, noThinkingParam }) {
+    if (AI.sample) {
+      const turns = [{ role: 'user', content: system }].concat(messages);
+      const r = await AI.sample(turns, { onText: ({ text }) => onText && onText(text), signal, cache: false });
+      return r.text;
+    }
+    if (!AI.key) throw { code: 'no_key' };
+    const sendThinking = !!quick && !noThinkingParam && AI.model === 'claude-sonnet-5-5';
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      signal,
+      headers: {
+        'x-api-key': AI.key,
+        'anthropic-version': '2023-06-01',
+        'content-type': 'application/json',
+        'anthropic-dangerous-direct-browser-access': 'true',
+      },
+      body: JSON.stringify(Object.assign({ model: AI.model, max_tokens: maxTokens || 6000, system, messages, stream: true }, sendThinking ? { thinking: { type: 'between_tools' } } : {})),
+    });
+    if (!res.ok) {
+      let message = '';
+      try { const j = await res.json(); message = (j.error && j.error.message) || ''; } catch (e) {}
+      if (sendThinking && res.status === 400 && /thinking/i.test(message)) return askClaude({ system, messages, maxTokens, onText, signal, quick, noThinkingParam: true });
+      throw { code: 'http', status: res.status, message };
+    }
+    const reader = res.body.getReader();
+    const dec = new TextDecoder();
+    let buf = '', text = '', stop = null;
+    for (;;) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      buf += dec.decode(value, { stream: true });
+      let i;
+      while ((i = buf.indexOf('\n\n')) >= 0) {
+        const chunk = buf.slice(0, i);
+        buf = buf.slice(i + 2);
+        const line = chunk.split('\n').find(l => l.startsWith('data:'));
+        if (!line) continue;
+        let ev;
+        try { ev = JSON.parse(line.slice(5).trim()); } catch (e) { continue; }
+        if (ev.type === 'content_block_delta' && ev.delta && ev.delta.type === 'text_delta') { text += ev.delta.text; if (onText) onText(text); }
+        else if (ev.type === 'message_delta' && ev.delta && ev.delta.stop_reason) stop = ev.delta.stop_reason;
+        else if (ev.type === 'error') throw { code: 'http', status: 529, message: (ev.error && ev.error.message) || '' };
+      }
+    }
+    if (!text.trim()) throw { code: 'empty', stop };
+    return text;
+  }
+  function aiErrorText(e) {
+    if (!e) return 'Claude couldn\'t answer just now. Try again.';
+    if (e.code === 'cancelled' || e.name === 'AbortError') return '';
+    if (e.code === 'no_key') return 'Connect your Claude API key in the Claude coach panel first.';
+    if (e.code === 'http') {
+      if (e.status === 401) return 'Claude didn\'t accept your API key. Check it, or create a new one in the Claude Console.';
+      if (e.status === 400 && /credit/i.test(e.message || '')) return 'Your API credits are used up. Max credits refresh at the start of each billing cycle.';
+      if (e.status === 404) return 'That model isn\'t available on your key. Pick a different model below.';
+      if (e.status === 429) return 'Too many requests right now. Wait a minute and try again.';
+      if (e.status >= 500) return 'Claude is busy right now. Try again in a minute.';
+      return 'Claude returned an error (' + e.status + ')' + (e.message ? ': ' + e.message : '.');
+    }
+    if (e.code === 'not_granted' || e.code === 'sampling_disabled') return 'This page isn\'t allowed to use Claude. You can allow it from the page\'s Permissions menu.';
+    if (e.code === 'rate_limited') return 'You\'ve hit a usage limit. Try again later.';
+    if (e.code === 'session_expired') return 'Sign in to Claude again, then retry.';
+    if (e instanceof TypeError) return 'Couldn\'t reach Claude. Check your internet connection.';
+    if (e.code === 'empty') return e.stop === 'max_tokens' ? 'Claude spent its whole reply thinking. Ask a shorter question, or try again.' : 'Claude sent an empty reply. Try again.';
+    return 'Claude couldn\'t answer just now. Try again.' + (e.code || e.message ? ' (' + (e.code || e.message) + ')' : '');
+  }
+  // Small, safe Markdown: paragraphs, headings, bullet and numbered lists, **bold**.
+  function renderMd(host, md) {
+    host.innerHTML = '';
+    let list = null;
+    const inline = (node, str) => {
+      str.split(/(\*\*[^*]+\*\*)/).forEach(part => {
+        if (/^\*\*[^*]+\*\*$/.test(part)) node.appendChild(el('strong', '', part.slice(2, -2)));
+        else if (part) node.appendChild(document.createTextNode(part.replace(/(^|[\s(])\*([^*\s][^*]*)\*/g, '$1$2')));
+      });
+    };
+    md.split('\n').forEach(raw => {
+      const line = raw.replace(/\s+$/, '');
+      const b = /^\s*[-*•]\s+(.*)$/.exec(line), n = /^\s*\d+[.)]\s+(.*)$/.exec(line), h = /^#{1,4}\s+(.*)$/.exec(line);
+      if (b || n) {
+        const tag = b ? 'UL' : 'OL';
+        if (!list || list.tagName !== tag) { list = el(tag.toLowerCase(), 'md-list'); host.appendChild(list); }
+        const li = el('li');
+        inline(li, (b || n)[1]);
+        list.appendChild(li);
+        return;
+      }
+      list = null;
+      if (!line.trim() || /^-{3,}$/.test(line.trim()) || /^\|/.test(line.trim())) {
+        if (/^\|/.test(line.trim()) && !/^\|[\s:-]+\|/.test(line.trim())) { const p = el('p', 'mono small'); p.textContent = line.trim(); host.appendChild(p); }
+        return;
+      }
+      const p = el('p', h ? 'md-h' : '');
+      inline(p, h ? h[1] : line);
+      host.appendChild(p);
+    });
+  }
+  async function aiRun(out, btn, req, done) {
+    if (!aiOn()) return;
+    const ctl = new AbortController();
+    const label = btn ? btn.innerHTML : '';
+    out.hidden = false;
+    out.innerHTML = '';
+    const think_ = el('p', 'ai-think', 'Thinking…');
+    out.appendChild(think_);
+    const stop = el('button', 'ghost ai-stop', 'Stop');
+    stop.type = 'button';
+    stop.addEventListener('click', () => ctl.abort());
+    out.appendChild(stop);
+    if (btn) btn.disabled = true;
+    const body = el('div', 'ai-body');
+    let text = '';
+    try {
+      text = await askClaude(Object.assign({}, req, {
+        signal: ctl.signal,
+        onText: t => { text = t; if (think_.parentNode) { think_.remove(); out.insertBefore(body, stop); } renderMd(body, t); },
+      }));
+      if (think_.parentNode) { think_.remove(); out.insertBefore(body, stop); }
+      renderMd(body, text);
+      if (done) done(text);
+    } catch (e) {
+      if (think_.parentNode) think_.remove();
+      if (text && !body.parentNode) out.insertBefore(body, stop);
+      const msg = aiErrorText(e);
+      if (msg) out.appendChild(el('p', 'status err', msg));
+      else if (!text) out.hidden = true;
+    } finally {
+      stop.remove();
+      if (btn) { btn.disabled = false; btn.innerHTML = label; }
+    }
+  }
+  // "Ask Claude about this" under any result
+  function aiExplain(fbEl, detail, title) {
+    if (!aiOn() || !fbEl) return;
+    const box = fbEl.parentNode;
+    box.querySelectorAll(':scope > .ai-why, :scope > .ai-out.explain').forEach(n => n.remove());
+    const btn = el('button', 'ghost ai-why', 'Ask Claude about this');
+    btn.type = 'button';
+    const out = el('div', 'ai-out explain');
+    out.hidden = true;
+    fbEl.after(btn, out);
+    btn.addEventListener('click', () => aiRun(out, btn, {
+      system: coachPrompt(),
+      messages: [{ role: 'user', content: 'Exercise: ' + title + '\nApp feedback: ' + fbEl.textContent.trim() + '\nData: ' + detail + '\n\nIn 2–4 sentences, say what this result means and one concrete change for my next session, grounded in the evidence for this method. No preamble.' }],
+      maxTokens: 3000,
+      quick: true,
+    }));
+  }
+  function renderChat() {
+    const log = $('#chat-log');
+    log.innerHTML = '';
+    AI.chat.forEach(m => {
+      const b = el('div', 'bubble ' + (m.role === 'user' ? 'me' : 'coach'));
+      if (m.role === 'user') b.textContent = m.content;
+      else renderMd(b, m.content);
+      log.appendChild(b);
+    });
+    log.hidden = !AI.chat.length;
+  }
+  async function chatSend(text) {
+    text = (text || '').trim();
+    if (!text || AI.busy) return;
+    AI.busy = 1;
+    AI.chat.push({ role: 'user', content: text });
+    $('#chat-in').value = '';
+    renderChat();
+    const log = $('#chat-log');
+    const bubble = el('div', 'bubble coach');
+    bubble.appendChild(el('p', 'ai-think', 'Thinking…'));
+    log.appendChild(bubble);
+    $('#chat-send').disabled = true;
+    try {
+      const reply = await askClaude({
+        system: coachPrompt() + '\n\nYou\'re chatting inside the app. Answer directly in under 200 words unless they ask for more, using their data when it helps.',
+        messages: AI.chat.slice(-12),
+        maxTokens: 6000,
+        onText: t => renderMd(bubble, t),
+      });
+      AI.chat.push({ role: 'assistant', content: reply });
+    } catch (e) {
+      AI.chat.pop();
+      bubble.innerHTML = '';
+      bubble.appendChild(el('p', 'status err', aiErrorText(e) || 'Stopped.'));
+      $('#chat-in').value = text;
+      AI.busy = 0;
+      $('#chat-send').disabled = false;
+      return;
+    }
+    AI.busy = 0;
+    $('#chat-send').disabled = false;
+    renderChat();
+    if (log.lastChild) log.lastChild.scrollIntoView({ block: 'nearest' });
+  }
+  async function aiConnect() {
+    const key = $('#ai-key').value.trim();
+    const st = $('#ai-status');
+    st.className = 'small';
+    if (!key) { $('#ai-key').focus(); return; }
+    st.textContent = 'Checking your key…';
+    AI.key = key;
+    try {
+      try { await askClaude({ system: 'Reply with the single word OK.', messages: [{ role: 'user', content: 'Test' }], maxTokens: 400, quick: true }); }
+      catch (e) { if (e.code !== 'empty') throw e; }
+      aiSave();
+      $('#ai-key').value = '';
+      st.textContent = '';
+      renderAI();
+    } catch (e) {
+      AI.key = null;
+      st.className = 'small status err';
+      st.textContent = aiErrorText(e);
+    }
+  }
+  function aiDisconnect() { AI.key = null; aiSave(); renderAI(); }
+  function renderAI() {
+    const box = $('#ai');
+    const viewerNoAI = inViewer && !AI.sample;
+    box.hidden = viewerNoAI;
+    if (viewerNoAI) return;
+    const on = aiOn();
+    $('#ai-setup').hidden = on;
+    $('#ai-on').hidden = !on;
+    $('#ai-model').value = AI.model;
+    $('#ai-mode').textContent = AI.sample ? 'Uses your Claude account' : on ? 'Connected · ' + (($('#ai-model').selectedOptions[0] || {}).textContent || '') : 'Not connected';
+    $('#ai-keyrow').hidden = !!AI.sample;
+    const pre = $('#chat-presets');
+    if (!pre.childNodes.length) {
+      CHAT_PRESETS.forEach(([label, q, fill]) => {
+        const b = el('button', 'chip', label);
+        b.type = 'button';
+        b.addEventListener('click', () => {
+          if (q) { chatSend(q()); return; }
+          const inp = $('#chat-in');
+          inp.value = fill;
+          inp.focus();
+          inp.setSelectionRange(inp.value.length, inp.value.length);
+        });
+        pre.appendChild(b);
+      });
+    }
+    renderChat();
+  }
+  async function aiInitViewer() {
+    if (!inViewer || !window.claude || typeof window.claude.use !== 'function') return;
+    try { const s = await window.claude.use('sample'); if (s) AI.sample = s; } catch (e) {}
+    renderAI();
+  }
+
+
+  // ---------- records, levels, coach ----------
+  const LOWER_BETTER = Object.fromEntries(Object.keys(METRIC_DEFS).filter(k => METRIC_DEFS[k].better === 'down').map(k => [k, 1]));
+  function logMetric(key, v) {
+    if (v == null || !isFinite(v)) return;
+    const k = todayKey();
+    const d = dayOf(k);
+    const old = d[key];
+    if (old == null || (LOWER_BETTER[key] ? v < old : v > old)) { d[key] = Math.round(v * 100) / 100; saveDay(k); }
+  }
+  const bestOf = m => (P().best[m] ? P().best[m].v : null);
+  const better = (m, a, b) => (LOWER_BETTER[m] ? a < b : a > b);
+  // A finished exercise: log the measure (if any), keep the baseline and best, count the sense, mark the rung.
+  function record(metric, value, sense) {
+    if (metric && value != null && isFinite(value)) {
+      logMetric(metric, value);
+      if (!P().first[metric]) P().first[metric] = { v: value, date: todayKey() };
+      const b = P().best[metric];
+      if (!b || better(metric, value, b.v)) P().best[metric] = { v: value, date: todayKey() };
+    }
+    if (sense) P().tried[sense] = (P().tried[sense] || 0) + 1;
+    saveSettings();
+    if (sense) markStep(RUNG_OF[sense]);
+    checkLevelUp();
+    renderTrends();
+    renderRecords();
+    renderRoadmap();
+  }
+  // improved: best beats the first measurement by 10% or more (or one full step for the taste ladder)
+  function improved(m) {
+    const f = P().first[m], b = P().best[m];
+    if (!f || !b) return false;
+    if (m === 'taste') return b.v > f.v;
+    return LOWER_BETTER[m] ? b.v <= f.v * 0.9 : b.v >= f.v * 1.1;
+  }
+  const improvedCount = () => Object.keys(METRIC_DEFS).filter(improved).length;
+  const sensesTried = () => Object.keys(SENSES).filter(s => P().tried[s] > 0).length;
+  function setNotice(text) { P().notice = { date: todayKey(), text }; }
+  function changeLevel(to, why) {
+    to = clamp(to, 1, 5);
+    if (to === P().level) return;
+    P().level = to;
+    P().levelSince = todayKey();
+    P().levelLog.push({ days: practiceDays(), date: todayKey(), level: to });
+    P().levelLog = P().levelLog.slice(-40);
+    setNotice(why || 'Level up! You are now ' + LEVELS[to].name + '. ' + LEVELS[to].unlock);
+    saveSettings();
+    renderCoach();
+  }
+  function checkLevelUp() {
+    const L = P().level;
+    if (L >= 5) return;
+    const n = LEVELS[L + 1];
+    if (practiceDays() >= n.days && sensesTried() >= n.senses && improvedCount() >= n.improved) changeLevel(L + 1);
+  }
+
+  // ----- check-in and today's quest -----
+  const todayCheckin = () => { const d = peekDay(todayKey()); return (d && d.checkin) || null; };
+  function setCheckin(field, val) {
+    const k = todayKey();
+    const d = dayOf(k);
+    d.checkin = Object.assign({ time: '20', partner: 'no' }, d.checkin || {}, { [field]: val });
+    saveDay(k);
+    renderCoach();
+  }
+  function dayPlan() {
+    const d = peekDay(todayKey()) || {};
+    const steps = d.steps || {};
+    const c = todayCheckin() || {};
+    const short = c.time === '10', partner = c.partner === 'yes';
+    const dn = dayNum(todayKey()), dow = new Date().getDay();
+    const balanceDay = [1, 3, 5].includes(dow); // three times a week, the studied dose
+    const items = [
+      dn % 2 ? { title: 'Contrast Hunt', sense: 'sight', min: 5, why: 'Faint patches, at the edge of what you can see.', target: '#ex-ch' } : { title: 'Speed Sight', sense: 'sight', min: 4, why: 'Flashes that shorten as you improve.', target: '#ex-ss' },
+      dn % 3 === 0 ? { title: 'Sound Compass', sense: 'hearing', min: 3, why: 'Headphones on, spatial audio off.', target: '#ex-sc' } : { title: 'Pitch Duel', sense: 'hearing', min: 4, why: 'Which of two tones is higher.', target: '#ex-pd' },
+      short ? { title: 'Quick jars', sense: 'smell', min: 1, why: 'Four scents, 10 seconds each.', target: '#ex-ot' } : { title: 'Scent Memory', sense: 'smell', min: 10, why: 'Find the pairs by smell.', target: '#ex-sm' },
+      balanceDay ? { title: 'Steady Stance', sense: 'balance', min: 5, why: '8 × 30 seconds, next to a counter.', target: '#ex-bal' } : { title: 'Quick Step', sense: 'balance', min: 2, why: 'Step where the app calls.', target: '#ex-qs' },
+      partner ? { title: 'Touch Lab', sense: 'touch', min: 5, why: 'Your partner runs the paper clip.', target: '#ex-tl' } : dow === 0 || dow === 6 ? { title: 'Taste Ladder', sense: 'taste', min: 10, why: 'Weekend test: one taste, three cups.', target: '#ex-tt' } : { title: 'Quick Tap', sense: 'touch', min: 1, why: 'Ten taps against your own baseline.', target: '#ex-rt' },
+    ];
+    items.forEach((it, i) => { it.done = !!steps[STEPS[i]]; });
+    if (short) items.splice(3, 2);
+    return { short, items };
+  }
+  function focusText() {
+    const missing = Object.keys(SENSES).filter(s => !P().tried[s]);
+    if (missing.length) return 'Baseline quest: test ' + missing.map(s => SENSES[s].split(' ')[1].toLowerCase()).join(', ') + ' once, so every later score has something to beat.';
+    const stale = Object.keys(METRIC_DEFS).filter(m => P().best[m]).sort((a, b) => (P().best[a].date || '').localeCompare(P().best[b].date || ''))[0];
+    if (stale) return 'Your oldest personal best is ' + METRIC_DEFS[stale].name + ' (' + fmtDate(P().best[stale].date) + '). Beat it today.';
+    return 'Keep the streak: short and often is how every method here was studied.';
+  }
+  function sinceLastTime() {
+    const tk = todayKey();
+    const prev = Object.keys(state.days).filter(k => k < tk && isPracticeDay(k)).sort().pop();
+    if (!prev) return 'This is your first quest. Welcome.';
+    const d = state.days[prev];
+    const parts = Object.keys(METRIC_DEFS).filter(m => d[m] != null).map(m => METRIC_DEFS[m].name + ' ' + fmtM(m, d[m]));
+    return fmtDate(prev) + ': ' + plural(stepsDone(prev), 'quest') + ' done' + (parts.length ? '; ' + parts.slice(0, 3).join(', ') : '') + '.';
+  }
+  const fmtM = (m, v) => { const D = METRIC_DEFS[m]; return (D.dp ? Number(v).toFixed(D.dp) : Math.round(v)) + D.unit; };
+  const WEEK_GOAL = [0, 3, 4, 5, 5, 6];
+  function weekPracticeDays() {
+    const now = new Date(), dow = (now.getDay() + 6) % 7;
+    let n = 0;
+    for (let j = 0; j <= dow; j++) if (isPracticeDay(dkey(new Date(now.getFullYear(), now.getMonth(), now.getDate() - j)))) n++;
+    return n;
+  }
+  function renderCoach() {
+    const L = P().level;
+    $('#lvl-num').textContent = 'Level ' + L;
+    $('#lvl-name').textContent = lv().name;
+    $('#lvl-fill').style.width = (L / 5) * 100 + '%';
+    const n = P().notice;
+    $('#lvl-msg').textContent = n && n.date === todayKey() ? n.text : '';
+    const next = L < 5 ? LEVELS[L + 1] : null;
+    $('#lvl-note').textContent = next ? 'To reach ' + next.name + ': ' + next.days + ' training days (' + practiceDays() + ')' + (next.senses ? ', ' + next.senses + ' senses tested (' + sensesTried() + ')' : '') + (next.improved ? ', ' + next.improved + ' measures 10%+ beyond your baseline (' + improvedCount() + ')' : '') + '.' : 'Apex. Keep training: gains fade without practice.';
+    const c = todayCheckin() || {};
+    setRadio('ci-time', c.time || '');
+    setRadio('ci-partner', c.partner || '');
+    const plan = dayPlan();
+    $('#s-focus').textContent = focusText();
+    $('#s-since').textContent = sinceLastTime();
+    const list = $('#s-list');
+    list.innerHTML = '';
+    let total = 0;
+    plan.items.forEach(it => {
+      total += it.min;
+      const b = el('button', 'sess-item' + (it.done ? ' done' : ''));
+      b.type = 'button';
+      b.appendChild(el('span', 'si-check', it.done ? '✓' : ''));
+      const main = el('span', 'si-main');
+      main.appendChild(el('span', 'si-title', SENSES[it.sense].split(' ')[0] + ' ' + it.title));
+      main.appendChild(el('span', 'si-meta', it.min + ' min · ' + it.why));
+      b.appendChild(main);
+      b.addEventListener('click', () => { const t = $(it.target); if (t) { t.scrollIntoView({ behavior: 'smooth', block: 'start' }); t.classList.add('flash'); setTimeout(() => t.classList.remove('flash'), 1200); } });
+      list.appendChild(b);
+    });
+    $('#s-title').textContent = (plan.short ? 'Short quest' : 'Daily quest') + ' · about ' + total + ' min · +' + plan.items.length * 10 + ' XP';
+    const nx = nextGoal();
+    $('#s-next').textContent = nx ? nx.label + (nx.progress ? ' (' + nx.progress + ')' : '') + '.' : 'Every milestone reached.';
+    const goalN = WEEK_GOAL[L], w = weekPracticeDays();
+    $('#ptime-val').textContent = w + ' of ' + goalN;
+    const fill = $('#ptime-fill');
+    fill.style.width = Math.min(100, (w / 7) * 100) + '%';
+    fill.className = 'ptime-fill' + (w >= goalN ? ' done' : '');
+    $('#ptime-rec').style.left = (goalN / 7) * 100 + '%';
+    $('#ptime-note').textContent = w >= goalN ? 'Weekly goal reached.' : 'Goal: ' + goalN + ' training days a week at ' + lv().name + '.';
+  }
+  function renderStats() {
+    const now = new Date();
+    const back = n => dkey(new Date(now.getFullYear(), now.getMonth(), now.getDate() - n));
+    const counts = k => stepsDone(k) >= 3;
+    let i = counts(back(0)) ? 0 : 1, streak = 0;
+    while (counts(back(i))) { streak++; i++; }
+    $('#st-streak').textContent = streak;
+    $('#st-streak-u').textContent = streak === 1 ? 'day' : 'days';
+    const dow = (now.getDay() + 6) % 7;
+    let wk = 0;
+    for (let j = 0; j <= dow; j++) if (isPracticeDay(back(j))) wk++;
+    $('#st-week').textContent = wk;
+    $('#st-senses').textContent = sensesTried();
+    $('#today-label').textContent = now.toLocaleDateString(undefined, { weekday: 'long', month: 'short', day: 'numeric' });
+  }
+  function renderRungs() {
+    const d = peekDay(todayKey());
+    const steps = (d && d.steps) || {};
+    let n = 0;
+    STEPS.forEach(s => {
+      const r = $('#rung-' + s);
+      const done = !!steps[s];
+      if (done) n++;
+      r.classList.toggle('done', done);
+      r.querySelector('.done-btn').textContent = done ? 'Done ✓' : 'Mark done';
+    });
+    $('#routine-progress').textContent = n + ' of 5 done';
+    $('#routine-bar').style.width = (n / 5) * 100 + '%';
+  }
+  function renderCal() {
+    const host = $('#cal');
+    host.innerHTML = '';
+    ['M', 'T', 'W', 'T', 'F', 'S', 'S'].forEach(d => { const h = el('div', 'dow', d); h.setAttribute('aria-hidden', 'true'); host.appendChild(h); });
+    const now = new Date(), dow = (now.getDay() + 6) % 7, tk = todayKey();
+    for (let i = 0; i < 28; i++) {
+      const dd = new Date(now.getFullYear(), now.getMonth(), now.getDate() - dow - 21 + i);
+      const k = dkey(dd), n = stepsDone(k), future = k > tk;
+      const c = el('div', 'day' + (future ? ' future' : n >= 5 ? ' l3' : n >= 3 ? ' l2' : n ? ' l1' : '') + (k === tk ? ' today' : ''), String(dd.getDate()));
+      c.title = fmtDate(k) + ': ' + (future ? 'upcoming' : n ? plural(n, 'quest') : 'no training');
+      c.setAttribute('aria-label', c.title);
+      host.appendChild(c);
+    }
+  }
+  // personal records: baseline → best for every measure
+  function renderRecords() {
+    const host = $('#records');
+    host.innerHTML = '';
+    const ms = Object.keys(METRIC_DEFS).filter(m => P().best[m]);
+    if (!ms.length) { host.appendChild(el('p', 'small muted', 'Finish any exercise and its record shows up here.')); return; }
+    Object.keys(SENSES).forEach(s => {
+      const mine = ms.filter(m => METRIC_DEFS[m].sense === s);
+      if (!mine.length) return;
+      const grp = el('div', 'm-group');
+      grp.appendChild(el('p', 'm-lvl', SENSES[s]));
+      mine.forEach(m => {
+        const f = P().first[m].v, b = P().best[m].v, up = improved(m);
+        const row = el('div', 'm-row rec' + (up ? ' done' : ''));
+        row.appendChild(el('span', 'm-name', METRIC_DEFS[m].name));
+        row.appendChild(el('span', 'm-stat', fmtM(m, f) + ' → ' + fmtM(m, b) + (up ? ' ▲' : '')));
+        grp.appendChild(row);
+      });
+      host.appendChild(grp);
+    });
+  }
+  function renderTrends() {
+    const list = $('#prog-list'), trends = $('#trends');
+    list.innerHTML = '';
+    trends.innerHTML = '';
+    let tracked = 0, up = 0;
+    Object.keys(METRIC_DEFS).forEach(key => {
+      const D = METRIC_DEFS[key];
+      const m = { key, name: D.name, chart: D.name + ' (' + D.unit.trim() + (D.better === 'down' ? ', lower is better' : ', higher is better') + ')', unit: D.unit, better: D.better, thr: D.thr, max: D.max };
+      const pts = metricPoints(key);
+      if (!pts.length) return;
+      tracked++;
+      const fit = fitTrend(pts), v = verdict(m, fit);
+      if (v === 'up') up++;
+      const row = el('div', 'prog-row');
+      const main = el('div', 'pr-main');
+      main.appendChild(el('div', 'pr-name', SENSES[D.sense].split(' ')[0] + ' ' + D.name));
+      main.appendChild(el('div', 'pr-detail', fit ? 'Trend: ' + fmtM(key, fit.y0) + ' → ' + fmtM(key, fit.y1) : 'Latest: ' + fmtM(key, pts[pts.length - 1].v) + '. A trend shows up after a few more days.'));
+      row.appendChild(main);
+      row.appendChild(el('span', 'vchip v-' + v, { up: '▲ Improving', down: '▼ Dipping', flat: '■ Holding steady', early: 'Just started' }[v]));
+      list.appendChild(row);
+      const fig = el('figure', 'trend');
+      fig.appendChild(el('figcaption', '', m.chart));
+      const host = el('div');
+      fig.appendChild(host);
+      const read = el('p', 'read');
+      fig.appendChild(read);
+      trends.appendChild(fig);
+      drawTrend(host, read, pts, m, fit);
+    });
+    $('#prog-head').textContent = tracked ? plural(practiceDays(), 'training day') + ', ' + improvedCount() + ' measures beyond your baseline' + (up ? ', ' + up + ' improving now.' : '.') : 'Nothing logged yet. Finish your first quest and it shows up here.';
+    $('#charts-h').hidden = !tracked;
+  }
+  const fmtV = (m, v) => fmtM(m.key, v);
+
+  // ----- roadmap (by training days) -----
+  const goal = (label, done, progress) => ({ label, done: !!done, progress: done ? '' : progress || '' });
+  function roadmap() {
+    const n = practiceDays(), t = sensesTried(), imp = improvedCount();
+    const daysN = k => goal('Train on ' + k + ' days', n >= k, n + ' / ' + k);
+    const lvlG = L => goal('Reach ' + LEVELS[L].name, P().level >= L, 'now ' + lv().name);
+    return [
+      { at: 1, when: 'Day 1', title: 'First light', expect: 'Every score today is your baseline. The point is to have something to beat.', goals: [daysN(1), goal('Test 3 senses', t >= 3, t + ' / 3')] },
+      { at: 7, when: 'Week 1', title: 'The habit', expect: 'Early gains are mostly getting used to each task. That\'s normal, and why baselines matter.', goals: [daysN(7), lvlG(2), goal('Test all six senses', t >= 6, t + ' / 6')] },
+      { at: 15, when: 'Week 3', title: 'Real gains', expect: 'Thresholds start moving: shorter flashes, smaller pitch gaps, longer stances.', goals: [daysN(15), lvlG(3), goal('Beat your baseline on 2 measures', imp >= 2, imp + ' / 2')] },
+      { at: 30, when: 'Month 1', title: 'Sharpened', expect: 'Around the dose most studies used. Re-test each sense and compare.', goals: [daysN(30), lvlG(4), goal('Beat your baseline on 4 measures', imp >= 4, imp + ' / 4')] },
+      { at: 60, when: 'Month 2', title: 'Apex', expect: 'Measurably sharper across the board. From here, practice keeps the gains.', goals: [daysN(60), lvlG(5), goal('Beat your baseline on 6 measures', imp >= 6, imp + ' / 6')] },
+    ];
+  }
+  function nextGoal() {
+    for (const m of roadmap()) for (const g of m.goals) if (!g.done) return g;
+    return null;
+  }
+  function renderRoadmap() {
+    const n = practiceDays(), ms = roadmap();
+    let hereIdx = ms.findIndex(m => !m.goals.every(g => g.done));
+    if (hereIdx < 0) hereIdx = ms.length;
+    $('#road-pos').textContent = n ? plural(n, 'training day') : 'Not started yet';
+    const list = $('#road-list');
+    list.innerHTML = '';
+    ms.forEach((m, i) => {
+      const doneGoals = m.goals.filter(g => g.done).length;
+      const li = el('li', 'mile' + (doneGoals === m.goals.length ? ' reached' : '') + (i === hereIdx ? ' next' : ''));
+      const head = el('div', 'mile-head');
+      head.appendChild(el('span', 'mile-dot'));
+      const t = el('div', 'mile-title');
+      t.appendChild(el('span', 'mile-when', m.when));
+      t.appendChild(el('strong', '', m.title));
+      head.appendChild(t);
+      head.appendChild(el('span', 'mile-count', doneGoals + '/' + m.goals.length));
+      li.appendChild(head);
+      li.appendChild(el('p', 'mile-expect', m.expect));
+      const ul = el('ul', 'mile-goals');
+      m.goals.forEach(g => {
+        const gi = el('li', g.done ? 'done' : '');
+        gi.appendChild(el('span', 'g-mark', g.done ? '✓' : '○'));
+        gi.appendChild(el('span', '', g.label));
+        if (g.progress) gi.appendChild(el('span', 'g-prog', g.progress));
+        ul.appendChild(gi);
+      });
+      li.appendChild(ul);
+      list.appendChild(li);
+    });
+  }
+
+  // ----- evidence chips -----
+  function evidenceEl(id) {
+    const E = EVIDENCE[id];
+    const det = el('details', 'why');
+    const sum = el('summary');
+    const chip = el('span', 'ev ' + E.tag, E.icon + ' ' + E.label);
+    chip.title = { a: 'Strong evidence', b: 'Good evidence, with a caveat', c: 'Promising: small or early studies' }[E.tag];
+    sum.append(chip, el('span', 'ev-more', 'Why it works'));
+    det.appendChild(sum);
+    const body = el('div', 'why-body');
+    const p1 = el('p');
+    p1.innerHTML = E.why; // trusted, static text from EVIDENCE
+    body.appendChild(p1);
+    if (E.caveat) { const p2 = el('p'); p2.appendChild(el('strong', '', 'Caveat: ')); p2.appendChild(document.createTextNode(E.caveat)); body.appendChild(p2); }
+    const cites = el('p', 'why-cite');
+    E.cites.forEach(([t, url], i) => { if (i) cites.appendChild(document.createTextNode(' · ')); const a = el('a', '', t); a.href = url; a.target = '_blank'; a.rel = 'noopener'; cites.appendChild(a); });
+    body.appendChild(cites);
+    det.appendChild(body);
+    return det;
+  }
+  function renderEvidence() {
+    $$('[data-ev]').forEach(slot => { if (!slot.childNodes.length) slot.appendChild(evidenceEl(slot.dataset.ev)); });
+    const host = $('#myths');
+    if (!host.childNodes.length) MYTHS.forEach(([claim, truth, cite, url]) => {
+      const c = el('div', 'rcard');
+      c.appendChild(el('p', 'rcard-t', '✗ ' + claim));
+      c.appendChild(el('p', '', truth));
+      const a = el('a', 'why-cite', cite);
+      a.href = url; a.target = '_blank'; a.rel = 'noopener';
+      c.appendChild(a);
+      host.appendChild(c);
+    });
+  }
+
+  // ----- the coach prompt -----
+  function coachPrompt() {
+    const lines = [];
+    lines.push('You are a practical, evidence-minded coach inside Sense Quest, an app that trains sight, hearing, smell, taste, touch, and balance with methods that have research behind them.');
+    lines.push('');
+    lines.push('PLAYER');
+    lines.push('- Name: ' + ((P().name || '').trim() || 'not given') + '. Age: ' + (P().age || 'not given') + '. Goals: ' + ((P().about || '').trim() || 'not written') + '.');
+    lines.push('- Level ' + P().level + ' of 5 (' + lv().name + '). ' + plural(practiceDays(), 'training day') + '. Senses tested: ' + (Object.keys(SENSES).filter(s => P().tried[s]).join(', ') || 'none') + '.');
+    const recs = Object.keys(METRIC_DEFS).filter(m => P().best[m]).map(m => METRIC_DEFS[m].name + ': baseline ' + fmtM(m, P().first[m].v) + ', best ' + fmtM(m, P().best[m].v) + (METRIC_DEFS[m].better === 'down' ? ' (lower is better)' : ''));
+    lines.push('- Records: ' + (recs.join('; ') || 'none yet') + '.');
+    lines.push('');
+    lines.push('EXERCISES AND THEIR EVIDENCE: ' + Object.keys(EVIDENCE).map(k => k + ' (' + EVIDENCE[k].label + ')').join(', ') + '.');
+    lines.push('');
+    lines.push('RULES');
+    lines.push('- Recommend only methods with evidence, and say how strong it is. Name the study type and its limits; never overstate.');
+    lines.push('- Scores are relative to the player\'s own device, so compare them with their own baseline, not with clinical norms.');
+    lines.push('- Not medical advice: suggest an optometrist, audiologist, or doctor for sudden changes, pain, lasting ringing, or a sense that stays missing.');
+    lines.push('- Be specific and encouraging, without filler.');
+    return lines.join('\n');
+  }
+  async function copyPrompt() {
+    const text = coachPrompt() + '\n\nLook at my records and suggest what to focus on for the next two weeks, using the app\'s exercises.';
+    const ta = $('#cp-text');
+    ta.value = text;
+    ta.hidden = false;
+    try { await navigator.clipboard.writeText(text); $('#cp-status').textContent = 'Copied. Paste it into Claude.'; }
+    catch (e) { ta.select(); $('#cp-status').textContent = 'Select all and copy the text below, then paste it into Claude.'; }
+  }
+  function aiPlan() {
+    aiRun($('#ai-plan-out'), $('#ai-plan'), {
+      system: coachPrompt() + '\n\nKeep it under 250 words.',
+      messages: [{ role: 'user', content: 'Plan my next 4 weeks of sense training: which exercises on which days, what to re-test and when, and what result would count as real progress for me.' }],
+      maxTokens: 8000,
+    });
+  }
+
+  // Quick Step: the app calls a direction at random moments; step that way fast, then back. Two minutes.
+  const QS = { run: null };
+  const QS_DIRS = [['↑', 'forward'], ['→', 'right'], ['←', 'left'], ['↓', 'back']];
+  function qsStart() {
+    QS.run = { end: Date.now() + 120000, n: 0 };
+    $('#qs-go').hidden = true;
+    $('#qs-stop').hidden = false;
+    stepFeedback($('#qs-fb'), '', '');
+    qsCue();
+  }
+  function qsCue() {
+    const R = QS.run;
+    if (!R) return;
+    if (Date.now() >= R.end) { qsFinish(); return; }
+    const [g, w] = pick(QS_DIRS);
+    $('#qs-cue').textContent = g + ' ' + w;
+    beep(760, 0.1);
+    R.n++;
+    R.timer = setTimeout(() => { $('#qs-cue').textContent = '·'; R.timer = setTimeout(qsCue, 600 + Math.random() * 1600); }, 900);
+  }
+  function qsFinish() {
+    const R = QS.run;
+    clearTimeout(R && R.timer);
+    QS.run = null;
+    $('#qs-go').hidden = false;
+    $('#qs-stop').hidden = true;
+    $('#qs-cue').textContent = '';
+    if (R && R.n >= 20) { stepFeedback($('#qs-fb'), 'good', plural(R.n, 'step') + ' in 2 minutes. Faster stepping is what cut falls in the trials.'); record(null, null, 'balance'); }
+  }
+  const CHAT_PRESETS = [
+    ['What should I focus on?', () => 'Looking at my records, which sense should I focus on for the next two weeks, and how?'],
+    ['Explain today\'s evidence', () => 'Explain, in plain words, why today\'s exercises work and how strong the evidence is for each: ' + dayPlan().items.map(it => it.title).join(', ') + '.'],
+    ['Is my score good?', null, 'Is my ___ score good for my age, and how should I read it? '],
+    ['Protect my senses', () => 'What are the most important evidence-based habits to protect my eyes, ears, and sense of smell long-term?'],
+  ];
+
+  // ---------- setup, rendering, wiring ----------
+  const inViewer = !!(window.claude && typeof window.claude.use === 'function');
+  function renderSetup() {
+    if (document.activeElement !== $('#me-age')) $('#me-age').value = P().age || '';
+    if (document.activeElement !== $('#me-name')) $('#me-name').value = P().name || '';
+    if (document.activeElement !== $('#me-about')) $('#me-about').value = P().about || '';
+    if (!P().introSeen && !practiceDays()) $('#intro').open = true;
+  }
+  function renderAll() {
+    renderSetup();
+    renderCoach();
+    renderRungs();
+    renderStats();
+    renderCal();
+    renderTrends();
+    renderRecords();
+    renderRoadmap();
+    renderEvidence();
+  }
+  function wire() {
+    $$('input[name="ci-time"]').forEach(i => i.addEventListener('change', () => setCheckin('time', i.value)));
+    $$('input[name="ci-partner"]').forEach(i => i.addEventListener('change', () => setCheckin('partner', i.value)));
+    $('#me-age').addEventListener('change', e => { const v = Number(e.target.value); P().age = v >= 5 && v <= 110 ? v : null; saveSettings(); });
+    $('#me-name').addEventListener('change', e => { P().name = e.target.value.trim(); saveSettings(); });
+    $('#me-about').addEventListener('change', e => { P().about = e.target.value.trim(); saveSettings(); });
+    $('#intro').addEventListener('toggle', () => { if (!$('#intro').open && !P().introSeen) { P().introSeen = true; saveSettings(); } });
+    $$('.done-btn').forEach(b => b.addEventListener('click', () => {
+      const s = b.dataset.done, k = todayKey(), d = dayOf(k);
+      d.steps = d.steps || {};
+      if (d.steps[s]) delete d.steps[s]; else d.steps[s] = 1;
+      saveDay(k);
+      renderRungs(); renderStats(); renderCoach(); renderCal();
+    }));
+    $('#qs-go').addEventListener('click', qsStart);
+    $('#qs-stop').addEventListener('click', () => { const R = QS.run; if (R) { clearTimeout(R.timer); QS.run = null; } $('#qs-go').hidden = false; $('#qs-stop').hidden = true; $('#qs-cue').textContent = ''; });
+    // coach
+    $('#ai-save').addEventListener('click', aiConnect);
+    $('#ai-key').addEventListener('keydown', e => { if (e.key === 'Enter') aiConnect(); });
+    $('#ai-disconnect').addEventListener('click', aiDisconnect);
+    $('#ai-model').addEventListener('change', e => { AI.model = e.target.value; aiSave(); renderAI(); });
+    $('#ai-plan').addEventListener('click', aiPlan);
+    $('#chat-form').addEventListener('submit', e => { e.preventDefault(); chatSend($('#chat-in').value); });
+    $('#cp-btn').addEventListener('click', copyPrompt);
+    // sync
+    $('#gh-connect').addEventListener('click', ghConnect);
+    $('#gh-token').addEventListener('keydown', e => { if (e.key === 'Enter') ghConnect(); });
+    $('#gh-sync-now').addEventListener('click', () => { clearTimeout(GH.timer); ghSync(); });
+    $('#gh-disconnect').addEventListener('click', ghDisconnect);
+    let rt = 0;
+    window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(renderTrends, 250); });
+    document.addEventListener('visibilitychange', () => { if (document.hidden && GH.token) { clearTimeout(GH.timer); ghSync(); } });
+    let lastDay = todayKey();
+    setInterval(() => { if (todayKey() !== lastDay) { lastDay = todayKey(); renderAll(); } }, 60000);
+  }
+  // Self-check: every exercise has its evidence, every evidence link is a real URL, metrics are consistent.
+  function selfTest() {
+    const errors = [];
+    $$('[data-ev]').forEach(s => { if (!EVIDENCE[s.dataset.ev]) errors.push('no evidence for ' + s.dataset.ev); });
+    Object.entries(EVIDENCE).forEach(([k, E]) => {
+      if (!['a', 'b', 'c'].includes(E.tag)) errors.push(k + ': bad tag');
+      if (!E.cites.length) errors.push(k + ': no citation');
+      E.cites.forEach(([, u]) => { if (!/^https:\/\//.test(u)) errors.push(k + ': bad link ' + u); });
+    });
+    Object.entries(METRIC_DEFS).forEach(([k, D]) => { if (!SENSES[D.sense]) errors.push(k + ': unknown sense'); });
+    const s = makeStair({ start: 100, min: 1, max: 600, step: 1.6 });
+    for (let i = 0; i < 60; i++) s.record(Math.random() < (s.x > 20 ? 0.95 : 0.3));
+    if (!(s.threshold() > 5 && s.threshold() < 60)) errors.push('staircase did not converge near 20: ' + s.threshold());
+    return { ok: !errors.length, errors };
+  }
+  if (/[?&]debug=1/.test(location.search)) window.__sq = { P, state, selfTest, SS, CH, PD, SC, OT, TL, RT, BT, BAL, TT, QS, EVIDENCE, record };
+
+  // ---------- boot ----------
+  lsLoad();
+  ghLoadCfg();
+  aiLoad();
+  $('#sync-panel').hidden = inViewer;
+  setupVision(); setupHearing(); setupBody(); setupChem();
+  wire();
+  renderAll();
+  if (GH.token) { setGhStatus('none'); ghSync(); } else if (!inViewer) setGhStatus('none');
+  initRemote();
+  renderAI();
+  aiInitViewer();
+})();
+</script>
+<script src="../tree.js" data-app="senses" defer></script>
+</body>
+</html>

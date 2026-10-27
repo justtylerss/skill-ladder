@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Character Sheet · Skill Tree</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* The character sheet, styled like the home page. Tokens and themes are copied from the apps; keep them in sync. */
+:root {
+  --bg: #f2f3f8;
+  --card: #ffffff;
+  --ink: #141a2e;
+  --ink-2: #464d6a;
+  --muted: #6d7495;
+  --line: #d9dde9;
+  --hair: #e7e9f1;
+  --accent: #3445c9;
+  --accent-ink: #ffffff;
+  --accent-soft: #e4e8fc;
+  --accent-text: #2a39ad;
+  --heat-0: #e7e9f1;
+  --heat-1: #c3cbf5;
+  --heat-2: #8090ea;
+  --heat-3: #3445c9;
+  --good: #0ca30c;
+  --good-text: #006300;
+  --warn: #fab219;
+  --warn-text: #845500;
+  --bad: #d03b3b;
+  --bad-text: #a92626;
+  --target: rgba(52, 69, 201, 0.10);
+  --good-soft: rgba(12, 163, 12, 0.18);
+  --warn-soft: rgba(250, 178, 25, 0.22);
+  --inhale: #9aa6ee;
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r: 14px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1020;
+    --card: #161a2d;
+    --ink: #eceef8;
+    --ink-2: #b5bad2;
+    --muted: #8a90ad;
+    --line: #2a3049;
+    --hair: #1f2439;
+    --accent: #8e9cff;
+    --accent-ink: #0d1020;
+    --accent-soft: #232a55;
+    --accent-text: #aab4ff;
+    --heat-0: #1f2439;
+    --heat-1: #2d3775;
+    --heat-2: #4d5dc6;
+    --heat-3: #8e9cff;
+    --good: #2dbe2d;
+    --good-text: #55d655;
+    --warn: #fab219;
+    --warn-text: #fab219;
+    --bad: #ec6262;
+    --bad-text: #f28585;
+    --target: rgba(142, 156, 255, 0.13);
+    --inhale: #4b58a8;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1020;
+  --card: #161a2d;
+  --ink: #eceef8;
+  --ink-2: #b5bad2;
+  --muted: #8a90ad;
+  --line: #2a3049;
+  --hair: #1f2439;
+  --accent: #8e9cff;
+  --accent-ink: #0d1020;
+  --accent-soft: #232a55;
+  --accent-text: #aab4ff;
+  --heat-0: #1f2439;
+  --heat-1: #2d3775;
+  --heat-2: #4d5dc6;
+  --heat-3: #8e9cff;
+  --good: #2dbe2d;
+  --good-text: #55d655;
+  --warn: #fab219;
+  --warn-text: #fab219;
+  --bad: #ec6262;
+  --bad-text: #f28585;
+  --target: rgba(142, 156, 255, 0.13);
+  --inhale: #4b58a8;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+}
+.wrap {
+  max-width: 620px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 24px 64px;
+  display: grid;
+  gap: 20px;
+}
+h1, h2 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
+p { margin: 0; }
+.small { font-size: 13px; color: var(--ink-2); }
+.top { display: grid; gap: 10px; margin-bottom: 8px; }
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+h1 {
+  font-size: clamp(38px, 11vw, 54px);
+  font-weight: 780;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  font-variation-settings: "opsz" 96;
+}
+.lede { color: var(--ink-2); font-size: 16px; max-width: 34em; }
+.lede strong { color: var(--ink); }
+
+.app {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+.app-top { display: flex; align-items: baseline; justify-content: space-between; gap: 4px 12px; flex-wrap: wrap; }
+.app h2 { font-size: 26px; font-weight: 720; letter-spacing: -0.015em; }
+.lvl { font-family: var(--font-mono); font-size: 13px; color: var(--accent-text); }
+.stats {
+  margin: 0;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.stats > div { padding: 10px 0; min-width: 0; }
+.stats > div + div { padding-left: 14px; border-left: 1px solid var(--line); }
+.stats dt { font-size: 12px; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+.stats dd { margin: 2px 0 0; font-family: var(--font-display); font-size: 24px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.stats dd small { font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--ink-2); margin-left: 2px; }
+.empty { padding: 10px 14px; border-radius: 10px; background: var(--accent-soft); color: var(--ink-2); font-size: 14px; }
+
+.btn {
+  font: inherit;
+  font-weight: 600;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--accent-ink);
+  min-height: 44px;
+  padding: 0 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: start;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .1s;
+}
+.btn:active { transform: scale(0.97); }
+.btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.foot { font-size: 12px; color: var(--muted); }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+/* ---------- character sheet ---------- */
+.back { justify-self: start; display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 14px; border-radius: 99px; border: 1px solid var(--line); background: var(--card); color: var(--ink); font-size: 14px; font-weight: 600; text-decoration: none; }
+.back:hover { border-color: var(--accent); }
+.back:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.hero { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 16px; align-items: center; }
+.crest { width: 92px; height: 104px; display: grid; place-content: center; text-align: center; color: var(--accent-ink); background: var(--accent); clip-path: polygon(50% 0, 100% 14%, 100% 62%, 50% 100%, 0 62%, 0 14%); }
+.crest small { font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+.crest b { font-family: var(--font-display); font-size: 40px; font-weight: 800; line-height: 1; }
+.hero-name { font-family: var(--font-display); font-size: 24px; font-weight: 760; line-height: 1.15; }
+.hero-cls { font-size: 15px; color: var(--accent-text); font-weight: 650; }
+.hero-xp { display: grid; gap: 5px; margin-top: 6px; }
+.xp-head { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 12px; color: var(--ink-2); }
+.xp-track { height: 10px; border-radius: 99px; background: var(--hair); overflow: hidden; }
+.xp-track span { display: block; height: 100%; width: 0; border-radius: 99px; background: linear-gradient(90deg, var(--accent), var(--heat-2)); }
+.attrs { display: grid; gap: 10px; }
+.attr { display: grid; grid-template-columns: 2.2em minmax(0, 1fr) auto; gap: 4px 10px; align-items: center; }
+.attr .ico { font-size: 20px; text-align: center; }
+.attr .nm { font-weight: 650; font-size: 14px; }
+.attr .nm small { font-family: var(--font-mono); font-size: 11px; font-weight: 600; color: var(--muted); margin-left: 6px; }
+.attr .val { font-family: var(--font-display); font-weight: 760; font-size: 22px; font-variant-numeric: tabular-nums; grid-row: span 2; }
+.attr .bar { grid-column: 2; height: 8px; border-radius: 99px; background: var(--hair); overflow: hidden; }
+.attr .bar span { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 99px; }
+.attr.top .bar span { background: linear-gradient(90deg, var(--warn), var(--accent)); }
+.attr .src { grid-column: 2; font-size: 12px; color: var(--muted); }
+.tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; }
+.tile { padding: 12px; border-radius: 12px; background: var(--bg); border: 1px solid var(--line); display: grid; gap: 2px; }
+.tile b { font-family: var(--font-display); font-size: 26px; font-weight: 760; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.tile span { font-size: 12px; color: var(--ink-2); }
+.rows { display: grid; }
+.srow { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 12px; align-items: baseline; padding: 8px 0; border-top: 1px solid var(--hair); font-size: 14px; }
+.srow .k { font-weight: 600; }
+.srow .v { font-family: var(--font-mono); font-size: 13px; color: var(--ink-2); text-align: right; white-space: nowrap; }
+.srow .v b { color: var(--ink); }
+.srow.head { border-top: 0; font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); padding-bottom: 2px; }
+#xp-chart svg { display: block; width: 100%; height: auto; }
+.heat { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-auto-flow: column; grid-template-rows: repeat(7, auto); gap: 3px; }
+.heat i { aspect-ratio: 1; border-radius: 3px; background: var(--heat-0); }
+.heat i.h1 { background: var(--heat-1); }
+.heat i.h2 { background: var(--heat-2); }
+.heat i.h3 { background: var(--heat-3); }
+.heat i.future { background: transparent; border: 1px dashed var(--hair); }
+.heat-legend { display: flex; gap: 6px; align-items: center; font-size: 12px; color: var(--muted); }
+.heat-legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+.ach { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.ach li { display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 2px 8px; align-items: center; padding: 8px 10px; border-radius: 12px; border: 1px dashed var(--line); font-size: 13px; color: var(--muted); }
+.ach li .i { grid-row: span 2; font-size: 20px; filter: grayscale(1); opacity: .5; text-align: center; }
+.ach li b { font-size: 14px; color: var(--ink-2); }
+.ach li.got { border: 1px solid var(--accent); background: var(--accent-soft); color: var(--ink-2); }
+.ach li.got .i { filter: none; opacity: 1; }
+.ach li.got b { color: var(--ink); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="back" href="../">← Skill Tree</a>
+    <p class="eyebrow">Character sheet</p>
+    <h1>Your stats</h1>
+  </header>
+
+  <section class="app" aria-labelledby="hero-h">
+    <h2 id="hero-h" class="sr-only">Your hero</h2>
+    <div class="hero">
+      <div class="crest" aria-hidden="true"><small>Level</small><b id="h-lvl">1</b></div>
+      <div>
+        <p class="hero-name" id="h-name">Adventurer</p>
+        <p class="hero-cls" id="h-cls">Adventurer · Seedling</p>
+        <div class="hero-xp">
+          <div class="xp-head"><span id="h-xp">0 XP</span><span id="h-next"></span></div>
+          <div class="xp-track"><span id="h-fill"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="app" aria-labelledby="attr-h">
+    <div class="app-top"><h2 id="attr-h">Attributes</h2><p class="lvl" id="attr-note"></p></div>
+    <div class="attrs" id="attrs"></div>
+    <p class="small">Each ladder powers one attribute from the XP you earn there; Willpower grows with every practice day and your best streak. Your two highest attributes set your class.</p>
+  </section>
+
+  <section class="app" aria-labelledby="life-h">
+    <h2 id="life-h">Lifetime</h2>
+    <div class="tiles" id="tiles"></div>
+  </section>
+
+  <section class="app" aria-labelledby="xp-chart-h">
+    <h2 id="xp-chart-h">XP over time</h2>
+    <div id="xp-chart"></div>
+    <p class="small" id="xp-chart-note"></p>
+  </section>
+
+  <section class="app" aria-labelledby="heat-h">
+    <div class="app-top"><h2 id="heat-h">Last 12 weeks</h2><p class="lvl" id="heat-note"></p></div>
+    <div class="heat" id="heat" role="img"></div>
+    <div class="heat-legend" aria-hidden="true"><span>Skills practiced:</span><i style="background: var(--heat-0)"></i>0<i style="background: var(--heat-1)"></i>1<i style="background: var(--heat-2)"></i>2<i style="background: var(--heat-3)"></i>3+</div>
+  </section>
+
+  <section class="app" aria-labelledby="streak-h">
+    <h2 id="streak-h">Streaks and records</h2>
+    <div class="rows" id="streaks"></div>
+    <div class="rows" id="records"></div>
+  </section>
+
+  <section class="app" aria-labelledby="ach-h">
+    <div class="app-top"><h2 id="ach-h">Achievements</h2><p class="lvl" id="ach-count"></p></div>
+    <ul class="ach" id="ach"></ul>
+  </section>
+
+  <p class="foot">Worked out from what each ladder saved in this browser. <a href="../#save" style="color: var(--accent-text); font-weight: 600">Save menu</a></p>
+</div>
+<script src="../tree.js"></script>
+<script>
+(() => {
+  'use strict';
+  // The character sheet: everything comes from tree.js and the ladders' saved data. It never writes.
+  const ST = window.SkillTree;
+  const R = ST.compute();
+  const $ = id => document.getElementById(id);
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+  const motion = ST.motion();
+  const read = k => { try { const o = JSON.parse(localStorage.getItem(k) || 'null'); return o && typeof o === 'object' ? o : null; } catch (e) { return null; } };
+  const nf = n => Math.round(n).toLocaleString();
+  const countUp = (node, to, fmt) => {
+    if (!motion || !to) { node.textContent = fmt(to); return; }
+    const t0 = performance.now();
+    const tick = t => { const k = Math.min(1, (t - t0) / 900); node.textContent = fmt(to * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
+  };
+  const fillTo = (node, pct, delay) => {
+    if (!motion) { node.style.width = pct + '%'; return; }
+    node.animate([{ width: '0%' }, { width: pct + '%' }], { duration: 900, delay: delay || 0, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'forwards' });
+  };
+
+  // hero: the first name any ladder knows
+  const name = ST.APPS.map(a => ((read(a.key) || {}).profile || {}).name).find(n => n && n.trim());
+  $('h-lvl').textContent = R.L;
+  $('h-name').textContent = name ? name.trim() : 'Adventurer';
+  $('h-cls').textContent = R.cls + ' · ' + R.title;
+  countUp($('h-xp'), R.xp, v => nf(v) + ' XP');
+  $('h-next').textContent = (ST.xpAt(R.L + 1) - R.xp).toLocaleString() + ' XP to Level ' + (R.L + 1);
+  fillTo($('h-fill'), (100 * R.into) / R.span, 200);
+
+  // attributes
+  const maxScore = Math.max(20, ...R.attrs.map(a => a.score));
+  const topId = R.attrs.slice().sort((x, y) => y.score - x.score || y.xp - x.xp)[0].id;
+  const host = $('attrs');
+  R.attrs.forEach((a, i) => {
+    const row = el('div', 'attr' + (Object.keys(R.apps).length && a.id === topId ? ' top' : ''));
+    row.appendChild(el('span', 'ico', a.icon)).setAttribute('aria-hidden', 'true');
+    const nm = el('span', 'nm', a.name);
+    nm.appendChild(el('small', '', a.short));
+    row.appendChild(nm);
+    const val = el('span', 'val');
+    row.appendChild(val);
+    const bar = el('span', 'bar');
+    const fill = el('span');
+    bar.appendChild(fill);
+    row.appendChild(bar);
+    const app = ST.APPS.find(x => x.id === a.app);
+    row.appendChild(el('span', 'src', app ? 'From ' + app.name + ': ' + nf(a.xp) + ' XP' : 'From practice days and your best streak'));
+    row.setAttribute('aria-label', a.name + ' ' + a.score);
+    host.appendChild(row);
+    countUp(val, a.score, v => String(Math.round(v)));
+    fillTo(fill, (100 * a.score) / maxScore, 150 + i * 90);
+  });
+  $('attr-note').textContent = R.cls;
+
+  // lifetime totals
+  const S = Object.values(R.apps).map(x => x.sum);
+  const sum = f => S.reduce((n, s) => n + (f(s) || 0), 0);
+  const senses = (read('senses-ladder-v1') || {}).profile || {};
+  const tiles = [
+    ['Steps finished', sum(s => s.steps)],
+    ['Practice minutes', sum(s => s.mins)],
+    ['Cooks', sum(s => s.cooks)],
+    ['Puzzles solved', sum(s => s.solves)],
+    ['Chess games', sum(s => s.games)],
+    ['Sense tests', Object.values(senses.tried || {}).reduce((n, v) => n + (Number(v) || 0), 0)],
+    ['Days practiced', Object.keys(R.perDay).length],
+    ['Achievements', R.earned.length],
+  ];
+  tiles.forEach(([label, v]) => {
+    const t = el('div', 'tile');
+    const b = el('b');
+    t.append(b, el('span', '', label));
+    $('tiles').appendChild(t);
+    countUp(b, v, x => nf(x));
+  });
+
+  // XP over time: cumulative practice XP, last 90 days
+  (function chart() {
+    const byDay = {};
+    S.forEach(s => Object.entries(s.xpByDay).forEach(([k, v]) => { byDay[k] = (byDay[k] || 0) + v; }));
+    const pad = n => String(n).padStart(2, '0');
+    const dkey = d => d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+    const now = new Date(), N = 90, pts = [];
+    let run = Object.keys(byDay).filter(k => k < dkey(new Date(now.getFullYear(), now.getMonth(), now.getDate() - N + 1))).reduce((n, k) => n + byDay[k], 0);
+    const before = run;
+    for (let i = N - 1; i >= 0; i--) { const k = dkey(new Date(now.getFullYear(), now.getMonth(), now.getDate() - i)); run += byDay[k] || 0; pts.push(run); }
+    const W = 360, H = 150, L = 40, Rr = 10, T = 10, B = 20, max = Math.max(50, ...pts);
+    const x = i => L + (i / (N - 1)) * (W - L - Rr), y = v => T + (1 - v / max) * (H - T - B);
+    const NS = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    svg.setAttribute('role', 'img');
+    svg.setAttribute('aria-label', 'Practice XP over the last 90 days, from ' + nf(pts[0]) + ' to ' + nf(pts[N - 1]) + '.');
+    const add = (tag, attrs, text) => { const e = document.createElementNS(NS, tag); Object.entries(attrs).forEach(([a, v]) => { if (String(v).startsWith('var(')) e.style.setProperty(a, v); else e.setAttribute(a, v); }); if (text != null) e.textContent = text; svg.appendChild(e); return e; };
+    [0, max / 2, max].forEach(v => {
+      add('line', { x1: L, x2: W - Rr, y1: y(v), y2: y(v), stroke: 'var(--hair)', 'stroke-width': 1 });
+      add('text', { x: L - 6, y: y(v) + 4, 'text-anchor': 'end', fill: 'var(--muted)', 'font-size': 10, 'font-family': 'var(--font-mono)' }, nf(v));
+    });
+    const d = pts.map((v, i) => (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(v).toFixed(1)).join(' ');
+    add('path', { d: d + ' L' + x(N - 1) + ' ' + y(0) + ' L' + x(0) + ' ' + y(0) + ' Z', fill: 'var(--accent)', opacity: 0.12, stroke: 'none' });
+    const line = add('path', { d, fill: 'none', stroke: 'var(--accent)', 'stroke-width': 2.5, 'stroke-linejoin': 'round' });
+    add('text', { x: L, y: H - 4, fill: 'var(--muted)', 'font-size': 10, 'font-family': 'var(--font-mono)' }, '90 days ago');
+    add('text', { x: W - Rr, y: H - 4, 'text-anchor': 'end', fill: 'var(--muted)', 'font-size': 10, 'font-family': 'var(--font-mono)' }, 'today');
+    $('xp-chart').appendChild(svg);
+    if (motion) { const len = line.getTotalLength(); line.animate([{ strokeDasharray: len + ' ' + len, strokeDashoffset: len }, { strokeDasharray: len + ' ' + len, strokeDashoffset: 0 }], { duration: 1400, easing: 'ease-out', fill: 'backwards' }); }
+    $('xp-chart-note').textContent = 'Practice XP only; the +100 for each level gained in an app is in your total but not on this line. Last 90 days: +' + nf(pts[N - 1] - before) + ' XP.';
+  })();
+
+  // activity heatmap: skills practiced per day, 12 weeks, Monday first
+  (function heat() {
+    const pad = n => String(n).padStart(2, '0');
+    const dkey = d => d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+    const now = new Date(), dow = (now.getDay() + 6) % 7, today = dkey(now);
+    const h = $('heat');
+    let active = 0;
+    for (let i = 0; i < 84; i++) {
+      const d = new Date(now.getFullYear(), now.getMonth(), now.getDate() - dow - 77 + i), k = dkey(d);
+      const n = R.perDay[k] || 0;
+      if (n && k <= today) active++;
+      const c = el('i', k > today ? 'future' : n >= 3 ? 'h3' : n === 2 ? 'h2' : n ? 'h1' : '');
+      c.title = d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) + ': ' + (n ? n + ' skill' + (n === 1 ? '' : 's') : 'none');
+      h.appendChild(c);
+    }
+    h.setAttribute('aria-label', active + ' active days in the last 12 weeks.');
+    $('heat-note').textContent = active + ' active days';
+  })();
+
+  // streaks and records
+  const sh = $('streaks');
+  const head = el('div', 'srow head');
+  head.append(el('span', '', 'Streaks'), el('span', '', 'now'), el('span', '', 'best'));
+  sh.appendChild(head);
+  ST.APPS.forEach(app => {
+    const a = R.apps[app.id];
+    const row = el('div', 'srow');
+    row.appendChild(el('span', 'k', app.name));
+    if (!a) { row.append(el('span', 'v', '–'), el('span', 'v', 'not started')); }
+    else if (app.id === 'kitchen') { row.append(el('span', 'v', a.card.week + ' this week'), el('span', 'v', a.card.mastered + ' mastered')); }
+    else { const now = el('span', 'v'); now.appendChild(el('b', '', String(a.card.streak))); now.append(' d'); row.append(now, el('span', 'v', a.sum.best + ' d')); }
+    sh.appendChild(row);
+  });
+  const rec = $('records');
+  const rh = el('div', 'srow head');
+  rh.append(el('span', '', 'Records'), el('span', '', ''), el('span', '', ''));
+  rec.appendChild(rh);
+  const recRow = (k, v) => { const row = el('div', 'srow'); row.append(el('span', 'k', k), el('span', 'v', ''), el('span', 'v', v)); rec.appendChild(row); };
+  if (R.apps.chess) recRow('Chess puzzle rating', String(R.apps.chess.card.rating));
+  const chessWins = S.reduce((n, s) => n + (s.wins || 0), 0);
+  if (R.apps.chess) recRow('Chess games won', String(chessWins));
+  if (R.apps.kitchen) recRow('Dishes mastered', String(R.apps.kitchen.card.mastered));
+  const SB = { speed: ['Speed Sight', ' ms'], contrast: ['Contrast Hunt', '%'], pitch: ['Pitch Duel', ' cents'], stance: ['Eyes-closed stance', ' s'], touch: ['Touch Lab', ' mm'], react: ['Quick Tap', ' ms'], scentMemory: ['Scent Memory', '%'] };
+  Object.entries(SB).forEach(([m, [label, unit]]) => { const b = (senses.best || {})[m]; if (b) recRow(label, b.v + unit); });
+  if (rec.children.length === 1) recRow('Play any ladder to set records', '');
+
+  // achievements
+  const ach = $('ach');
+  R.badges.slice().sort((a, b) => (b.got ? 1 : 0) - (a.got ? 1 : 0)).forEach((b, i) => {
+    const li = el('li', b.got ? 'got' : '');
+    li.append(el('span', 'i', b.icon), el('b', '', b.name), el('span', '', b.got ? b.how + ' ✓' : b.how + ' · ' + Math.min(b.have, b.need).toLocaleString() + ' / ' + b.need.toLocaleString()));
+    ach.appendChild(li);
+    if (motion) li.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 300, delay: 300 + i * 40, easing: 'ease-out', fill: 'backwards' });
+  });
+  $('ach-count').textContent = R.earned.length + ' of ' + R.badges.length;
+  ST.addStyle();
+})();
+</script>
+</body>
+</html>

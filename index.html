@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
-/* Home for the four ladders. Tokens and themes are copied from the apps; keep them in sync. */
+/* Home for every ladder. Tokens and themes are copied from the apps; keep them in sync. */
 :root {
   --bg: #f2f3f8;
   --card: #ffffff;
@@ -238,6 +238,9 @@ details.xp-how summary { cursor: pointer; font-size: 13px; color: var(--accent-t
 details.xp-how p { margin-top: 6px; }
 .menu-link { justify-self: start; display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 14px; border-radius: 99px; border: 1px solid var(--line); background: var(--card); color: var(--ink); font-size: 14px; font-weight: 600; text-decoration: none; }
 .menu-link:hover { border-color: var(--accent); }
+.menu-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.attr-chip { font-family: var(--font-mono); font-size: 12px; font-weight: 700; padding: 2px 9px; border-radius: 99px; background: var(--accent-soft); color: var(--accent-text); }
+.ptitle small { display: block; font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--accent-text); }
 .menu-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 .slot { display: grid; gap: 10px; padding: 12px; border-radius: 12px; background: var(--bg); border: 1px solid var(--line); }
 .slot-top { display: flex; align-items: center; gap: 10px; }
@@ -268,8 +271,8 @@ label.btn { cursor: pointer; }
   <header class="top">
     <p class="eyebrow" id="today-label">Today</p>
     <h1>Skill Tree</h1>
-    <p class="lede" id="today-line">Four daily practice ladders: singing, piano, cooking, and chess.</p>
-    <a class="menu-link" href="#save">💾 Save menu</a>
+    <p class="lede" id="today-line">Five ways to level up: singing, piano, cooking, chess, and your senses.</p>
+    <div class="menu-row"><a class="menu-link" href="stats/">📜 Character sheet</a><a class="menu-link" href="#save">💾 Save menu</a></div>
   </header>
 
   <section class="app" id="tree-card" aria-labelledby="tree-h">
@@ -292,12 +295,12 @@ label.btn { cursor: pointer; }
   </section>
 
   <section class="app" aria-labelledby="badges-h">
-    <div class="app-top"><h2 id="badges-h">Badges</h2><p class="lvl" id="badge-count">0 of 14</p></div>
+    <div class="app-top"><h2 id="badges-h">Achievements</h2><p class="lvl" id="badge-count">0 of 14</p></div>
     <ul class="badges" id="badges"></ul>
   </section>
 
   <article class="app" id="voice" aria-labelledby="voice-h">
-    <div class="app-top"><h2 id="voice-h">Voice Ladder</h2><p class="lvl" data-f="level" hidden></p></div>
+    <div class="app-top"><span class="attr-chip" data-f="attr" hidden></span><h2 id="voice-h">Voice Ladder</h2><p class="lvl" data-f="level" hidden></p></div>
     <dl class="stats" hidden>
       <div><dt>Streak</dt><dd><span data-f="streak">0</span><small data-f="days">days</small></dd></div>
       <div><dt>Today</dt><dd><span data-f="mins">0</span><small>min</small></dd></div>
@@ -308,7 +311,7 @@ label.btn { cursor: pointer; }
   </article>
 
   <article class="app" id="piano" aria-labelledby="piano-h">
-    <div class="app-top"><h2 id="piano-h">Piano Ladder</h2><p class="lvl" data-f="level" hidden></p></div>
+    <div class="app-top"><span class="attr-chip" data-f="attr" hidden></span><h2 id="piano-h">Piano Ladder</h2><p class="lvl" data-f="level" hidden></p></div>
     <dl class="stats" hidden>
       <div><dt>Streak</dt><dd><span data-f="streak">0</span><small data-f="days">days</small></dd></div>
       <div><dt>Today</dt><dd><span data-f="mins">0</span><small>min</small></dd></div>
@@ -319,7 +322,7 @@ label.btn { cursor: pointer; }
   </article>
 
   <article class="app" id="kitchen" aria-labelledby="kitchen-h">
-    <div class="app-top"><h2 id="kitchen-h">Kitchen Ladder</h2><p class="lvl" data-f="level" hidden></p></div>
+    <div class="app-top"><span class="attr-chip" data-f="attr" hidden></span><h2 id="kitchen-h">Kitchen Ladder</h2><p class="lvl" data-f="level" hidden></p></div>
     <dl class="stats" hidden>
       <div><dt>This week</dt><dd><span data-f="week">0</span><small data-f="cooks">cooks</small></dd></div>
       <div><dt>Mastered</dt><dd><span data-f="mastered">0</span><small data-f="dishes">dishes</small></dd></div>
@@ -329,7 +332,7 @@ label.btn { cursor: pointer; }
   </article>
 
   <article class="app" id="chess" aria-labelledby="chess-h">
-    <div class="app-top"><h2 id="chess-h">Chess Ladder</h2><p class="lvl" data-f="level" hidden></p></div>
+    <div class="app-top"><span class="attr-chip" data-f="attr" hidden></span><h2 id="chess-h">Chess Ladder</h2><p class="lvl" data-f="level" hidden></p></div>
     <dl class="stats" hidden>
       <div><dt>Streak</dt><dd><span data-f="streak">0</span><small data-f="days">days</small></dd></div>
       <div><dt>Steps</dt><dd><span data-f="steps">0</span><small>/ 5</small></dd></div>
@@ -337,6 +340,17 @@ label.btn { cursor: pointer; }
     </dl>
     <p class="empty">Not started yet. Daily puzzles, openings, endgames, and games against the computer; start with the level check.</p>
     <a class="btn" href="chess/">Open Chess Ladder</a>
+  </article>
+
+  <article class="app" id="senses" aria-labelledby="senses-h">
+    <div class="app-top"><span class="attr-chip" data-f="attr" hidden></span><h2 id="senses-h">Sense Quest</h2><p class="lvl" data-f="level" hidden></p></div>
+    <dl class="stats" hidden>
+      <div><dt>Streak</dt><dd><span data-f="streak">0</span><small data-f="days">days</small></dd></div>
+      <div><dt>Steps</dt><dd><span data-f="steps">0</span><small>/ 5</small></dd></div>
+      <div><dt>Trained</dt><dd><span data-f="trained">0</span><small data-f="trainedU">days</small></dd></div>
+    </dl>
+    <p class="empty">Not started yet. Train sight, hearing, smell, taste, touch, and balance with the best-evidenced methods; start with the baseline tests.</p>
+    <a class="btn" href="senses/">Open Sense Quest</a>
   </article>
 
   <section class="app" id="save" aria-labelledby="save-h">
@@ -375,7 +389,7 @@ label.btn { cursor: pointer; }
 
     <div class="slot">
       <div class="slot-top"><span class="slot-ico" aria-hidden="true">💾</span><span class="slot-name">Save file</span><span class="slot-state" id="file-state"></span></div>
-      <p class="small">Download all four ladders' progress as one file, or load a file to restore it. Your keys stay out of the file.</p>
+      <p class="small">Download every ladder's progress as one file, or load a file to restore it. Your keys stay out of the file.</p>
       <div class="row">
         <button class="btn" id="save-down">Download save file</button>
         <input type="file" id="save-up" accept=".json,application/json" class="sr-only">
@@ -404,9 +418,11 @@ label.btn { cursor: pointer; }
     const a = R.apps[app.id];
     if (!a) return;
     const card = $(app.id);
-    const s = Object.assign({}, a.card, { level: 'Level ' + a.sum.lv + ' · ' + app.levels[a.sum.lv - 1] });
+    const at = R.attrs.find(x => x.app === app.id);
+    const s = Object.assign({}, a.card, { level: 'Level ' + a.sum.lv + ' · ' + app.levels[a.sum.lv - 1], attr: at.icon + ' ' + at.short + ' ' + at.score });
     Object.keys(s).forEach(k => { const e = card.querySelector('[data-f="' + k + '"]'); if (e) e.textContent = s[k]; });
     card.querySelector('[data-f="level"]').hidden = false;
+    card.querySelector('[data-f="attr"]').hidden = false;
     card.querySelector('.stats').hidden = false;
     card.querySelector('.empty').hidden = true;
     if (s.today) practicedToday.push(app.skill);
@@ -424,6 +440,7 @@ label.btn { cursor: pointer; }
   const started = Object.keys(R.apps).length;
   $('p-lvl').textContent = R.L;
   $('p-title').textContent = R.title;
+  $('p-title').appendChild(document.createElement('small')).textContent = R.cls;
   $('xp-note').textContent = started ? (ST.xpAt(R.L + 1) - R.xp) + ' XP to Level ' + (R.L + 1) + '.' : 'Practice in any app to grow your tree.';
   $('xp-bar').setAttribute('aria-valuenow', Math.round((100 * R.into) / R.span));
   const showXp = v => { $('xp-num').textContent = v.toLocaleString() + ' XP'; };
@@ -434,11 +451,11 @@ label.btn { cursor: pointer; }
     $('xp-fill').animate([{ width: '0%' }, { width: (100 * R.into) / R.span + '%' }], { duration: 1200, delay: 200, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'forwards' });
   } else { showXp(R.xp); $('xp-fill').style.width = (100 * R.into) / R.span + '%'; }
 
-  // ---------- the tree: a trunk ("You"), four branches, five level nodes each ----------
+  // ---------- the tree: a trunk ("You"), one branch per app, five level nodes each ----------
   const NS = 'http://www.w3.org/2000/svg';
   const svgEl = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); Object.entries(attrs || {}).forEach(([k, v]) => e.setAttribute(k, v)); if (parent) parent.appendChild(e); return e; };
   const svg = svgEl('svg', { viewBox: '0 0 360 400', role: 'img' });
-  const XS = [48, 136, 224, 312], NODE_Y = [262, 212, 162, 112, 62];
+  const XS = [36, 108, 180, 252, 324], NODE_Y = [262, 212, 162, 112, 62];
   const lines = [], nodes = [];
   lines.push([svgEl('path', { d: 'M180 342 L180 300', class: 't-line t-trunk' }, svg), 0]);
   ST.APPS.forEach((app, bi) => {
@@ -536,12 +553,13 @@ label.btn { cursor: pointer; }
       return { app, on };
     });
     const n = states.filter(s => s.on).length;
-    $('gh-state').textContent = n === 4 ? 'On' : n ? n + ' of 4 on' : 'Off';
+    const all = ST.APPS.length;
+    $('gh-state').textContent = n === all ? 'On' : n ? n + ' of ' + all + ' on' : 'Off';
     $('gh-state').classList.toggle('on', n > 0);
     const ul = $('gh-apps');
     ul.innerHTML = '';
     if (n) states.forEach(s => { const li = document.createElement('li'); li.className = s.on ? 'on' : ''; li.textContent = s.app.short + (s.on ? ' ✓' : ': off'); ul.appendChild(li); });
-    $('gh-form').hidden = n === 4;
+    $('gh-form').hidden = n === all;
     $('gh-on').hidden = !n;
     $('save-where').textContent = n ? 'This device + cloud' : 'This device';
   }
@@ -608,7 +626,7 @@ label.btn { cursor: pointer; }
     msg('ai-msg', 'Key removed from this device.');
     renderAi();
   }
-  // Save file: the four progress keys, never the tokens.
+  // Save file: every app's progress key, never the tokens.
   const stamp = () => { const d = new Date(), p = n => String(n).padStart(2, '0'); return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()); };
   function download() {
     const data = {};
