@@ -10,6 +10,8 @@ GitHub Pages serves `main` (root) at `justtylerss.github.io/skill-ladder/`. No b
 
 Read the app's own CLAUDE.md and README before changing it. Links between apps are relative (`../voice/`, `../`), so they work locally and on Pages.
 
+The old repos (`Voice-Ladder`, `piano-ladder`, `kitchen-ladder`) only hold redirect pages to these folders. Make app changes here, not there.
+
 ## Don't break saved progress
 All three apps share one origin, so they share `localStorage`. Never rename these keys or gist files:
 - Keys: `voice-ladder-v1`, `piano-ladder-v1`, `kitchen-ladder-v1`, `voice-ladder-ai`, `voice-ladder-gh`, `piano-ladder-gh`, `kitchen-ladder-gh`, `voice-ladder-hp`, `piano-ladder-hp`.
