@@ -182,6 +182,63 @@ h1 {
 .btn:active { transform: scale(0.97); }
 .btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 .foot { font-size: 12px; color: var(--muted); }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* ---------- the skill tree ---------- */
+.player { display: flex; align-items: center; gap: 14px; }
+.plvl { flex: none; width: 64px; height: 64px; border-radius: 50%; display: grid; place-content: center; text-align: center; background: var(--accent); color: var(--accent-ink); box-shadow: 0 0 0 6px var(--accent-soft); }
+.plvl small { font-family: var(--font-mono); font-size: 9px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+.plvl b { font-family: var(--font-display); font-size: 28px; font-weight: 780; line-height: 1; }
+.xp { flex: 1; min-width: 0; display: grid; gap: 6px; }
+.xp-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.ptitle { font-family: var(--font-display); font-weight: 700; font-size: 18px; }
+.xp-num { font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--accent-text); font-variant-numeric: tabular-nums; }
+.xp-track { height: 10px; border-radius: 99px; background: var(--hair); overflow: hidden; }
+.xp-track span { display: block; height: 100%; width: 0; border-radius: 99px; background: linear-gradient(90deg, var(--accent), var(--heat-2)); }
+#tree svg { display: block; width: 100%; height: auto; max-width: 480px; margin: 0 auto; overflow: visible; }
+.t-line { fill: none; stroke: var(--line); stroke-width: 4; stroke-linecap: round; }
+.t-line.off { stroke-dasharray: 2 7; }
+.t-line.on { stroke: var(--accent); }
+.t-trunk { stroke: var(--accent); stroke-width: 8; }
+.node { transform-box: fill-box; transform-origin: center; transition: transform .15s ease; cursor: pointer; }
+.node:hover, .node:focus-within { transform: scale(1.14); }
+.node a { outline: none; }
+.node .dot { fill: var(--card); stroke: var(--line); stroke-width: 2; }
+.node.on .dot { fill: var(--accent); stroke: var(--accent); }
+.node a:focus-visible .dot { stroke: var(--ink); stroke-width: 3; }
+.node .halo { fill: var(--accent); opacity: 0; transform-box: fill-box; transform-origin: center; }
+.node.cur .halo { animation: halo 2.2s ease-in-out infinite; }
+@keyframes halo { 0%, 100% { transform: scale(1); opacity: .32; } 50% { transform: scale(1.5); opacity: .06; } }
+.node text, .root text { font-family: var(--font-mono); font-weight: 600; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+.node text { font-size: 12px; fill: var(--muted); }
+.node.on text { fill: var(--accent-ink); }
+.t-label { font-family: var(--font-display); font-weight: 700; font-size: 13px; fill: var(--ink); text-anchor: middle; }
+.t-label.off { fill: var(--muted); }
+.root circle { fill: var(--accent); }
+.root .ring { fill: none; stroke: var(--accent-soft); stroke-width: 6; }
+.root text { fill: var(--accent-ink); }
+.tree-tip { min-height: 1.5em; font-size: 13px; color: var(--ink-2); text-align: center; }
+.levelup { padding: 12px 14px; border-radius: 12px; background: var(--accent); color: var(--accent-ink); font-family: var(--font-display); font-weight: 700; font-size: 18px; text-align: center; animation: pop .6s cubic-bezier(.2, 1.4, .4, 1) both; }
+@keyframes pop { from { transform: scale(.6); opacity: 0; } to { transform: none; opacity: 1; } }
+.badges { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.bdg { position: relative; overflow: hidden; display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 2px 10px; align-items: center; padding: 10px; border-radius: 12px; border: 1px dashed var(--line); }
+.bdg .ico { grid-row: span 3; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; font-size: 18px; background: var(--hair); filter: grayscale(1); opacity: .55; }
+.bdg .nm { font-weight: 650; font-size: 14px; color: var(--ink-2); line-height: 1.25; }
+.bdg .ds { font-size: 12px; color: var(--muted); line-height: 1.3; }
+.bdg .bar { height: 4px; border-radius: 99px; background: var(--hair); overflow: hidden; }
+.bdg .bar span { display: block; height: 100%; background: var(--muted); border-radius: 99px; }
+.bdg.got { border: 1px solid var(--accent); background: var(--accent-soft); }
+.bdg.got .ico { filter: none; opacity: 1; background: var(--card); }
+.bdg.got .nm { color: var(--ink); }
+.bdg.got .bar { display: none; }
+.bdg .tag { position: absolute; top: 6px; right: 8px; font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 1px 6px; border-radius: 99px; background: var(--warn); color: #141a2e; }
+.bdg.new::after { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, .55) 50%, transparent 65%); transform: translateX(-100%); animation: shine 2.6s ease-in-out infinite; pointer-events: none; }
+@keyframes shine { 0%, 30% { transform: translateX(-100%); } 70%, 100% { transform: translateX(100%); } }
+.confetti { position: fixed; inset: 0; pointer-events: none; z-index: 50; overflow: hidden; }
+.confetti i { position: absolute; top: -16px; width: 8px; height: 13px; border-radius: 2px; }
+details.xp-how summary { cursor: pointer; font-size: 13px; color: var(--accent-text); font-weight: 600; }
+details.xp-how p { margin-top: 6px; }
+@media (prefers-reduced-motion: reduce) { *, *::after { animation: none !important; transition: none !important; } }
 </style>
 </head>
 <body>
@@ -191,6 +248,30 @@ h1 {
     <h1>Skill Tree</h1>
     <p class="lede" id="today-line">Four daily practice ladders: singing, piano, cooking, and chess.</p>
   </header>
+
+  <section class="app" id="tree-card" aria-labelledby="tree-h">
+    <h2 id="tree-h" class="sr-only">Your skill tree</h2>
+    <p class="levelup" id="levelup" role="status" hidden></p>
+    <div class="player">
+      <div class="plvl" aria-hidden="true"><small>Level</small><b id="p-lvl">1</b></div>
+      <div class="xp">
+        <div class="xp-head"><span class="ptitle" id="p-title">Seedling</span><span class="xp-num" id="xp-num">0 XP</span></div>
+        <div class="xp-track" role="progressbar" aria-label="XP to the next level" aria-valuemin="0" aria-valuemax="100" id="xp-bar"><span id="xp-fill"></span></div>
+        <p class="small" id="xp-note">Practice in any app to grow your tree.</p>
+      </div>
+    </div>
+    <div id="tree"></div>
+    <p class="tree-tip" id="tree-tip" aria-live="polite">Each branch is an app; each node is one of its five levels.</p>
+    <details class="xp-how">
+      <summary>How XP works</summary>
+      <p class="small">10 XP for every step you finish, 1 for every practice minute in Voice and Piano, 30 for every cook, 5 for every puzzle solved on the first try, 20 for every chess game, and 100 for every level you gain in an app. It all comes from what the apps have already saved, so your past practice counts.</p>
+    </details>
+  </section>
+
+  <section class="app" aria-labelledby="badges-h">
+    <div class="app-top"><h2 id="badges-h">Badges</h2><p class="lvl" id="badge-count">0 of 14</p></div>
+    <ul class="badges" id="badges"></ul>
+  </section>
 
   <article class="app" id="voice" aria-labelledby="voice-h">
     <div class="app-top"><h2 id="voice-h">Voice Ladder</h2><p class="lvl" data-f="level" hidden></p></div>
@@ -240,7 +321,8 @@ h1 {
 <script>
 (() => {
   'use strict';
-  // Read-only: this page never writes to localStorage. Keys and shapes belong to the apps.
+  // Reads the apps' saved data and never writes it. Its only key is skill-tree-seen (what it last
+  // celebrated), so new levels and badges get a party once.
   const LEVELS = {
     voice: ['Foundations', 'Pitch control', 'Range & registers', 'Agility', 'Polish'],
     piano: ['First keys', 'Both hands', 'Chord changes', 'Groove', 'Expression'],
@@ -298,13 +380,54 @@ h1 {
     return { streak: s.streak, days: s.days, steps: s.steps, rating: Math.round(Number(obj(o.profile).rating) || 800), today: s.steps >= 1 || answered > 0 };
   }
 
-  const practicedToday = [];
+  // ---------- XP, player level, badges ----------
+  // XP comes from what the apps already saved: 10 per step, 1 per practice minute (Voice, Piano),
+  // 30 per cook, 5 per first-try puzzle, 20 per chess game, and 100 per level gained in an app.
+  const XP = { step: 10, minute: 1, cook: 30, solve: 5, game: 20, level: 100 };
+  const TITLES = ['Seedling', 'Sprout', 'Sapling', 'Young tree', 'Branching out', 'Leafy', 'In bloom', 'Sturdy oak', 'Old growth', 'Ancient tree', 'World tree'];
+  const lvlOf = xp => Math.floor(Math.sqrt(xp / 40)) + 1;
+  const xpAt = L => 40 * (L - 1) * (L - 1);
+  const dayNum = k => { const [y, m, d] = k.split('-').map(Number); return Math.round(new Date(y, m - 1, d).getTime() / 86400000); };
+  const count = (d, f) => (Array.isArray(obj(d)[f]) ? d[f].length : 0);
+  const practicedOn = {
+    voice: d => stepsOn(d) >= 1 || (Number(d.mins) || 0) >= 3,
+    piano: d => stepsOn(d) >= 1 || (Number(d.mins) || 0) >= 3,
+    kitchen: d => count(d, 'cooks') > 0 || stepsOn(d) > 0,
+    chess: d => stepsOn(d) >= 1 || Object.keys(obj(obj(d.pz).res)).length > 0,
+  };
+  function summarize(id, o) {
+    const days = obj(o.days), keys = Object.keys(days).sort();
+    const sum = f => keys.reduce((n, k) => n + f(obj(days[k])), 0);
+    const steps = sum(stepsOn);
+    const mins = id === 'voice' || id === 'piano' ? sum(d => Math.round(Number(d.mins) || 0)) : 0;
+    const cooks = id === 'kitchen' ? sum(d => count(d, 'cooks')) : 0;
+    const solves = id === 'chess' ? sum(d => Object.values(obj(obj(d.pz).res)).filter(v => v === 1).length) : 0;
+    const games = id === 'chess' ? sum(d => count(d, 'games')) : 0;
+    // longest run of days with 3+ steps (Kitchen counts cooks per week instead, so it has no streak)
+    let best = 0, run = 0, prev = null;
+    if (id !== 'kitchen') keys.forEach(k => {
+      if (stepsOn(days[k]) < 3) { run = 0; prev = null; return; }
+      run = prev != null && dayNum(k) - prev === 1 ? run + 1 : 1;
+      prev = dayNum(k);
+      best = Math.max(best, run);
+    });
+    const lv = level(o);
+    return {
+      id, lv, steps, best,
+      xp: steps * XP.step + mins * XP.minute + cooks * XP.cook + solves * XP.solve + games * XP.game + (lv - 1) * XP.level,
+      dates: keys.filter(k => practicedOn[id](obj(days[k]))),
+    };
+  }
+
+  const practicedToday = [], sums = {}, extra = {};
   [['voice', 'voice-ladder-v1', practice], ['piano', 'piano-ladder-v1', practice], ['kitchen', 'kitchen-ladder-v1', kitchen], ['chess', 'chess-ladder-v1', chess]].forEach(([id, key, read]) => {
     const o = load(key);
     if (!o) return;
     const card = document.getElementById(id);
     const s = read(o);
     const n = level(o);
+    extra[id] = s;
+    sums[id] = summarize(id, o);
     s.level = 'Level ' + n + ' · ' + LEVELS[id][n - 1];
     Object.keys(s).forEach(k => { const e = card.querySelector('[data-f="' + k + '"]'); if (e) e.textContent = s[k]; });
     card.querySelector('[data-f="level"]').hidden = false;
@@ -312,6 +435,170 @@ h1 {
     card.querySelector('.empty').hidden = true;
     if (s.today) practicedToday.push(SKILL[id]);
   });
+
+  const S = Object.values(sums);
+  const xp = S.reduce((n, s) => n + s.xp, 0);
+  const L = lvlOf(xp);
+  const perDay = {};
+  S.forEach(s => s.dates.forEach(k => { perDay[k] = (perDay[k] || 0) + 1; }));
+  const T = {
+    steps: S.reduce((n, s) => n + s.steps, 0),
+    best: Math.max(0, ...S.map(s => s.best)),
+    maxDay: Math.max(0, ...Object.values(perDay)),
+    maxLevel: Math.max(0, ...S.map(s => s.lv)),
+    started: S.length,
+    round: S.filter(s => s.lv >= 2).length,
+    mastered: extra.kitchen ? extra.kitchen.mastered : 0,
+    rating: extra.chess ? extra.chess.rating : 0,
+  };
+  // [id, icon, name, how to earn, progress, target]
+  const BADGES = [
+    ['first', '🌱', 'First leaf', 'Finish a step in any app', T.steps, 1],
+    ['roll', '🔥', 'On a roll', 'A 3-day streak', T.best, 3],
+    ['week', '⚡', 'Week warrior', 'A 7-day streak', T.best, 7],
+    ['month', '🏆', 'Unstoppable', 'A 30-day streak', T.best, 30],
+    ['combo', '🎯', 'Combo', 'Two skills in one day', T.maxDay, 2],
+    ['all', '🎨', 'Renaissance', 'All four skills in one day', T.maxDay, 4],
+    ['branch', '🌿', 'Branching out', 'Start all four apps', T.started, 4],
+    ['lv2', '⭐', 'Level up', 'Level 2 in any app', T.maxLevel, 2],
+    ['lv3', '🌟', 'Halfway up', 'Level 3 in any app', T.maxLevel, 3],
+    ['lv5', '👑', 'Top of the branch', 'Level 5 in any app', T.maxLevel, 5],
+    ['round', '🌳', 'Well-rounded', 'Level 2 in all four apps', T.round, 4],
+    ['dish', '🍳', 'Signature dish', 'Master a dish in Kitchen', T.mastered, 1],
+    ['sharp', '♟️', 'Sharp eye', 'Chess puzzle rating 1000', T.rating, 1000],
+    ['century', '💯', 'Century', '100 steps in all', T.steps, 100],
+  ];
+  const earned = BADGES.filter(b => b[4] >= b[5]).map(b => b[0]);
+  let seen = null;
+  try { seen = JSON.parse(localStorage.getItem('skill-tree-seen') || 'null'); } catch (e) {}
+  const newBadges = seen && Array.isArray(seen.badges) ? earned.filter(id => !seen.badges.includes(id)) : [];
+  const leveled = seen ? L > (Number(seen.level) || 1) : L > 1;
+  try { localStorage.setItem('skill-tree-seen', JSON.stringify({ level: L, xp, badges: earned })); } catch (e) {}
+
+  const motion = !(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) && typeof Element.prototype.animate === 'function';
+  const $ = id => document.getElementById(id);
+  const css = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+
+  // player level and XP bar (counts up on load)
+  const into = xp - xpAt(L), span = xpAt(L + 1) - xpAt(L);
+  $('p-lvl').textContent = L;
+  $('p-title').textContent = TITLES[Math.min(L, TITLES.length) - 1];
+  $('xp-note').textContent = S.length ? (xpAt(L + 1) - xp) + ' XP to Level ' + (L + 1) + '.' : 'Practice in any app to grow your tree.';
+  $('xp-bar').setAttribute('aria-valuenow', Math.round((100 * into) / span));
+  const showXp = v => { $('xp-num').textContent = v.toLocaleString() + ' XP'; };
+  if (motion && xp) {
+    const t0 = performance.now(), dur = 1200;
+    const tick = t => { const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3); showXp(Math.round(xp * e)); if (k < 1) requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
+    $('xp-fill').animate([{ width: '0%' }, { width: (100 * into) / span + '%' }], { duration: 1200, delay: 200, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'forwards' });
+  } else { showXp(xp); $('xp-fill').style.width = (100 * into) / span + '%'; }
+
+  // the tree: a trunk ("You"), four branches, five level nodes each
+  const NS = 'http://www.w3.org/2000/svg';
+  const svgEl = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); Object.entries(attrs || {}).forEach(([k, v]) => e.setAttribute(k, v)); if (parent) parent.appendChild(e); return e; };
+  const svg = svgEl('svg', { viewBox: '0 0 360 400', role: 'img' });
+  const BR = [['voice', 'Voice', 48], ['piano', 'Piano', 136], ['kitchen', 'Kitchen', 224], ['chess', 'Chess', 312]];
+  const NODE_Y = [262, 212, 162, 112, 62];
+  const lines = [], nodes = [];
+  const trunk = svgEl('path', { d: 'M180 342 L180 300', class: 't-line t-trunk' }, svg);
+  lines.push([trunk, 0]);
+  BR.forEach(([id, name, x], bi) => {
+    const s = sums[id], lv = s ? s.lv : 0;
+    const base = svgEl('path', { d: 'M180 300 C180 285 ' + x + ' 292 ' + x + ' ' + NODE_Y[0], class: 't-line ' + (s ? 'on' : 'off') }, svg);
+    lines.push([base, 300 + bi * 60]);
+    for (let k = 1; k < 5; k++) {
+      const seg = svgEl('path', { d: 'M' + x + ' ' + NODE_Y[k - 1] + ' L' + x + ' ' + NODE_Y[k], class: 't-line ' + (lv > k ? 'on' : 'off') }, svg);
+      lines.push([seg, 650 + bi * 60 + (k - 1) * 190]);
+    }
+    svgEl('text', { x, y: 32, class: 't-label' + (s ? '' : ' off') }, svg).textContent = name;
+    NODE_Y.forEach((y, k) => {
+      const n = k + 1, on = n <= lv, cur = n === lv;
+      const g = svgEl('g', { class: 'node' + (on ? ' on' : '') + (cur ? ' cur' : '') }, svg);
+      const a = svgEl('a', { href: id + '/' }, g);
+      const tip = name + ' · Level ' + n + ': ' + LEVELS[id][k] + (cur ? ' (you are here)' : on ? ' ✓' : s ? ' (locked)' : ' (not started)');
+      svgEl('title', {}, a).textContent = tip;
+      svgEl('circle', { cx: x, cy: y, r: 24, fill: 'transparent' }, a); // a finger-sized tap target
+      svgEl('circle', { cx: x, cy: y, r: 15, class: 'halo' }, a);
+      svgEl('circle', { cx: x, cy: y, r: 15, class: 'dot' }, a);
+      svgEl('text', { x, y }, a).textContent = on ? (cur ? '★' : '✓') : n;
+      const say = () => { $('tree-tip').textContent = tip; };
+      a.addEventListener('mouseenter', say);
+      a.addEventListener('focus', say);
+      nodes.push([g, 700 + bi * 60 + k * 190, on]);
+    });
+  });
+  const root = svgEl('g', { class: 'root' }, svg);
+  svgEl('circle', { cx: 180, cy: 368, r: 30, class: 'ring' }, root);
+  svgEl('circle', { cx: 180, cy: 368, r: 26 }, root);
+  svgEl('text', { x: 180, y: 361, 'font-size': 9 }, root).textContent = 'YOU';
+  svgEl('text', { x: 180, y: 376, 'font-size': 15 }, root).textContent = 'Lv ' + L;
+  svg.setAttribute('aria-label', 'Your skill tree, Level ' + L + '. ' + BR.map(([id, name]) => name + ': ' + (sums[id] ? 'Level ' + sums[id].lv + ' of 5' : 'not started')).join('; ') + '.');
+  $('tree').appendChild(svg);
+  if (motion) {
+    // branches grow from the trunk upward, then each node pops when its branch reaches it
+    lines.forEach(([p, delay]) => {
+      const len = p.getTotalLength();
+      p.animate([{ strokeDasharray: len + ' ' + len, strokeDashoffset: len }, { strokeDasharray: len + ' ' + len, strokeDashoffset: 0 }], { duration: 420, delay, easing: 'ease-out', fill: 'backwards' });
+    });
+    nodes.forEach(([g, delay, on]) => g.animate(on
+      ? [{ transform: 'scale(0)', opacity: 0 }, { transform: 'scale(1.3)', opacity: 1, offset: 0.65 }, { transform: 'scale(1)', opacity: 1 }]
+      : [{ opacity: 0 }, { opacity: 1 }], { duration: on ? 480 : 300, delay, easing: 'ease-out', fill: 'backwards' }));
+    root.animate([{ transform: 'scale(.4)', opacity: 0 }, { transform: 'scale(1)', opacity: 1 }], { duration: 500, easing: 'cubic-bezier(.2,1.4,.4,1)', fill: 'backwards' });
+  }
+
+  // badges, earned first
+  const list = $('badges');
+  BADGES.slice().sort((a, b) => (earned.includes(b[0]) ? 1 : 0) - (earned.includes(a[0]) ? 1 : 0)).forEach(([id, icon, name, how, have, need], i) => {
+    const got = earned.includes(id), isNew = newBadges.includes(id);
+    const li = document.createElement('li');
+    li.className = 'bdg' + (got ? ' got' : '') + (isNew ? ' new' : '');
+    const ic = document.createElement('span');
+    ic.className = 'ico';
+    ic.setAttribute('aria-hidden', 'true');
+    ic.textContent = icon;
+    const nm = document.createElement('span');
+    nm.className = 'nm';
+    nm.textContent = name;
+    const ds = document.createElement('span');
+    ds.className = 'ds';
+    ds.textContent = got ? how + ' ✓' : how + ' · ' + Math.min(have, need).toLocaleString() + ' / ' + need.toLocaleString();
+    li.append(ic, nm, ds);
+    if (!got) { const bar = document.createElement('span'); bar.className = 'bar'; bar.appendChild(document.createElement('span')).style.width = Math.min(100, (100 * have) / need) + '%'; li.appendChild(bar); }
+    if (isNew) { const t = document.createElement('span'); t.className = 'tag'; t.textContent = 'New'; li.appendChild(t); }
+    list.appendChild(li);
+    if (motion) li.animate([{ opacity: 0, transform: 'translateY(10px) scale(.96)' }, { opacity: 1, transform: 'none' }], { duration: 320, delay: 500 + i * 45, easing: 'ease-out', fill: 'backwards' });
+  });
+  $('badge-count').textContent = earned.length + ' of ' + BADGES.length;
+
+  // a party for a new level or new badges since the last visit
+  function confetti(n) {
+    if (!motion) return;
+    const host = document.createElement('div');
+    host.className = 'confetti';
+    host.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(host);
+    const colors = ['--accent', '--heat-2', '--warn', '--good', '--bad', '--accent-soft'].map(css);
+    for (let i = 0; i < n; i++) {
+      const p = document.createElement('i');
+      p.style.left = Math.random() * 100 + '%';
+      p.style.background = colors[i % colors.length];
+      host.appendChild(p);
+      const dx = (Math.random() - 0.5) * 220, rot = (Math.random() - 0.5) * 900;
+      p.animate([{ transform: 'translate(0, 0) rotate(0deg)', opacity: 1 }, { transform: 'translate(' + dx + 'px, ' + (innerHeight + 40) + 'px) rotate(' + rot + 'deg)', opacity: 0.85 }],
+        { duration: 1900 + Math.random() * 1500, delay: Math.random() * 500, easing: 'cubic-bezier(.25,.6,.45,1)', fill: 'forwards' });
+    }
+    setTimeout(() => host.remove(), 4200);
+  }
+  const banner = $('levelup');
+  if (leveled && S.length) {
+    banner.textContent = (seen ? 'Level up! ' : 'Your tree is growing: ') + 'Level ' + L + ', ' + TITLES[Math.min(L, TITLES.length) - 1] + '.';
+    banner.hidden = false;
+    setTimeout(() => confetti(90), motion ? 900 : 0);
+  } else if (newBadges.length) {
+    banner.textContent = 'New badge' + (newBadges.length > 1 ? 's' : '') + ': ' + BADGES.filter(b => newBadges.includes(b[0])).map(b => b[2]).join(', ') + '.';
+    banner.hidden = false;
+    setTimeout(() => confetti(50), motion ? 900 : 0);
+  }
 
   document.getElementById('today-label').textContent = now.toLocaleDateString(undefined, { weekday: 'long', month: 'short', day: 'numeric' });
   const line = document.getElementById('today-line');
