@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Skill Ladder</title>
+<title>Skill Tree</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
-/* Home for the three ladders. Tokens and themes are copied from the apps; keep them in sync. */
+/* Home for the four ladders. Tokens and themes are copied from the apps; keep them in sync. */
 :root {
   --bg: #f2f3f8;
   --card: #ffffff;
@@ -188,8 +188,8 @@ h1 {
 <div class="wrap">
   <header class="top">
     <p class="eyebrow" id="today-label">Today</p>
-    <h1>Skill Ladder</h1>
-    <p class="lede" id="today-line">Three daily practice ladders: singing, piano, and cooking.</p>
+    <h1>Skill Tree</h1>
+    <p class="lede" id="today-line">Four daily practice ladders: singing, piano, cooking, and chess.</p>
   </header>
 
   <article class="app" id="voice" aria-labelledby="voice-h">
@@ -224,6 +224,17 @@ h1 {
     <a class="btn" href="kitchen/">Open Kitchen Ladder</a>
   </article>
 
+  <article class="app" id="chess" aria-labelledby="chess-h">
+    <div class="app-top"><h2 id="chess-h">Chess Ladder</h2><p class="lvl" data-f="level" hidden></p></div>
+    <dl class="stats" hidden>
+      <div><dt>Streak</dt><dd><span data-f="streak">0</span><small data-f="days">days</small></dd></div>
+      <div><dt>Steps</dt><dd><span data-f="steps">0</span><small>/ 5</small></dd></div>
+      <div><dt>Puzzles</dt><dd><span data-f="rating">800</span><small>rating</small></dd></div>
+    </dl>
+    <p class="empty">Not started yet. Daily puzzles, openings, endgames, and games against the computer; start with the level check.</p>
+    <a class="btn" href="chess/">Open Chess Ladder</a>
+  </article>
+
   <p class="foot">Progress is read from this browser. Each app saves and syncs its own log.</p>
 </div>
 <script>
@@ -234,8 +245,9 @@ h1 {
     voice: ['Foundations', 'Pitch control', 'Range & registers', 'Agility', 'Polish'],
     piano: ['First keys', 'Both hands', 'Chord changes', 'Groove', 'Expression'],
     kitchen: ['Kitchen basics', 'Heat control', 'Flavor balance', 'No recipe needed', 'Your own dishes'],
+    chess: ['First moves', 'Safe pieces', 'Tactics', 'Plans', 'Club player'],
   };
-  const SKILL = { voice: 'singing', piano: 'piano', kitchen: 'cooking' };
+  const SKILL = { voice: 'singing', piano: 'piano', kitchen: 'cooking', chess: 'chess' };
 
   const pad = n => String(n).padStart(2, '0');
   const dkey = d => d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
@@ -279,8 +291,15 @@ h1 {
       today: cooks(today) > 0 || stepsOn(days[today]) > 0 };
   }
 
+  // Chess: the same 3-step streak, steps today, and the puzzle rating. A puzzle answered counts as practice.
+  function chess(o) {
+    const s = practice(o);
+    const answered = Object.keys(obj(obj(obj(obj(o.days)[today]).pz).res)).length;
+    return { streak: s.streak, days: s.days, steps: s.steps, rating: Math.round(Number(obj(o.profile).rating) || 800), today: s.steps >= 1 || answered > 0 };
+  }
+
   const practicedToday = [];
-  [['voice', 'voice-ladder-v1', practice], ['piano', 'piano-ladder-v1', practice], ['kitchen', 'kitchen-ladder-v1', kitchen]].forEach(([id, key, read]) => {
+  [['voice', 'voice-ladder-v1', practice], ['piano', 'piano-ladder-v1', practice], ['kitchen', 'kitchen-ladder-v1', kitchen], ['chess', 'chess-ladder-v1', chess]].forEach(([id, key, read]) => {
     const o = load(key);
     if (!o) return;
     const card = document.getElementById(id);

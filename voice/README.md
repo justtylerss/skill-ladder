@@ -2,7 +2,7 @@
 
 A daily singing coach that runs in the browser. It gives you a 15–45 minute session plan, live mic feedback on every exercise, and a coach that adapts to how you actually sing.
 
-**Live app:** https://justtylerss.github.io/skill-ladder/voice/ (part of [Skill Ladder](https://justtylerss.github.io/skill-ladder/))
+**Live app:** https://justtylerss.github.io/skill-ladder/voice/ (part of [Skill Tree](https://justtylerss.github.io/skill-ladder/))
 
 ## Today's session
 

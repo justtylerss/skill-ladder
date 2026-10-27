@@ -2,7 +2,7 @@
 
 A cooking coach for beginners that runs in the browser. Every cook is five steps (plan, prep, cook, taste, log), with built-in timers, taste-and-adjust fixes, and a log that decides what to cook next and when a dish counts as mastered.
 
-**Live app:** https://justtylerss.github.io/skill-ladder/kitchen/ (part of [Skill Ladder](https://justtylerss.github.io/skill-ladder/))
+**Live app:** https://justtylerss.github.io/skill-ladder/kitchen/ (part of [Skill Tree](https://justtylerss.github.io/skill-ladder/))
 
 ## Today in the kitchen
 

@@ -2,7 +2,7 @@
 
 A daily piano coach that runs in the browser and listens to your piano. It gives you a 15–40 minute session plan, checks every note and chord you play through the mic (or a MIDI keyboard), and adapts to how you actually play.
 
-**Live app:** https://justtylerss.github.io/skill-ladder/piano/ (part of [Skill Ladder](https://justtylerss.github.io/skill-ladder/))
+**Live app:** https://justtylerss.github.io/skill-ladder/piano/ (part of [Skill Tree](https://justtylerss.github.io/skill-ladder/))
 
 Built for adult beginners who want to play songs they like (pop, R&B), accompany their own singing, read sheet music, and play by ear.
 
